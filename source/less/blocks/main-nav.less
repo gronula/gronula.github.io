@@ -1,0 +1,135 @@
+.main-nav {
+  font-family: "Oswald", "Arial", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
+  text-transform: uppercase;
+  width: 100%;
+  position: relative;
+}
+
+.main-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav__item {
+  text-align: center;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.main-nav__link {
+  text-decoration: none;
+  color: @main-color;
+
+  &:hover:not(.main-nav__link--active) {
+    opacity: 0.6;
+  }
+
+  &:active:not(.main-nav__link--active) {
+    opacity: 0.3;
+  }
+}
+
+@media (max-width: @mobile-width-only) {
+  .main-nav__toggle {
+    position: absolute;
+    right: 20px;
+    top: -43px;
+    cursor: pointer;
+    border: 0;
+    font-size: 0;
+    width: 24px;
+    height: 18px;
+
+    &--opened {
+      background: url("../img/icon-close.svg") no-repeat center;
+    }
+
+    &--closed {
+      background: url("../img/icon-mobile-menu.svg") no-repeat center;
+    }
+
+    &--nojs {
+      display: none;
+    }
+  }
+
+  .main-nav__list {
+    &--closed {
+      display: none;
+    }
+
+    &--opened {
+      display: block;
+    }
+
+    &--nojs {
+      display: block;
+    }
+  }
+}
+
+@media (min-width: @tablet-width) {
+  .main-nav {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    width: auto;
+    margin-top: 3px;
+    margin-right: 1px;
+  }
+
+  .main-nav__toggle {
+    display: none;
+  }
+
+  .main-nav__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .main-nav__item {
+    border: 0;
+    padding: 0;
+    padding-right: 35px;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  .main-nav__link {
+    color: #222222;
+
+    &--active {
+      border-bottom: 2px solid @bg-green;
+      padding-bottom: 7px;
+      cursor: default;
+    }
+  }
+}
+
+@media (min-width: @desktop-width) {
+  .main-nav {
+    font-size: 20px;
+    margin-right: -1px;
+  }
+
+  .index .main-nav__link {
+    color: #ffffff;
+
+    &--active {
+      border-bottom: 2px solid #ffffff;
+    }
+  }
+
+  .main-nav__link {
+    color: @main-color;
+  }
+}

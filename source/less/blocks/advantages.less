@@ -1,0 +1,207 @@
+.advantages {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 21px;
+  display: flex;
+  flex-direction: column;
+}
+
+.advantages__list {
+  list-style: none;
+  margin-top: 2px;
+  margin-bottom: 0;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.advantages__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 80px;
+  margin-bottom: 20px;
+  font-family: "Arial", sans-serif;
+  color: @text-color;
+  min-height: 60px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background: @bg-green no-repeat center;
+  }
+
+  &--nutrition::before {
+    content: "";
+    position: absolute;
+    background-image: url("../img/advantage-leaf@1x.png");
+    background-size: 50px;
+
+    @media (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+      background-image: url("../img/advantage-leaf@2x.png");
+    }
+  }
+
+  &--powder::before {
+    content: "";
+    position: absolute;
+    background-image: url("../img/advantage-powder@1x.png");
+    background-size: 50px;
+
+    @media (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+      background-image: url("../img/advantage-powder@2x.png");
+    }
+  }
+
+  &--replacement::before {
+    content: "";
+    position: absolute;
+    background-image: url("../img/advantage-dining@1x.png");
+    background-size: 50px;
+
+    @media (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+      background-image: url("../img/advantage-dining@2x.png");
+    }
+  }
+
+  &--progress::before {
+    content: "";
+    position: absolute;
+    background-image: url("../img/advantage-clock@1x.png");
+    background-size: 50px;
+
+    @media (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+      background-image: url("../img/advantage-clock@2x.png");
+    }
+  }
+}
+
+@media (min-width: @tablet-width) {
+  .advantages {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 59px;
+  }
+
+  .advantages__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .advantages__item {
+    width: calc(50% - 30px);
+    min-height: 227px;
+    margin-left: 0;
+    margin-right: 59px;
+    margin-bottom: 90px;
+    padding-top: 112px;
+    padding-right: 74px;
+    align-items: flex-start;
+    font-size: 16px;
+    line-height: 1.5;
+
+    &:nth-child(even) {
+      margin-right: 0;
+    }
+
+    &:nth-last-child(-n+2) {
+      margin-bottom: 0;
+    }
+
+    &::before {
+      left: 0;
+      top: 0;
+      width: 80px;
+      height: 80px;
+      transform: none;
+    }
+
+    &--nutrition::after {
+      content: "1";
+      position: absolute;
+      left: 118px;
+      top: -40px;
+      font-size: 281px;
+      line-height: 1;
+      color: @bg-grey;
+      z-index: -1;
+      font-family: "Oswald", "Arial", sans-serif;
+      font-weight: 400;
+    }
+
+    &--powder::after {
+      content: "2";
+      position: absolute;
+      left: 111px;
+      top: -38px;
+      font-size: 281px;
+      line-height: 1;
+      color: @bg-grey;
+      z-index: -1;
+      font-family: "Oswald", "Arial", sans-serif;
+      font-weight: 400;
+    }
+
+    &--replacement::after {
+      content: "3";
+      position: absolute;
+      left: 112px;
+      top: -37px;
+      font-size: 281px;
+      line-height: 1;
+      color: @bg-grey;
+      z-index: -1;
+      font-family: "Oswald", "Arial", sans-serif;
+      font-weight: 400;
+    }
+
+    &--progress::after {
+      content: "4";
+      position: absolute;
+      left: 113px;
+      top: -40px;
+      font-size: 281px;
+      line-height: 1;
+      color: @bg-grey;
+      z-index: -1;
+      font-family: "Oswald", "Arial", sans-serif;
+      font-weight: 400;
+    }
+  }
+}
+
+@media (min-width: @desktop-width) {
+  .advantages {
+    width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .advantages__item {
+    width: 245px;
+    min-height: auto;
+    margin-right: 80px;
+    margin-bottom: 120px;
+    padding-right: 0;
+
+    &:nth-child(even) {
+      margin-right: 80px;
+    }
+
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+
+    &:nth-last-child(-n+4) {
+      margin-bottom: 57px;
+    }
+  }
+}
