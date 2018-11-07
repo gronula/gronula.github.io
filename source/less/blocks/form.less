@@ -2,40 +2,49 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+
   margin-top: -4px;
 }
 
 .form__annotation {
   margin: 0 20px 37px;
+
   text-transform: uppercase;
 }
 
 .form__info {
-  width: 100%;
-  border: 0;
-  margin-left: -1px;
-  margin-right: 0;
-  margin-bottom: 3px;
-  padding: 0;
-  padding-left: 20px;
-  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+
+  width: 100%;
+  margin-right: 0;
+  margin-bottom: 3px;
+  margin-left: -1px;
+  padding: 0;
+  padding-bottom: 20px;
+  padding-left: 20px;
+
+  border: 0;
 }
 
 .form__label {
   position: relative;
-  width: 100%;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
   margin-bottom: 12px;
   padding-right: 19px;
+
   text-transform: uppercase;
+
+  color: #222222;
+
   font-size: 16px;
   line-height: 18px;
-  color: #222222;
 
   &:last-child {
     margin-bottom: 0;
@@ -47,20 +56,25 @@
 }
 
 .form__input {
+  z-index: 1;
+
   flex-grow: 1;
-  margin-left: 14px;
+
   margin-top: 2px;
-  padding-left: 15px;
-  padding-right: 14px;
+  margin-left: 14px;
   padding-top: 9px;
+  padding-right: 14px;
   padding-bottom: 10px;
-  border: 1px solid rgba(205, 205, 205, 0.5);
-  color: @text-color;
+  padding-left: 15px;
+
   text-transform: uppercase;
+
+  color: @text-color;
+  border: 1px solid rgba(205, 205, 205, 0.5);
+  outline: 0;
+
   font-size: 16px;
   line-height: 1.5;
-  outline: 0;
-  z-index: 1;
 
   &--weight {
     margin-left: 17px;
@@ -72,8 +86,8 @@
 
   &--email {
     margin-left: 12px;
-    padding-left: 14px;
     padding-right: 40px;
+    padding-left: 14px;
   }
 
   &--phone {
@@ -89,17 +103,20 @@
   &:focus,
   &:focus + .form__icon {
     border-color: @text-color;
+
     fill: @bg-green;
   }
 
   &::-ms-clear {
     display: none;
+
     width: 0;
     height: 0;
   }
 
   &::-ms-reveal {
     display: none;
+
     width: 0;
     height: 0;
   }
@@ -107,6 +124,7 @@
   &:not(:focus):not(:placeholder-shown):invalid,
   &:not(:focus):not(:placeholder-shown):invalid + .form__icon {
     border-color: #ff8282;
+
     fill: #ff8282;
   }
 
@@ -124,16 +142,19 @@
   margin: 0;
   margin-bottom: 29px;
   padding-top: 26px;
+  padding-right: 19px;
   padding-bottom: 26px;
   padding-left: 19px;
-  padding-right: 19px;
+
   border: 1px solid #ededed;
 }
 
 .form__feeding .form__label {
   position: relative;
+
   margin-bottom: 25px;
   padding-left: 46px;
+
   cursor: pointer;
 
   &:last-child {
@@ -142,12 +163,16 @@
 
   &::before {
     content: "";
+
     position: absolute;
-    left: 0;
     top: 50%;
-    transform: translateY(-50%);
+    left: 0;
+
     width: 30px;
     height: 30px;
+
+    transform: translateY(-50%);
+
     border: 1px solid #cdcdcd;
     border-radius: 50%;
   }
@@ -163,25 +188,31 @@
 
 .form__input[type="radio"]:checked + .form__label::after {
   content: "";
+
   position: absolute;
-  left: 9px;
   top: 50%;
-  transform: translateY(-50%);
+  left: 9px;
+
   width: 12px;
   height: 12px;
+
+  transform: translateY(-50%);
+
   border: 1px solid @bg-green;
-  background-color: @bg-green;
   border-radius: 50%;
+  background-color: @bg-green;
 }
 
 .form__details {
+  display: flex;
+  flex-direction: column;
+
   margin: 0;
   margin-bottom: 28px;
   padding: 0;
   padding-left: 20px;
+
   border: 0;
-  display: flex;
-  flex-direction: column;
 }
 
 .form__icon {
@@ -190,16 +221,20 @@
 }
 
 .form__icon--email {
-  right: 35px;
   top: 50%;
+  right: 35px;
+
   transform: translateY(-50%);
+
   fill: #222222;
 }
 
 .form__icon--phone {
-  right: 32px;
   top: 50%;
+  right: 32px;
+
   transform: translateY(-50%);
+
   fill: #222222;
 }
 
@@ -208,24 +243,28 @@
   margin-bottom: 25px;
   padding: 0;
   padding-left: 20px;
+
   border: 0;
 }
 
 .form__textarea {
-  padding-top: 12px;
-  padding-bottom: 13px;
-  padding-left: 14px;
-  padding-right: 11px;
   width: calc(100% - 20px);
   min-width: 280px;
   min-height: 150px;
+  padding-top: 12px;
+  padding-right: 11px;
+  padding-bottom: 13px;
+  padding-left: 14px;
+
+  resize: none;
   text-transform: uppercase;
+
+  color: @text-color;
+  border: 1px solid rgba(#cdcdcd, 0.5);
+  outline: none;
+
   font-size: 16px;
   line-height: 18px;
-  border: 1px solid rgba(#cdcdcd, 0.5);
-  color: @text-color;
-  resize: none;
-  outline: none;
 
   &:hover {
     border-color: #cdcdcd;
@@ -242,13 +281,16 @@
   margin-bottom: 41px;
   padding: 0;
   padding-left: 20px;
+
   border: 0;
 }
 
 .form__extra .form__label {
   position: relative;
-  padding-left: 46px;
+
   margin-bottom: 24px;
+  padding-left: 46px;
+
   cursor: pointer;
 
   &:last-child {
@@ -257,13 +299,17 @@
 
   &::before {
     content: "";
+
     position: absolute;
+    top: 50%;
+    left: 0;
+
     width: 30px;
     height: 30px;
-    border: 1px solid #cdcdcd;
-    left: 0;
-    top: 50%;
+
     transform: translateY(-50%);
+
+    border: 1px solid #cdcdcd;
   }
 
   &:hover::before {
@@ -282,61 +328,65 @@
 
 .form__input[type="radio"]:focus + .form__label::before,
 .form__input[type="checkbox"]:focus + .form__label::before {
-  box-shadow:
-    0 0 0 2px #ffffff,
-    0 0 0 4px @bg-green;
   outline: 0;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px @bg-green;
 }
 
 .form__wrapper {
-  padding-left: 20px;
   padding-right: 20px;
+  padding-left: 20px;
 }
 
 .form__legend {
   align-self: center;
+
   margin-top: 21px;
+
+  color: @text-color;
+
   font-family: "Arial", sans-serif;
   font-size: 14px;
   line-height: 16px;
-  color: @text-color;
 }
 
 
 @media (min-width: @tablet-width) {
   .form {
-    margin-top: 26px;
     flex-direction: row;
     justify-content: space-between;
+
+    margin-top: 26px;
   }
 
   .form__annotation {
-    font-size: 20px;
-    line-height: 1.5;
-    margin-left: 30px;
+    width: 374px;
     margin-right: auto;
     margin-bottom: 67px;
+    margin-left: 30px;
     padding-left: 40px;
-    width: 374px;
+
+    font-size: 20px;
+    line-height: 1.5;
   }
 
   .form__info {
-    padding-left: 72px;
-    padding-right: 66px;
     margin-bottom: 52px;
+    padding-right: 66px;
+    padding-left: 72px;
   }
 
   .form__label {
+    margin-top: -3px;
+    margin-bottom: 21px;
+    padding-right: 0;
+
     font-size: 20px;
     line-height: 1;
-    padding-right: 0;
-    margin-bottom: 21px;
-    margin-top: -3px;
   }
 
   .form__feeding .form__label {
-    padding-left: 59px;
     margin-bottom: 36px;
+    padding-left: 59px;
 
     &::before {
       width: 40px;
@@ -345,24 +395,25 @@
   }
 
   .form__details .form__label {
-    padding-left: 72px;
     padding-right: 64px;
+    padding-left: 72px;
 
     &[for="phone"] {
-      padding-left: 69px;
       padding-right: 65px;
+      padding-left: 69px;
     }
   }
 
   .form__input {
-    font-size: 20px;
-    line-height: 1.5;
     margin-top: 2px;
     margin-left: 16px;
     padding-top: 9px;
+    padding-right: 18px;
     padding-bottom: 11px;
     padding-left: 18px;
-    padding-right: 18px;
+
+    font-size: 20px;
+    line-height: 1.5;
 
     &--weight {
       margin-left: 20px;
@@ -374,78 +425,84 @@
 
     &--email {
       margin-left: 19px;
-      padding-left: 20px;
       padding-right: 55px;
+      padding-left: 20px;
     }
 
     &--phone {
-      padding-left: 19px;
       padding-right: 55px;
+      padding-left: 19px;
     }
   }
 
   .form__feeding {
     width: calc(100% - 138px);
-    margin-left: 71px;
     margin-bottom: 81px;
-    padding-left: 27px;
+    margin-left: 71px;
     padding-top: 37px;
     padding-bottom: 34px;
+    padding-left: 27px;
+
     border: 1px solid rgba(#cdcdcd, 0.5);
   }
 
   .form__input[type="radio"]:checked + .form__label::after {
+    left: 11px;
+
     width: 18px;
     height: 18px;
-    left: 11px;
   }
 
   .form__details {
     width: 100%;
-    padding-left: 0;
     margin-bottom: 70px;
+    padding-left: 0;
   }
 
   .form__icon--email {
     right: 85px;
+
     margin-top: 2px;
   }
 
   .form__icon--phone {
     right: 82px;
+
     margin-top: 2px;
   }
 
   .form__comments {
     width: 100%;
-    padding-left: 0;
     margin-bottom: 67px;
+    padding-left: 0;
   }
 
   .form__textarea {
-    font-size: 20px;
-    line-height: 1.5;
     width: calc(100% - 137px);
     min-height: 174px;
     margin-left: 70px;
     padding-top: 9px;
+    padding-right: 18px;
     padding-bottom: 9px;
     padding-left: 18px;
-    padding-right: 18px;
+
+    font-size: 20px;
+    line-height: 1.5;
   }
 
   .form__extra {
     width: 100%;
-    padding-left: 0;
     margin-bottom: 10px;
+    padding-left: 0;
   }
 
   .form__extra .form__label {
-    width: calc(50% - 72px);
     display: inline-flex;
+
+    width: calc(50% - 72px);
     margin-bottom: 55px;
-    padding-left: 58px;
     margin-left: 70px;
+    padding-left: 58px;
 
     &:nth-of-type(even) {
       margin-left: 29px;
@@ -460,15 +517,16 @@
 
   .form__wrapper {
     width: calc(50% - 72px);
-    margin-left: 71px;
     margin-right: 32px;
-    padding-left: 0;
+    margin-left: 71px;
     padding-right: 29px;
+    padding-left: 0;
   }
 
   .form__legend {
-    margin-right: auto;
     margin-top: -4px;
+    margin-right: auto;
+
     font-size: 16px;
   }
 }
@@ -480,29 +538,31 @@
 
   .form__annotation {
     width: 100%;
-    margin-left: calc(50% - 610px);
     margin-bottom: 65px;
-    padding-left: 0;
+    margin-left: calc(50% - 610px);
     padding-right: calc(50% + 245px);
+    padding-left: 0;
   }
 
   .form__info {
     align-self: center;
+
     width: 570px;
-    margin-left: auto;
-    margin-right: 40px;
     margin-top: -2px;
-    padding-left: 1px;
+    margin-right: 40px;
+    margin-left: auto;
     padding-right: 0;
+    padding-left: 1px;
   }
 
   .form__feeding {
     align-self: center;
+
     width: 570px;
-    margin-left: 40px;
+    margin-top: 1px;
     margin-right: auto;
     margin-bottom: 76px;
-    margin-top: 1px;
+    margin-left: 40px;
     padding-top: 36px;
     padding-bottom: 35px;
   }
@@ -517,33 +577,35 @@
 
   .form__details {
     display: block;
+
     margin-top: -1px;
     margin-bottom: 51px;
   }
 
   .form__details .form__label {
+    display: inline-flex;
+
     width: 569px;
     margin-top: -3px;
-    padding-left: 0;
     padding-right: 0;
-    display: inline-flex;
+    padding-left: 0;
 
     &[for="phone"] {
       margin-left: 35px;
-      padding-left: 0;
       padding-right: 0;
+      padding-left: 0;
     }
 
     &:nth-of-type(odd) {
-      margin-left: calc(50% - 609px);
       margin-right: 40px;
+      margin-left: calc(50% - 609px);
     }
 
     &:nth-of-type(even) {
       width: 574px;
       margin-left: 35px;
-      padding-left: 0;
       padding-right: 2px;
+      padding-left: 0;
     }
   }
 
@@ -603,9 +665,9 @@
   }
 
   .form__wrapper {
-    margin-left: calc(50% - 609px);
-    margin-right: 82px;
     width: 568px;
+    margin-right: 82px;
+    margin-left: calc(50% - 609px);
     padding-right: 0;
   }
 }

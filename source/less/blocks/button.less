@@ -1,19 +1,23 @@
 .button {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
   width: 100%;
   height: 100%;
-  background-color: @bg-green;
+  padding: 11px 20px;
+
+  cursor: pointer;
+  text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+
   color: #ffffff;
+  border: 0;
+  background-color: @bg-green;
+
   font-size: 14px;
   line-height: 18px;
-  border: 0;
-  padding: 11px 20px;
-  text-align: center;
-  cursor: pointer;
 
   &:hover {
     background-color: #5eaa2f;
@@ -24,10 +28,12 @@
   }
 
   &--secondary {
-    background-color: @bg-grey;
-    color: @text-color;
     margin-top: 21px;
+
     cursor: pointer;
+
+    color: @text-color;
+    background-color: @bg-grey;
 
     &:hover {
       background-color: #ebebeb;
@@ -40,23 +46,25 @@
 }
 
 .inner .button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 23px;
+
   font-size: 16px;
   line-height: 1.25;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  padding-left: 23px;
 }
 
 @media (min-width: @tablet-width) {
   .button {
+    padding-left: 16px;
+
     font-size: 20px;
     line-height: 1;
-    padding-left: 16px;
   }
 
   .products .button {
-    height: auto;
     width: calc(100% - 75px);
+    height: auto;
   }
 
   .additional-goods .button {
@@ -64,10 +72,11 @@
   }
 
   .inner--form .button {
-    font-size: 20px;
-    padding-bottom: 14px;
     padding-top: 13px;
+    padding-bottom: 14px;
     padding-left: 14px;
+
+    font-size: 20px;
   }
 }
 

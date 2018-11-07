@@ -1,16 +1,19 @@
 .footer {
   position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
   background-color: @bg-grey;
 }
 
 .footer__contacts {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
+
   padding: 25px 20px;
   padding-top: 28px;
 
@@ -22,49 +25,52 @@
 .footer__cooperation {
   display: flex;
   justify-content: center;
-  font-size: 16px;
-  line-height: 20px;
-  text-transform: uppercase;
-  font-weight: 400;
+
+  width: 50%;
   margin-top: 0;
   margin-bottom: 0;
-  padding-right: 10px;
   margin-left: -1px;
-  width: 50%;
+  padding-right: 10px;
+
+  text-transform: uppercase;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
 }
 
 .footer__address {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+
+  width: 50%;
   margin-top: 0;
   margin-bottom: 0;
+
+  color: @text-color;
+
   font-family: "Arial", sans-serif;
   line-height: 20px;
-  color: @text-color;
-  width: 50%;
 }
 
 .footer__map {
-  border: 0;
   width: 100%;
   height: 362px;
   margin-bottom: 40px;
-  background:
-    url("../img/map-pin.png") no-repeat center 140px,
-    url("../img/bg-map-mobile@1x.png") no-repeat center -37px;
+
+  border: 0;
+  background: url("../img/map-pin.png") no-repeat center 140px, url("../img/bg-map-mobile@1x.png") no-repeat center -37px;
   background-size: 63px 53px, 320px auto;
 
   @media (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
-    background-image:
-      url("../img/map-pin.png"),
-      url("../img/bg-map-mobile@2x.png");
+    background-image: url("../img/map-pin.png"), url("../img/bg-map-mobile@2x.png");
   }
 }
 
 .footer__wrapper {
-  padding-left: 20px;
   padding-right: 20px;
+  padding-left: 20px;
 }
 
 @media (min-width: @tablet-width) {
@@ -72,26 +78,30 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+
     padding-bottom: 57px;
   }
 
   .footer__contacts {
+    width: 100%;
     padding-top: 63px;
+    padding-right: 72px;
     padding-bottom: 58px;
     padding-left: 74px;
-    padding-right: 72px;
-    width: 100%;
   }
 
   .footer__cooperation {
     width: 160px;
+
     font-size: 20px;
     line-height: 1.25;
   }
 
   .footer__address {
     width: 160px;
+
     text-align: right;
+
     font-size: 16px;
   }
 
@@ -101,26 +111,24 @@
 
   .footer__map {
     height: 396px;
-    background:
-      url("../img/map-pin.png") no-repeat center 146px,
-      url("../img/bg-map-tablet@1x.png") no-repeat center -4px;
-    background-size: 122px 106px, 768px auto;
     margin-bottom: 53px;
 
+    background: url("../img/map-pin.png") no-repeat center 146px, url("../img/bg-map-tablet@1x.png") no-repeat center -4px;
+    background-size: 122px 106px, 768px auto;
+
     @media (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
-      background-image:
-        url("../img/map-pin.png"),
-        url("../img/bg-map-tablet@2x.png");
+      background-image: url("../img/map-pin.png"), url("../img/bg-map-tablet@2x.png");
     }
   }
 
   .footer__wrapper {
     display: flex;
     justify-content: space-between;
-    margin-top: 2px;
-    padding-left: 30px;
-    padding-right: 30px;
+
     width: 100%;
+    margin-top: 2px;
+    padding-right: 30px;
+    padding-left: 30px;
   }
 }
 
@@ -131,11 +139,13 @@
 
   .footer__contacts {
     position: absolute;
-    width: 570px;
-    left: calc(50% - 610px);
     top: 95px;
-    padding-left: 79px;
+    left: calc(50% - 610px);
+
+    width: 570px;
     padding-right: 85px;
+    padding-left: 79px;
+
     background-color: #ffffff;
   }
 
@@ -145,23 +155,20 @@
 
   .footer__map {
     height: 400px;
-    background:
-      url("../img/map-pin.png") no-repeat calc(50% + 340px) 150px,
-      url("../img/bg-map-desktop@1x.png") no-repeat center;
+
+    background: url("../img/map-pin.png") no-repeat calc(50% + 340px) 150px, url("../img/bg-map-desktop@1x.png") no-repeat center;
     background-size: 122px 106px, 1440px auto;
 
     @media (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
-      background-image:
-        url("../img/map-pin.png"),
-        url("../img/bg-map-desktop@2x.png");
+      background-image: url("../img/map-pin.png"), url("../img/bg-map-desktop@2x.png");
     }
   }
 
   .footer__wrapper {
     width: 1300px;
-    margin-left: auto;
     margin-right: auto;
-    padding-left: 40px;
+    margin-left: auto;
     padding-right: 40px;
+    padding-left: 40px;
   }
 }
