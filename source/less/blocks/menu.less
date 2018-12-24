@@ -1,0 +1,246 @@
+.menu {
+  position: relative;
+  padding-top: 64px;
+}
+
+.menu__toogle {
+  position: fixed;
+  padding: 0;
+  bottom: 26px;
+  right: 21px;
+  width: 48px;
+  height: 48px;
+  font-size: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: @bg-red;
+  background-size: cover;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: url("../img/icon-mobile-more.svg") no-repeat center;
+  }
+}
+
+.menu__nav {
+  display: flex;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 37%, #ffffff 37%, #ffffff 100%);
+  transition: all 0.7s ease-out;
+
+  &--opened {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  &--closed {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+.menu__wrapper {
+  position: fixed;
+  display: flex;
+  top: 37%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 45px;
+  padding-right: 56px;
+  padding-left: 56px;
+
+  &::after {
+    content: "";
+    position: fixed;
+    top: calc(100% - 80px);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+  }
+}
+
+.menu__list {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
+  padding-bottom: 80px;
+  overflow: auto;
+}
+
+.menu__item {
+  margin-bottom: 26px;
+}
+
+.menu__link {
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 500;
+  color: @text-color;
+  text-decoration: none;
+}
+
+.menu__number {
+  color: rgba(51, 51, 51, 0.3);
+  font-weight: 500;
+  font-size: 9px;
+  line-height: 11px;
+}
+
+.menu__header {
+  margin-top: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+  line-height: 36px;
+  font-size: 32px;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+}
+
+.menu__filter {
+  display: none;
+}
+
+.menu__dish {
+  margin-top: 103px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width: @desktop-width) {
+  .menu {
+    padding-top: 0;
+  }
+
+  .menu__toogle {
+    display: none;
+  }
+
+  .menu__nav {
+    position: static;
+    width: 100%;
+    background-image: none;
+    border-bottom: 1px solid #e8eaed;
+    opacity: 1;
+    min-height: 85px;
+
+    &--hidden {
+      display: block;
+    }
+  }
+
+  .menu__wrapper {
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    padding-top: 0;
+    padding-left: 11%;
+    padding-right: 0;
+    overflow: auto;
+
+    &::after {
+      position: absolute;
+      left: calc(100% - 150px);
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+    }
+  }
+
+  .menu__list {
+    position: relative;
+    left: 0;
+    margin-top: 0;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    padding-bottom: 0;
+    width: auto;
+
+    &::-webkit-scrollbar {
+      height: 0;
+    }
+  }
+
+  .menu__item {
+    position: relative;
+    display: flex;
+    margin-right: 44px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+
+    &--active {
+      &::after {
+        content: "";
+        position: absolute;
+        width: 29px;
+        height: 2px;
+        background-color: @bg-red;
+        left: 50%;
+        bottom: -32px;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  .menu__top {
+    display: flex;
+    padding-top: 60px;
+  }
+
+  .menu__header {
+    width: 50%;
+    padding-left: 11%;
+    margin-bottom: 0;
+  }
+
+  .menu__filter {
+    display: block;
+    margin-left: auto;
+    margin-right: 76px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .menu__price {
+    position: relative;
+    margin-bottom: 0;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 9px;
+      width: 12px;
+      height: 6px;
+      background: url("../img/icon-price-sort.svg") no-repeat;
+      background-size: contain;
+      margin-left: 10px;
+    }
+  }
+
+  .menu__dishes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding-left: 11%;
+    padding-right: 46px;
+  }
+}

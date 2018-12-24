@@ -1,0 +1,84 @@
+@font-face {
+  font-family: "TT Norms";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+
+  src:
+    url("../fonts/ttnorms-regular-webfont.woff2") format("woff2"),
+    url("../fonts/ttnorms-regular-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "TT Norms";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+
+  src:
+    url("../fonts/ttnorms-medium-webfont.woff2") format("woff2"),
+    url("../fonts/ttnorms-medium-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "TT Norms";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+
+  src:
+    url("../fonts/ttnorms-bold-webfont.woff2") format("woff2"),
+    url("../fonts/ttnorms-bold-webfont.woff") format("woff");
+}
+
+html {
+  box-sizing: border-box;
+  min-width: 375px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  min-width: 375px;
+  margin: 0;
+  padding: 0;
+  font-family: "TT Norms", "Arial", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 21px;
+  color: @text-color;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+@media (min-width: @desktop-width) {
+  .blur {
+    transition: all 0.5s ease-in-out;
+    filter: blur(10px);
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0);
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    z-index: -1;
+  }
+
+  .product--opened + .overlay {
+    opacity: 0.3;
+    transition: all 0.5s ease-out;
+  }
+}
