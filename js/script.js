@@ -485,8 +485,18 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function () {
   $('.banner__slides').on('init reInit afterChange', function(event, slick, currentSlide) {
     var i = (currentSlide ? currentSlide : 0) + 1;
-    $('.banner__controls .controls__number--active').text('0' + i);
-    $('.banner__controls .controls__number--last').text('0' + slick.slideCount);
+
+    if (i < 10) {
+      $('.banner__controls .controls__number--active').text('0' + i);
+    } else {
+      $('.banner__controls .controls__number--active').text(i);
+    }
+
+    if (slick.slideCount < 10) {
+      $('.banner__controls .controls__number--last').text('0' + slick.slideCount);
+    } else {
+      $('.banner__controls .controls__number--last').text(slick.slideCount);
+    }
 
     $('.banner__controls .controls__timeline').css({
       height: '0'
@@ -499,7 +509,7 @@ $(document).ready(function () {
     dots: false,
     arrows: true,
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 6000,
     speed: 500,
     pauseOnHover: false,
@@ -529,7 +539,7 @@ $(document).ready(function () {
           dots: true,
           arrows: false,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           autoplaySpeed: 6000,
           speed: 500,
           pauseOnHover: false,
@@ -630,8 +640,18 @@ $(document).ready(function () {
 
   $('.industry .slider__items').on('init reInit afterChange', function(event, slick, currentSlide) {
     var i = (currentSlide ? currentSlide : 0) + 1;
-    $('.industry__controls .controls__number--active').text('0' + i);
-    $('.industry__controls .controls__number--last').text('0' + slick.slideCount);
+
+    if (i < 10) {
+      $('.industry__controls .controls__number--active').text('0' + i);
+    } else {
+      $('.industry__controls .controls__number--active').text(i);
+    }
+
+    if (slick.slideCount < 10) {
+      $('.industry__controls .controls__number--last').text('0' + slick.slideCount);
+    } else {
+      $('.industry__controls .controls__number--last').text(slick.slideCount);
+    }
 
     $('.industry__controls .controls__timeline').css({
       width: '0'
@@ -646,7 +666,7 @@ $(document).ready(function () {
     infinite: true,
     autoplay: true,
     autoplaySpeed: 6000,
-    slidesToShow: 2,
+    slidesToShow: 5,
     speed: 500,
     pauseOnHover: false,
     variableWidth: true,
@@ -704,7 +724,7 @@ $(document).ready(function () {
     dots: true,
     arrows: false,
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 6000,
     speed: 500,
     pauseOnHover: false,
