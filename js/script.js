@@ -777,7 +777,7 @@ $(document).ready(function () {
     dots: true,
     arrows: false,
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 6000,
     speed: 500,
     pauseOnHover: false,
