@@ -8,7 +8,8 @@ var searchIcon = search.querySelector('.search__icon');
 var searchField = search.querySelector('.search__field');
 var searchSubmit = search.querySelector('.search__button');
 var navButton = header.querySelector('.main-nav__toggle');
-var mainNav = header.querySelector('.main-nav__list');
+var mainNav = header.querySelector('.main-nav');
+var mainNavList = mainNav.querySelector('.main-nav__list');
 var siteNav = header.querySelector('.site-nav');
 var contacts = header.querySelector('.contacts');
 var citiesWrapper = contacts.querySelector('.contacts__cities-wrapper');
@@ -25,8 +26,6 @@ var categoryPowerstation = main.querySelector('.categories__item--powerstation  
 var upwardButton = main.querySelector('.upward');
 var filterLinks = main.querySelectorAll('.filter__link');
 var filterForms = main.querySelectorAll('.filter__form');
-var filterHeadings = main.querySelectorAll('.filter__form--active  .filter__main  .filter__heading');
-var filterBlocks = main.querySelectorAll('.filter__form--active  .filter__block');
 var filterCaptions = main.querySelectorAll('.filter__caption');
 var filterSelects = main.querySelectorAll('.filter__select');
 var filterPreview = main.querySelectorAll('.filter__preview');
@@ -34,6 +33,8 @@ var footer = document.querySelector('.footer');
 var citiesFooter = footer.querySelectorAll('.footer__city');
 var addressesFooter = footer.querySelectorAll('.footer__address');
 var footerAuthor = footer.querySelector('.footer__policy + .footer__copyrights');
+var searchFieldWidth = 100;
+var mainNavWidth = 240;
 
 var navButtonClickHandler = function () {
   if (window.matchMedia('(max-width: 1023px)').matches) {
@@ -45,7 +46,7 @@ var navButtonClickHandler = function () {
       logo.classList.add('logo--closed');
 
       search.classList.remove('search--closed');
-      mainNav.classList.remove('main-nav__list--closed');
+      mainNavList.classList.remove('main-nav__list--closed');
       siteNav.classList.remove('site-nav--closed');
 
       navButton.classList.remove('main-nav__toggle--closed');
@@ -60,7 +61,7 @@ var navButtonClickHandler = function () {
       logo.classList.add('logo--opened');
 
       search.classList.add('search--closed');
-      mainNav.classList.add('main-nav__list--closed');
+      mainNavList.classList.add('main-nav__list--closed');
       siteNav.classList.add('site-nav--closed');
 
       navButton.classList.remove('main-nav__toggle--opened');
@@ -70,32 +71,41 @@ var navButtonClickHandler = function () {
     }
   } else {
     if (navButton.classList.contains('main-nav__toggle--opened')) {
-      document.addEventListener('click', mainNavCloseHandler);
+      document.addEventListener('click', mainNavListCloseHandler);
       navButton.classList.remove('main-nav__toggle--opened');
-      mainNav.classList.remove('main-nav__list--closed');
-      mainNav.classList.add('main-nav__list--fixed');
+      mainNavList.classList.remove('main-nav__list--closed');
+      mainNavList.classList.remove('main-nav__list--hidden');
+      mainNavList.classList.add('main-nav__list--fixed');
     } else {
       navButton.classList.add('main-nav__toggle--opened');
-      mainNav.classList.add('main-nav__list--closed');
-      mainNav.classList.remove('main-nav__list--fixed');
+      mainNavList.classList.add('main-nav__list--closed');
+      mainNavList.classList.add('main-nav__list--hidden');
+      mainNavList.classList.remove('main-nav__list--fixed');
     }
   }
 };
 
-var mainNavCloseHandler = function (evt) {
+var mainNavListCloseHandler = function (evt) {
   if (!window.matchMedia('(max-width: 1023px)').matches && evt.target !== navButton) {
     navButton.classList.add('main-nav__toggle--opened');
-    mainNav.classList.add('main-nav__list--closed');
-    mainNav.classList.remove('main-nav__list--fixed');
-    document.removeEventListener('click', mainNavCloseHandler);
+    mainNavList.classList.add('main-nav__list--closed');
+    mainNavList.classList.add('main-nav__list--hidden');
+    mainNavList.classList.remove('main-nav__list--fixed');
+    document.removeEventListener('click', mainNavListCloseHandler);
   }
 };
 
 var searchFieldFocusHandler = function () {
-  if (!navButton.classList.contains('main-nav__toggle--opened')) {
-    mainNav.classList.add('main-nav__list--closed');
+  if (!navButton.classList.contains('main-nav__toggle--opened') &&
+      !mainNavList.classList.contains('main-nav__list--fixed') &&
+      !siteNav.classList.contains('site-nav--closed')) {
+    mainNav.style.transition = 'all 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
+    mainNav.style.width = '';
+    mainNav.classList.add('main-nav--closed');
     searchField.removeEventListener('click', searchFieldFocusHandler);
     searchField.classList.remove('search__field--closed');
+    searchField.style.transition = 'all 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
+    searchField.style.width = searchFieldWidth + 'px';
   }
 
   if (!window.matchMedia('(max-width: 1023px)').matches) {
@@ -106,15 +116,41 @@ var searchFieldFocusHandler = function () {
 
 var searchFieldBlurHandler = function () {
   if (navButton.classList.contains('main-nav__toggle--closed')) {
-    mainNav.classList.remove('main-nav__list--closed');
     searchField.removeEventListener('click', searchFieldBlurHandler);
     searchField.classList.add('search__field--closed');
+    searchField.style.width = '';
+    mainNav.style.width = mainNavWidth + 'px';
+    mainNav.classList.remove('main-nav--closed');
+    setTimeout(function () {
+    }, 500);
   }
 
   if (!window.matchMedia('(max-width: 1023px)').matches) {
     searchIcon.classList.remove('search__icon--opened');
     searchField.placeholder = 'Поиск товаров и услуг';
   }
+};
+
+var getSearchInputWidth = function () {
+  if (pageYOffset === 0) {
+    mainNav.style.transition = '';
+    mainNav.style.width = '';
+    mainNavWidth = mainNav.getBoundingClientRect().width;
+    mainNav.style.width = 0;
+    searchField.style.transition = '';
+    searchField.style.width = '100%';
+    searchFieldWidth = searchField.getBoundingClientRect().width;
+    searchField.classList.add('search__field--closed');
+    searchField.style.width = '';
+    mainNav.style.width = mainNavWidth + 'px';
+    mainNav.classList.remove('main-nav--closed');
+  } else {
+    mainNav.style.width = '';
+    searchField.style.width = '';
+  }
+
+  setTimeout(function () {
+  }, 500);
 };
 
 var windowResizeHandler = function () {
@@ -127,14 +163,14 @@ var windowResizeHandler = function () {
       navButton.classList.add('main-nav__toggle--closed');
     }
 
-    if (mainNav.classList.contains('main-nav__list--fixed')) {
-      mainNav.classList.remove('main-nav__list--fixed');
-      mainNav.classList.add('main-nav__list--closed');
+    if (mainNavList.classList.contains('main-nav__list--fixed')) {
+      mainNavList.classList.remove('main-nav__list--fixed');
+      mainNavList.classList.add('main-nav__list--closed');
       navButton.classList.add('main-nav__toggle--closed');
       siteNav.classList.add('site-nav--closed');
       search.classList.add('search--closed');
     } else if (navButton.classList.contains('main-nav__toggle--closed')) {
-      mainNav.classList.add('main-nav__list--closed');
+      mainNavList.classList.add('main-nav__list--closed');
       siteNav.classList.add('site-nav--closed');
       search.classList.add('search--closed');
     }
@@ -144,7 +180,7 @@ var windowResizeHandler = function () {
     categoryPump.textContent = 'Насосы';
     categoryPowerstation.textContent = 'Электростанции';
   } else {
-    if (!mainNav.classList.contains('main-nav__list--fixed')) {
+    if (!mainNavList.classList.contains('main-nav__list--fixed')) {
       windowScrollHandler();
 
       document.body.classList.remove('no-scroll');
@@ -159,7 +195,7 @@ var windowResizeHandler = function () {
       searchField.placeholder = 'Поиск товаров и услуг';
       searchField.classList.add('search__field--closed');
 
-      mainNav.classList.remove('main-nav__list--closed');
+      mainNavList.classList.remove('main-nav__list--closed');
       siteNav.classList.remove('site-nav--closed');
 
       navButton.classList.remove('main-nav__toggle--opened');
@@ -227,66 +263,71 @@ var scrollTop = document.body.getBoundingClientRect().top;
 
 var windowScrollHandler = function () {
   if (!window.matchMedia('(max-width: 1023px)').matches) {
-    if (!mainNav.classList.contains('main-nav__list--fixed')) {
-      var newScrollTop = document.body.getBoundingClientRect().top;
+    searchField.blur();
+    searchField.style.transition = 'border-bottom 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
 
-      var bodyHeight = document.body.offsetHeight;
-      var footerHeight = footer.getBoundingClientRect().height;
-      var footerTop = bodyHeight - innerHeight - footerHeight;
-      var footerAuthorHeight = footerAuthor.getBoundingClientRect().height;
-      var footerAuthorTop = bodyHeight - footerAuthorHeight;
-      var upwardButtonTop = footerAuthorTop - upwardButton.getBoundingClientRect().height - 28;
+    var newScrollTop = document.body.getBoundingClientRect().top;
 
-      if (footerTop < window.pageYOffset) {
-        sidebar.style.position = 'absolute';
-        sidebar.style.top = footerTop + 'px';
-      } else {
-        sidebar.style.position = '';
-        sidebar.style.top = '';
-      }
+    var bodyHeight = document.body.offsetHeight;
+    var footerHeight = footer.getBoundingClientRect().height;
+    var footerTop = bodyHeight - innerHeight - footerHeight;
+    var footerAuthorHeight = footerAuthor.getBoundingClientRect().height;
+    var footerAuthorTop = bodyHeight - footerAuthorHeight;
+    var upwardButtonTop = footerAuthorTop - upwardButton.getBoundingClientRect().height - 28;
 
-      if (footerAuthorTop < window.pageYOffset + innerHeight) {
-        upwardButton.style.position = 'absolute';
-        upwardButton.style.top = upwardButtonTop + 'px';
-      } else {
-        upwardButton.style.position = '';
-        upwardButton.style.top = '';
-      }
-
-      if (scrollTop > newScrollTop) {
-        header.classList.add('header--closed');
-        main.classList.remove('main--full');
-      } else {
-
-        if (pageYOffset > 0) {
-          header.classList.remove('header--closed');
-          logoTitle.classList.add('logo__title--closed');
-          mainNav.classList.add('main-nav__list--closed');
-          navButton.classList.remove('main-nav__toggle--closed');
-          navButton.classList.add('main-nav__toggle--opened');
-          siteNav.classList.add('site-nav--closed');
-          contacts.classList.add('contacts--closed');
-          searchField.classList.remove('search__field--closed');
-        } else {
-          header.classList.remove('header--closed');
-          logoTitle.classList.remove('logo__title--closed');
-          mainNav.classList.remove('main-nav__list--closed');
-          navButton.classList.add('main-nav__toggle--closed');
-          navButton.classList.remove('main-nav__toggle--opened');
-          siteNav.classList.remove('site-nav--closed');
-          contacts.classList.remove('contacts--closed');
-          searchField.classList.add('search__field--closed');
-          main.classList.add('main--full');
-        }
-      }
-
-      scrollTop = newScrollTop;
+    if (footerTop < window.pageYOffset) {
+      sidebar.style.position = 'absolute';
+      sidebar.style.top = footerTop + 'px';
+    } else {
+      sidebar.style.position = '';
+      sidebar.style.top = '';
     }
+
+    if (footerAuthorTop < window.pageYOffset + innerHeight) {
+      upwardButton.style.position = 'absolute';
+      upwardButton.style.top = upwardButtonTop + 'px';
+    } else {
+      upwardButton.style.position = '';
+      upwardButton.style.top = '';
+    }
+
+    if (scrollTop > newScrollTop) {
+      header.classList.add('header--closed');
+      main.classList.remove('main--full');
+    } else {
+      if (pageYOffset > 115) {
+        header.classList.remove('header--closed');
+        logoTitle.classList.add('logo__title--closed');
+        mainNavList.classList.add('main-nav__list--closed');
+        mainNavList.classList.add('main-nav__list--hidden');
+        navButton.classList.remove('main-nav__toggle--closed');
+        navButton.classList.add('main-nav__toggle--opened');
+        siteNav.classList.add('site-nav--closed');
+        contacts.classList.add('contacts--closed');
+        searchField.classList.remove('search__field--closed');
+      } else {
+        header.classList.remove('header--closed');
+        logoTitle.classList.remove('logo__title--closed');
+        mainNavList.classList.remove('main-nav__list--closed');
+        mainNavList.classList.remove('main-nav__list--hidden');
+        mainNavList.classList.remove('main-nav__list--fixed');
+        navButton.classList.add('main-nav__toggle--closed');
+        navButton.classList.remove('main-nav__toggle--opened');
+        siteNav.classList.remove('site-nav--closed');
+        contacts.classList.remove('contacts--closed');
+        searchField.classList.add('search__field--closed');
+        main.classList.add('main--full');
+        document.removeEventListener('click', mainNavListCloseHandler);
+      }
+    }
+
+    scrollTop = newScrollTop;
+
+    getSearchInputWidth();
   }
 };
 
 var filterLinksClickHandler = function (link, form) {
-
   link.addEventListener('click', function (evt) {
     evt.preventDefault();
     if (!link.classList.contains('filter__link--active')) {
@@ -299,71 +340,88 @@ var filterLinksClickHandler = function (link, form) {
         it.classList.remove('filter__form--active');
       });
       form.classList.add('filter__form--active');
-
-      filterHeadings.forEach(function (it) {
-        it.removeEventListener('click', filterHeadingsClickHandler);
-      });
-
-      filterHeadings = document.querySelectorAll('.filter__form--active    .filter__main  .filter__heading');
-      filterBlocks = document.querySelectorAll('.filter__form--active  .filter__block');
-
-      for (var i = 0; i < filterHeadings.length; i++) {
-        filterHeadings[i].addEventListener('click', filterHeadingsClickHandler);
-      }
     }
   });
 };
 
-/* eslint-disable */
-var filterHeadingsClickHandler = function (evt) {
-  if (evt.target.parentElement.classList.contains('filter__block--opened')) {
-    var filterRange = $('.filter__form--active  .filter__range');
-    filterRange.slider('destroy');
+var getBlockHeight = function (form) {
+  form.classList.add('filter__form--active');
 
-    evt.target.parentElement.classList.remove('filter__block--opened');
-  } else {
-    filterBlocks.forEach(function (it) {
-      it.classList.remove('filter__block--opened');
-    });
+  var headings = form.querySelectorAll('.filter__main  .filter__heading');
+  var blocks = form.querySelectorAll('.filter__block');
 
-    evt.target.parentElement.classList.add('filter__block--opened');
+  for (var i = 0; i < headings.length; i++) {
+    blocks[i].classList.add('filter__block--opened');
+    var blockHeight = blocks[i].getBoundingClientRect().height;
+    blocks[i].classList.remove('filter__block--opened');
 
-    filterRange = $('.filter__form--active  .filter__range');
-    var minValue = $('.filter__form--active  .filter__block--opened  .filter__value--min');
-    var maxValue = $('.filter__form--active  .filter__block--opened  .filter__value--max');
-    var minInput = $('.filter__form--active  .filter__block--opened  .filter__cost--min');
-    var maxInput = $('.filter__form--active  .filter__block--opened  .filter__cost--max');
-
-    filterRange.slider({
-      range: true,
-      min: 9000,
-      max: 90000,
-      step: 1000,
-      values: [20000, 80000],
-      slide: function (event, ui) {
-        var min = filterRange.slider('option', 'min');
-        var max = filterRange.slider('option', 'max');
-        var step = filterRange.slider('option', 'step');
-
-        minValue.text(Math.floor(ui.values[0] / step) + 'K');
-        minValue.css({left: ((ui.values[0] - min) / (max - min) * 100 - 1) + '%'});
-        minInput[0].value = ui.values[0];
-
-        maxValue.text(Math.floor(ui.values[1] / 1000) + 'K');
-        maxValue.css({left: ((ui.values[1] - min) / (max - min) * 100 - 1) + '%'});
-        maxInput[0].value = ui.values[1];
-      }
-    });
-
-    minValue.text(Math.floor(20000 / 1000) + 'K');
-    minValue.css({left: ((20000 - 9000) / 81000 * 100 - 1) + '%'});
-    minInput[0].value = '';
-
-    maxValue.text(Math.floor(80000 / 1000) + 'K');
-    maxValue.css({left: ((80000 - 9000) / 81000 * 100 - 1) + '%'});
-    maxInput[0].value = '';
+    filterHeadingsClickHandler(form, headings, blocks, blockHeight, i);
   }
+
+  form.classList.remove('filter__form--active');
 };
+
+/* eslint-disable */
+var filterHeadingsClickHandler = function (form, headings, blocks, blockHeight, i) {
+  headings[i].addEventListener('click', function () {
+    if (blocks[i].classList.contains('filter__block--opened')) {
+      var filterRange = $('.filter__form--active  .filter__range');
+      filterRange.slider('destroy');
+
+      headings[i].classList.remove('filter__heading--opened');
+      blocks[i].classList.remove('filter__block--opened');
+      blocks[i].style.height = 0;
+    } else {
+      headings.forEach(function (it) {
+        it.classList.remove('filter__heading--opened');
+      });
+      blocks.forEach(function (it) {
+        it.classList.remove('filter__block--opened');
+        it.style.height = 0;
+      });
+
+      headings[i].classList.add('filter__heading--opened');
+      blocks[i].classList.add('filter__block--opened');
+      blocks[i].style.height = blockHeight + 'px';
+
+      filterRange = $('.filter__form--active  .filter__range');
+      var minValue = $('.filter__form--active  .filter__block--opened  .filter__value--min');
+      var maxValue = $('.filter__form--active  .filter__block--opened  .filter__value--max');
+      var minInput = $('.filter__form--active  .filter__block--opened  .filter__cost--min');
+      var maxInput = $('.filter__form--active  .filter__block--opened  .filter__cost--max');
+
+      filterRange.slider({
+        range: true,
+        min: 9000,
+        max: 90000,
+        step: 1000,
+        values: [20000, 80000],
+        slide: function (event, ui) {
+          var min = filterRange.slider('option', 'min');
+          var max = filterRange.slider('option', 'max');
+          var step = filterRange.slider('option', 'step');
+
+          minValue.text(Math.floor(ui.values[0] / step) + 'K');
+          minValue.css({left: ((ui.values[0] - min) / (max - min) * 100 - 1) + '%'});
+          minInput[0].value = ui.values[0];
+
+          maxValue.text(Math.floor(ui.values[1] / 1000) + 'K');
+          maxValue.css({left: ((ui.values[1] - min) / (max - min) * 100 - 1) + '%'});
+          maxInput[0].value = ui.values[1];
+        }
+      });
+
+      minValue.text(Math.floor(20000 / 1000) + 'K');
+      minValue.css({left: ((20000 - 9000) / 81000 * 100 - 1) + '%'});
+      minInput[0].value = '';
+
+      maxValue.text(Math.floor(80000 / 1000) + 'K');
+      maxValue.css({left: ((80000 - 9000) / 81000 * 100 - 1) + '%'});
+      maxInput[0].value = '';
+    }
+  });
+};
+
 /* eslint-enable */
 
 var filterCapionsClickHandler = function (caption, select) {
@@ -428,10 +486,9 @@ var filterFormsClickHandler = function (form, preview) {
 document.addEventListener('DOMContentLoaded', function () {
   navButton.addEventListener('click', navButtonClickHandler);
 
-  windowResizeHandler();
-  window.addEventListener('resize', windowResizeHandler);
-
   window.addEventListener('scroll', windowScrollHandler);
+  window.addEventListener('resize', windowResizeHandler);
+  windowResizeHandler();
 
   activeCity.addEventListener('click', function () {
     var currentCity = activeCity.textContent;
@@ -462,15 +519,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   for (var i = 0; i < filterLinks.length; i++) {
     filterLinksClickHandler(filterLinks[i], filterForms[i]);
-  }
-
-  for (i = 0; i < filterForms.length; i++) {
     filterFormsClickHandler(filterForms[i], filterPreview[i]);
+    getBlockHeight(filterForms[i]);
   }
 
-  for (i = 0; i < filterHeadings.length; i++) {
-    filterHeadings[i].addEventListener('click', filterHeadingsClickHandler);
-  }
+  filterForms[0].classList.add('filter__form--active');
 
   for (i = 0; i < filterCaptions.length; i++) {
     filterCapionsClickHandler(filterCaptions[i], filterSelects[i]);
@@ -509,7 +562,7 @@ $(document).ready(function () {
     dots: false,
     arrows: true,
     infinite: true,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 6000,
     speed: 500,
     pauseOnHover: false,
@@ -539,7 +592,7 @@ $(document).ready(function () {
           dots: true,
           arrows: false,
           infinite: true,
-          autoplay: false,
+          autoplay: true,
           autoplaySpeed: 6000,
           speed: 500,
           pauseOnHover: false,
@@ -602,7 +655,7 @@ $(document).ready(function () {
   });
 
   $('.upward').click(function() {
-    $('body,html').animate({scrollTop:0},500);
+    $('body,html').animate({scrollTop:0}, 500);
   });
 
   var filterRange = $('.filter__block--opened  .filter__range');
@@ -724,7 +777,7 @@ $(document).ready(function () {
     dots: true,
     arrows: false,
     infinite: true,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 6000,
     speed: 500,
     pauseOnHover: false,
