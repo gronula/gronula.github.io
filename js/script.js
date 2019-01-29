@@ -18,6 +18,10 @@ var citiesList = citiesWrapper.querySelector('.contacts__cities');
 var citiesHeader = citiesList.querySelectorAll('.contacts__city');
 var main = document.querySelector('.main');
 var sidebar = main.querySelector('.sidebar');
+var sidebarCatalogLink = sidebar.querySelector('.sidebar__link--catalog');
+var catalog = sidebar.querySelector('.catalog');
+var catalogButton = sidebar.querySelector('.catalog__toggle');
+var catalogLinks = catalog.querySelectorAll('.catalog__link');
 var categoryCompressor = main.querySelector('.categories__item--compressor  .categories__link');
 var categoryDehydrator = main.querySelector('.categories__item--dehydrator  .categories__link');
 var categoryPneumotool = main.querySelector('.categories__item--pneumotool  .categories__link');
@@ -29,6 +33,9 @@ var filterForms = main.querySelectorAll('.filter__form');
 var filterCaptions = main.querySelectorAll('.filter__caption');
 var filterSelects = main.querySelectorAll('.filter__select');
 var filterPreview = main.querySelectorAll('.filter__preview');
+var brands = main.querySelector('.brands');
+var brandsLists = brands.querySelectorAll('.brands__list');
+var brandsImages = brands.querySelectorAll('.brands__image-wrapper');
 var footer = document.querySelector('.footer');
 var citiesFooter = footer.querySelectorAll('.footer__city');
 var addressesFooter = footer.querySelectorAll('.footer__address');
@@ -121,8 +128,6 @@ var searchFieldBlurHandler = function () {
     searchField.style.width = '';
     mainNav.style.width = mainNavWidth + 'px';
     mainNav.classList.remove('main-nav--closed');
-    setTimeout(function () {
-    }, 500);
   }
 
   if (!window.matchMedia('(max-width: 1023px)').matches) {
@@ -148,9 +153,32 @@ var getSearchInputWidth = function () {
     mainNav.style.width = '';
     searchField.style.width = '';
   }
+};
 
-  setTimeout(function () {
-  }, 500);
+var offsetTop = 0;
+
+var sidebarCatalogLinkClickHandler = function (evt) {
+  if (window.matchMedia('(max-width: 1023px)').matches) {
+    evt.preventDefault();
+
+    offsetTop = pageYOffset;
+
+    document.body.style.top = -offsetTop + 'px';
+    document.body.classList.add('no-scroll');
+
+    catalog.classList.add('catalog--opened');
+    catalogButton.addEventListener('click', catalogButtonClickHandler);
+  }
+};
+
+var catalogButtonClickHandler = function () {
+  document.body.style.top = '';
+  document.body.classList.remove('no-scroll');
+
+  window.scroll(0, offsetTop);
+
+  catalog.classList.remove('catalog--opened');
+  catalogButton.removeEventListener('click', catalogButtonClickHandler);
 };
 
 var windowResizeHandler = function () {
@@ -180,50 +208,56 @@ var windowResizeHandler = function () {
     categoryPump.textContent = 'Насосы';
     categoryPowerstation.textContent = 'Электростанции';
   } else {
-    if (!mainNavList.classList.contains('main-nav__list--fixed')) {
-      windowScrollHandler();
+    windowScrollHandler();
 
-      document.body.classList.remove('no-scroll');
-      header.classList.remove('header--fixed');
-      header.classList.remove('header--closed');
+    document.body.classList.remove('no-scroll');
+    header.classList.remove('header--fixed');
+    header.classList.remove('header--closed');
 
-      logo.classList.remove('logo--closed');
-      logo.classList.add('logo--opened');
-      logoTitle.classList.remove('logo__title--closed');
+    logo.classList.remove('logo--closed');
+    logo.classList.add('logo--opened');
+    logoTitle.classList.remove('logo__title--closed');
 
-      search.classList.add('search--closed');
-      searchField.placeholder = 'Поиск товаров и услуг';
-      searchField.classList.add('search__field--closed');
+    search.classList.add('search--closed');
+    searchField.placeholder = 'Поиск товаров и услуг';
+    searchField.classList.add('search__field--closed');
 
-      mainNavList.classList.remove('main-nav__list--closed');
-      siteNav.classList.remove('site-nav--closed');
+    mainNavList.classList.remove('main-nav__list--closed');
+    siteNav.classList.remove('site-nav--closed');
 
-      navButton.classList.remove('main-nav__toggle--opened');
-      navButton.classList.add('main-nav__toggle--closed');
+    navButton.classList.remove('main-nav__toggle--opened');
+    navButton.classList.add('main-nav__toggle--closed');
 
-      contacts.classList.remove('contacts--closed');
+    contacts.classList.remove('contacts--closed');
 
-      sidebar.classList.remove('sidebar--closed');
+    sidebar.classList.remove('sidebar--closed');
+    catalog.classList.remove('catalog--opened');
 
-      searchField.addEventListener('focus', searchFieldFocusHandler);
-      searchField.addEventListener('blur', searchFieldBlurHandler);
+    searchField.addEventListener('focus', searchFieldFocusHandler);
+    searchField.addEventListener('blur', searchFieldBlurHandler);
 
-      var categoryCompressorSubitems = categoryCompressor.parentElement.querySelectorAll('.categories__subitem').length;
-      var categoryDehydratorSubitems = categoryDehydrator.parentElement.querySelectorAll('.categories__subitem').length;
-      var categoryPneumotoolSubitems = categoryPneumotool.parentElement.querySelectorAll('.categories__subitem').length;
-      var categoryPumpSubitems = categoryPump.parentElement.querySelectorAll('.categories__subitem').length;
-      var categoryPowerstationSubitems = categoryPowerstation.parentElement.querySelectorAll('.categories__subitem').length;
+    var categoryCompressorSubitems = categoryCompressor.parentElement.querySelectorAll('.categories__subitem').length;
+    var categoryDehydratorSubitems = categoryDehydrator.parentElement.querySelectorAll('.categories__subitem').length;
+    var categoryPneumotoolSubitems = categoryPneumotool.parentElement.querySelectorAll('.categories__subitem').length;
+    var categoryPumpSubitems = categoryPump.parentElement.querySelectorAll('.categories__subitem').length;
+    var categoryPowerstationSubitems = categoryPowerstation.parentElement.querySelectorAll('.categories__subitem').length;
 
-      categoryCompressor.innerHTML = 'Компрессорное оборудование<sup class="categories__number">' + categoryCompressorSubitems + '</sup>';
+    categoryCompressor.innerHTML = 'Компрессорное оборудование<sup class="categories__number">' + categoryCompressorSubitems + '</sup>';
 
-      categoryDehydrator.innerHTML = 'Адсорбционные осушители<sup class="categories__number">' + categoryDehydratorSubitems + '</sup>';
+    categoryDehydrator.innerHTML = 'Адсорбционные осушители<sup class="categories__number">' + categoryDehydratorSubitems + '</sup>';
 
-      categoryPneumotool.innerHTML = 'Пневмоинструмент<sup class="categories__number">' + categoryPneumotoolSubitems + '</sup>';
+    categoryPneumotool.innerHTML = 'Пневмоинструмент<sup class="categories__number">' + categoryPneumotoolSubitems + '</sup>';
 
-      categoryPump.innerHTML = 'Вакуумные насосы<sup class="categories__number">' + categoryPumpSubitems + '</sup>';
+    categoryPump.innerHTML = 'Вакуумные насосы<sup class="categories__number">' + categoryPumpSubitems + '</sup>';
 
-      categoryPowerstation.innerHTML = 'Автономные электростанции<sup class="categories__number">' + categoryPowerstationSubitems + '</sup>';
-    }
+    categoryPowerstation.innerHTML = 'Автономные электростанции<sup class="categories__number">' + categoryPowerstationSubitems + '</sup>';
+
+    setTimeout(function () {
+      $('.brands__list.slick-initialized').not('.brands__list--copy').slick('unslick');
+    }, 50);
+
+    cancelAnimation();
+    animateBrandsLists();
   }
 };
 
@@ -289,11 +323,11 @@ var windowScrollHandler = function () {
     var upwardButtonTop = footerAuthorTop - upwardButton.getBoundingClientRect().height - 28;
 
     if (footerTop < window.pageYOffset) {
-      sidebar.style.position = 'absolute';
-      sidebar.style.top = footerTop + 'px';
+      // sidebar.style.position = 'absolute';
+      // sidebar.style.top = footerTop + 'px';
     } else {
-      sidebar.style.position = '';
-      sidebar.style.top = '';
+      // sidebar.style.position = '';
+      // sidebar.style.top = '';
     }
 
     if (footerAuthorTop < window.pageYOffset + innerHeight) {
@@ -330,7 +364,6 @@ var windowScrollHandler = function () {
         contacts.classList.remove('contacts--closed');
         searchField.classList.add('search__field--closed');
         main.classList.add('main--full');
-        // document.removeEventListener('click', mainNavListCloseHandler);
       }
     }
 
@@ -464,14 +497,133 @@ var filterFormsSubmitHandler = function (form) {
   });
 };
 
-document.addEventListener('DOMContentLoaded', function () {
-  navButton.addEventListener('click', navButtonClickHandler);
+var requestAnimationFrame = window.requestAnimationFrame ||
+                                window.mozRequestAnimationFrame ||
+                                window.webkitRequestAnimationFrame ||
+                                window.msRequestAnimationFrame;
 
+window.requestAnimationFrame = requestAnimationFrame;
+
+var isScrollDown = true;
+var requestId;
+var x = 0;
+
+var animation = function () {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    var brandsWidth = brands.getBoundingClientRect().width;
+    x = isScrollDown ? x - 1 : x + 1;
+
+    brandsLists.forEach(function (it) {
+      if (x < -brandsWidth) {
+        x = 0;
+      } else if (x > 0) {
+        x = -brandsWidth;
+      }
+
+      it.style.transform = 'translateX(' + x + 'px)';
+    });
+
+    requestId = requestAnimationFrame(animation);
+  }
+};
+
+var cancelAnimation = function () {
+  cancelAnimationFrame(requestId);
+};
+
+var isMoved = false;
+var isClick = true;
+
+var brandsImageClickHandler = function (evt) {
+  if (!isClick) {
+    evt.preventDefault();
+  }
+};
+
+var brandsImageMouseDownHandler = function (evt) {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    evt.preventDefault();
+
+    var brandsWidth = brands.getBoundingClientRect().width;
+
+    var startCoords = {
+      x: evt.clientX
+    };
+
+    isClick = true;
+
+    var mouseMoveHandler = function (moveEvt) {
+      moveEvt.preventDefault();
+
+      cancelAnimation();
+
+      x -= startCoords.x - moveEvt.x;
+
+      brandsLists.forEach(function (it) {
+        if (x < -brandsWidth) {
+          x = 0;
+        } else if (x > 0) {
+          x = -brandsWidth;
+        }
+
+        it.style.transform = 'translateX(' + x + 'px)';
+      });
+
+      startCoords = {
+        x: moveEvt.clientX
+      };
+
+      isMoved = true;
+      isClick = false;
+    };
+
+    var mouseUpHandler = function (upEvt) {
+      upEvt.preventDefault();
+
+      if (isMoved) {
+        isMoved = false;
+        animation();
+      }
+
+      document.removeEventListener('mousemove', mouseMoveHandler);
+      document.removeEventListener('mouseup', mouseUpHandler, true);
+    };
+
+    for (var i = 0; i < brandsImages.length; i++) {
+      brandsImages[i].addEventListener('click', brandsImageClickHandler);
+    }
+
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler, true);
+  }
+};
+
+var animateBrandsLists = function () {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    var brandsScrollTop = brands.getBoundingClientRect().top;
+
+    window.addEventListener('scroll', function () {
+      var newbrandsScrollTop = brands.getBoundingClientRect().top;
+      isScrollDown = brandsScrollTop >= newbrandsScrollTop;
+      brandsScrollTop = newbrandsScrollTop;
+    });
+
+    requestAnimationFrame(animation);
+
+    for (var i = 0; i < brandsImages.length; i++) {
+      brandsImages[i].addEventListener('mousedown', brandsImageMouseDownHandler);
+    }
+  }
+};
+
+document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', windowScrollHandler);
   window.addEventListener('resize', windowResizeHandler);
-  windowResizeHandler();
 
+  windowResizeHandler();
   activeCityClickHandler();
+
+  navButton.addEventListener('click', navButtonClickHandler);
 
   searchSubmit.addEventListener('click', function (evt) {
     if (searchField.validity.valueMissing) {
@@ -498,6 +650,8 @@ document.addEventListener('DOMContentLoaded', function () {
   for (i = 0; i < citiesFooter.length; i++) {
     citiesFooterClickHandler(citiesFooter[i], addressesFooter[i]);
   }
+
+  sidebarCatalogLink.addEventListener('click', sidebarCatalogLinkClickHandler);
 });
 
 $(document).ready(function () {
@@ -549,11 +703,14 @@ $(document).ready(function () {
 
   $(window).on('load resize', function () {
     if (innerWidth >= 1024) {
-      $('.brands__list.slick-initialized').slick('unslick');
       $('.news__notes.slick-initialized').slick('unslick');
     } else {
+      brandsLists.forEach(function (it) {
+        it.style.transform = '';
+      });
+
       if (!document.querySelector('.brands__list').classList.contains('slick-initialized')) {
-        $('.brands__list').slick({
+        $('.brands__list').not('.brands__list--copy').slick({
           dots: true,
           arrows: false,
           infinite: true,
