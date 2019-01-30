@@ -28,6 +28,7 @@ var catalogWrapper = catalog.querySelector('.catalog__wrapper');
 var catalogList = catalog.querySelector('.catalog__list');
 var catalogItems = catalog.querySelectorAll('.catalog__item');
 var catalogLinks = catalog.querySelectorAll('.catalog__link');
+var catalogNumbers = catalog.querySelectorAll('.catalog__number');
 var categoryCompressor = main.querySelector('.categories__item--compressor  .categories__link');
 var categoryDehydrator = main.querySelector('.categories__item--dehydrator  .categories__link');
 var categoryPneumotool = main.querySelector('.categories__item--pneumotool  .categories__link');
@@ -345,6 +346,15 @@ var catalogItemMouseoutHandler = function (evt) {
   catalogWrapper.classList.remove('catalog__wrapper--opened');
   catalogLink.classList.remove('catalog__link--opened');
   catalogSublist.classList.remove('catalog__sublist--opened');
+};
+
+var setCatalogNumbersValue = function () {
+  catalogItems.forEach(function (it, i) {
+    var sublist = it.querySelector('.catalog__sublist');
+    var number = sublist === null ? '' : sublist.childElementCount;
+
+    catalogNumbers[i].textContent = number;
+  });
 };
 
 var windowResizeHandler = function () {
@@ -844,6 +854,8 @@ document.addEventListener('DOMContentLoaded', function () {
   for (i = 0; i < citiesFooter.length; i++) {
     citiesFooterClickHandler(citiesFooter[i], addressesFooter[i]);
   }
+
+  setCatalogNumbersValue();
 });
 
 $(document).ready(function () {
