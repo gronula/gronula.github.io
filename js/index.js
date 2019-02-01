@@ -378,30 +378,22 @@ var catalogItemMouseoverHandler = function (evt) {
 };
 
 var catalogItemMouseoutHandler = function (evt) {
-  if (evt.currentTarget.childElementCount > 1) {
-    if (evt.toElement === catalogList || evt.toElement === catalogHeader) {
-      return;
-    }
-
-    catalogHeader.classList.remove('catalog__header--opened');
-    catalogWrapper.classList.remove('catalog__wrapper--opened');
-    catalogLinks.forEach(function (it) {
-      it.classList.remove('catalog__link--opened');
-    });
-    catalogSublists.forEach(function (it) {
-      it.classList.remove('catalog__sublist--opened');
-    });
-  } else {
-    catalogHeader.classList.remove('catalog__header--opened');
-    catalogWrapper.classList.remove('catalog__wrapper--opened');
-
-    catalogLinks.forEach(function (it) {
-      it.classList.remove('catalog__link--opened');
-    });
-    catalogSublists.forEach(function (it) {
-      it.classList.remove('catalog__sublist--opened');
-    });
+  if (
+    evt.currentTarget.childElementCount > 1 &&
+    evt.toElement === catalogList ||
+    evt.toElement === catalogHeader) {
+    return;
   }
+
+  catalogHeader.classList.remove('catalog__header--opened');
+  catalogWrapper.classList.remove('catalog__wrapper--opened');
+
+  catalogLinks.forEach(function (it) {
+    it.classList.remove('catalog__link--opened');
+  });
+  catalogSublists.forEach(function (it) {
+    it.classList.remove('catalog__sublist--opened');
+  });
 };
 
 var setCatalogNumbersValue = function () {
