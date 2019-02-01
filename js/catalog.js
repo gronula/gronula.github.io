@@ -38,6 +38,21 @@ var searchFieldWidth = 100;
 var mainNavWidth = 240;
 // var sidebarHeight = sidebar.getBoundingClientRect().height;
 
+var getScrollWidth = function () {
+  var div = document.createElement('div');
+
+  div.style.overflowY = 'scroll';
+  div.style.width = '50px';
+  div.style.height = '50px';
+  div.style.visibility = 'hidden';
+
+  document.body.appendChild(div);
+  var scrollWidth = div.offsetWidth - div.clientWidth;
+  document.body.removeChild(div);
+
+  return scrollWidth;
+};
+
 var navButtonClickHandler = function () {
   if (window.matchMedia('(max-width: 1023px)').matches) {
     if (navButton.classList.contains('main-nav__toggle--closed')) {
@@ -249,7 +264,13 @@ var catalogButtonClickHandler = function () {
     }
   } else {
     document.body.classList.remove('dark');
+    document.body.style.overflow = '';
+    document.body.style.width = '';
     header.style.zIndex = '';
+    header.style.right = '';
+    setTimeout(function () {
+      header.style.transition = '';
+    }, 500);
     catalog.removeEventListener('mouseover', catalogMouseoverHandler);
     catalog.removeEventListener('mouseout', catalogMouseoutHandler);
     catalogHeader.classList.remove('catalog__header--opened');
@@ -269,7 +290,11 @@ var catalogButtonClickHandler = function () {
 var sidebarCatalogLinkMouseoverHandler = function () {
   if (!window.matchMedia('(max-width: 1023px)').matches) {
     document.body.classList.add('dark');
+    document.body.style.overflow = 'hidden';
+    document.body.style.width = 'calc(100% - ' + getScrollWidth() + 'px)';
+    header.style.transition = 'none';
     header.style.zIndex = '2';
+    header.style.right = getScrollWidth() + 'px';
 
     catalog.classList.add('catalog--opened');
     catalog.addEventListener('mouseover', catalogMouseoverHandler);
@@ -289,7 +314,13 @@ var sidebarCatalogLinkMouseoutHandler = function (evt) {
         evt.toElement !== catalogList &&
         !evt.toElement.classList.contains('catalog__link')) {
       document.body.classList.remove('dark');
+      document.body.style.overflow = '';
+      document.body.style.width = '';
       header.style.zIndex = '';
+      header.style.right = '';
+      setTimeout(function () {
+        header.style.transition = '';
+      }, 500);
       catalog.classList.remove('catalog--opened');
       catalog.removeEventListener('mouseover', catalogMouseoverHandler);
       catalog.removeEventListener('mouseout', catalogMouseoutHandler);
@@ -305,7 +336,13 @@ var catalogMouseoverHandler = function (evt) {
   if (evt.target === catalog) {
     timer = setTimeout(function () {
       document.body.classList.remove('dark');
+      document.body.style.overflow = '';
+      document.body.style.width = '';
       header.style.zIndex = '';
+      header.style.right = '';
+      setTimeout(function () {
+        header.style.transition = '';
+      }, 500);
       catalog.classList.remove('catalog--opened');
       catalog.removeEventListener('mouseover', catalogMouseoverHandler);
       catalog.removeEventListener('mouseout', catalogMouseoutHandler);
@@ -323,7 +360,12 @@ var catalogMouseoutHandler = function (evt) {
   sidebarLinks.forEach(function (it) {
     if (evt.toElement === null || evt.toElement === it && evt.toElement !== sidebarCatalogLink) {
       document.body.classList.remove('dark');
+      document.body.style.overflow = '';
       header.style.zIndex = '';
+      header.style.right = '';
+      setTimeout(function () {
+        header.style.transition = '';
+      }, 500);
       catalog.classList.remove('catalog--opened');
       catalog.removeEventListener('mouseover', catalogMouseoverHandler);
       catalog.removeEventListener('mouseout', catalogMouseoutHandler);
@@ -526,7 +568,13 @@ var windowScrollHandler = function () {
 var windowResizeHandler = function () {
   if (window.matchMedia('(max-width: 1023px)').matches) {
     document.body.classList.remove('dark');
+    document.body.style.overflow = '';
+    document.body.style.width = '';
     header.style.zIndex = '';
+    header.style.right = '';
+    setTimeout(function () {
+      header.style.transition = '';
+    }, 500);
 
     logoTitle.classList.remove('logo__title--closed');
     searchField.placeholder = 'Поиск';
@@ -575,7 +623,13 @@ var windowResizeHandler = function () {
 
     document.body.classList.remove('no-scroll');
     document.body.classList.remove('dark');
+    document.body.style.overflow = '';
+    document.body.style.width = '';
     header.style.zIndex = '';
+    header.style.right = '';
+    setTimeout(function () {
+      header.style.transition = '';
+    }, 500);
 
     header.classList.remove('header--fixed');
     if (pageYOffset > 115) {
