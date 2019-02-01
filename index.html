@@ -25,8 +25,8 @@
 
       <nav class=main-nav>
         <button class="main-nav__toggle main-nav__toggle--closed main-nav__toggle--nojs" type=button>Меню</button>
-        <div class="main-nav__list main-nav__list--closed main-nav__list--nojs">
-          <a class="main-nav__link link" href=#>
+        <div class="main-nav__list main-nav__list--nojs">
+          <a class="main-nav__link link" href=catalog.html>
             <span class=link__text>Каталог </span>
             <span class="link__text link__text--hover">Каталог</span>
           </a>
@@ -69,7 +69,7 @@
         </div>
       </nav>
 
-      <nav class="site-nav site-nav--closed site-nav--nojs">
+      <nav class="site-nav site-nav--nojs">
         <a class="site-nav__link link" href=#>
           <span class=link__text>О компании</span>
           <span class="link__text link__text--hover">О компании</span>
@@ -417,7 +417,7 @@
           </div>
         </a>
 
-        <a class="sidebar__link sidebar__link--catalog" href=#>
+        <a class="sidebar__link sidebar__link--catalog" href=catalog.html>
           <div class="sidebar__item sidebar__item--catalog">Каталог</div>
         </a>
 
@@ -2082,290 +2082,292 @@
       <section class=bestsellers>
         <h2 class=bestsellers__title>Лидеры продаж</h2>
 
-        <article class=bestsellers__product>
-          <div class=bestsellers__image-wrapper>
-            <picture>
-              <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-01@1x.webp>
-              <source type=image/webp srcset=img/bestseller-mobile-01@1x.webp>
+        <div class=bestsellers__products>
+          <article class=bestsellers__product>
+            <div class=bestsellers__image-wrapper>
+              <picture>
+                <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-01@1x.webp>
+                <source type=image/webp srcset=img/bestseller-mobile-01@1x.webp>
 
-              <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-01@1x.png>
-              <img class=bestsellers__image src=img/bestseller-mobile-01@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
-            </picture>
-          </div>
-
-          <div class=bestsellers__info>
-            <p class=bestsellers__category>Винтовой компрессор</p>
-            <h3 class=bestsellers__name>
-              <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
-            </h3>
-
-            <div class=bestsellers__characteristics>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>5.5</span>
-                <p class=bestsellers__caption>кВт</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>10</span>
-                <p class=bestsellers__caption>атм</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>600</span>
-                <p class=bestsellers__caption>л/мин</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
+                <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-01@1x.png>
+                <img class=bestsellers__image src=img/bestseller-mobile-01@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
+              </picture>
             </div>
 
-            <footer class=bestsellers__footer>
-              <div class=bestsellers__cost>
-                <a class=bestsellers__value href=#>612 000 ₽</a>
-                <span class=bestsellers__tag>Цена</span>
+            <div class=bestsellers__info>
+              <p class=bestsellers__category>Винтовой компрессор</p>
+              <h3 class=bestsellers__name>
+                <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
+              </h3>
+
+              <div class=bestsellers__characteristics>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>5.5</span>
+                  <p class=bestsellers__caption>кВт</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>10</span>
+                  <p class=bestsellers__caption>атм</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>600</span>
+                  <p class=bestsellers__caption>л/мин</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
               </div>
 
-              <a class=bestsellers__comparison href=#>Сравнение</a>
-              <a class=bestsellers__cart href=#>Корзина</a>
-            </footer>
-          </div>
-        </article>
+              <footer class=bestsellers__footer>
+                <div class=bestsellers__cost>
+                  <a class=bestsellers__value href=#>612 000 ₽</a>
+                  <span class=bestsellers__tag>Цена</span>
+                </div>
 
-        <article class=bestsellers__product>
-          <div class=bestsellers__image-wrapper>
-            <picture>
-              <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-02@1x.webp>
-              <source type=image/webp srcset=img/bestseller-mobile-02@1x.webp>
+                <a class=bestsellers__comparison href=#>Сравнение</a>
+                <a class=bestsellers__cart href=#>Корзина</a>
+              </footer>
+            </div>
+          </article>
 
-              <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-02@1x.png>
-              <img class=bestsellers__image src=img/bestseller-mobile-02@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
-            </picture>
-          </div>
+          <article class=bestsellers__product>
+            <div class=bestsellers__image-wrapper>
+              <picture>
+                <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-02@1x.webp>
+                <source type=image/webp srcset=img/bestseller-mobile-02@1x.webp>
 
-
-          <div class=bestsellers__info>
-            <p class=bestsellers__category>Винтовой компрессор</p>
-            <h3 class=bestsellers__name>
-              <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
-            </h3>
-
-            <div class=bestsellers__characteristics>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>5.5</span>
-                <p class=bestsellers__caption>кВт</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>10</span>
-                <p class=bestsellers__caption>атм</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>600</span>
-                <p class=bestsellers__caption>л/мин</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
+                <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-02@1x.png>
+                <img class=bestsellers__image src=img/bestseller-mobile-02@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
+              </picture>
             </div>
 
-            <footer class=bestsellers__footer>
-              <div class=bestsellers__cost>
-                <a class="bestsellers__value bestsellers__value--request" href=#>По запросу</a>
-                <span class=bestsellers__tag>Цена</span>
+
+            <div class=bestsellers__info>
+              <p class=bestsellers__category>Винтовой компрессор</p>
+              <h3 class=bestsellers__name>
+                <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
+              </h3>
+
+              <div class=bestsellers__characteristics>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>5.5</span>
+                  <p class=bestsellers__caption>кВт</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>10</span>
+                  <p class=bestsellers__caption>атм</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>600</span>
+                  <p class=bestsellers__caption>л/мин</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
               </div>
 
-              <a class=bestsellers__comparison href=#>Сравнение</a>
-              <a class=bestsellers__cart href=#>Корзина</a>
-            </footer>
-          </div>
-        </article>
+              <footer class=bestsellers__footer>
+                <div class=bestsellers__cost>
+                  <a class="bestsellers__value bestsellers__value--request" href=#>По запросу</a>
+                  <span class=bestsellers__tag>Цена</span>
+                </div>
 
-        <article class=bestsellers__product>
-          <div class=bestsellers__image-wrapper>
-            <picture>
-              <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-03@1x.webp>
-              <source type=image/webp srcset=img/bestseller-mobile-01@1x.webp>
+                <a class=bestsellers__comparison href=#>Сравнение</a>
+                <a class=bestsellers__cart href=#>Корзина</a>
+              </footer>
+            </div>
+          </article>
 
-              <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-03@1x.png>
-              <img class=bestsellers__image src=img/bestseller-mobile-01@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
-            </picture>
-          </div>
+          <article class=bestsellers__product>
+            <div class=bestsellers__image-wrapper>
+              <picture>
+                <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-03@1x.webp>
+                <source type=image/webp srcset=img/bestseller-mobile-01@1x.webp>
 
-          <div class=bestsellers__info>
-            <p class=bestsellers__category>Винтовой компрессор</p>
-            <h3 class=bestsellers__name>
-              <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
-            </h3>
-
-            <div class=bestsellers__characteristics>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>5.5</span>
-                <p class=bestsellers__caption>кВт</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>10</span>
-                <p class=bestsellers__caption>атм</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>600</span>
-                <p class=bestsellers__caption>л/мин</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
+                <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-03@1x.png>
+                <img class=bestsellers__image src=img/bestseller-mobile-01@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
+              </picture>
             </div>
 
-            <footer class=bestsellers__footer>
-              <div class=bestsellers__cost>
-                <a class=bestsellers__value href=#>612 000 ₽</a>
-                <span class=bestsellers__tag>Цена</span>
+            <div class=bestsellers__info>
+              <p class=bestsellers__category>Винтовой компрессор</p>
+              <h3 class=bestsellers__name>
+                <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
+              </h3>
+
+              <div class=bestsellers__characteristics>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>5.5</span>
+                  <p class=bestsellers__caption>кВт</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>10</span>
+                  <p class=bestsellers__caption>атм</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>600</span>
+                  <p class=bestsellers__caption>л/мин</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
               </div>
 
-              <a class=bestsellers__comparison href=#>Сравнение</a>
-              <a class=bestsellers__cart href=#>Корзина</a>
-            </footer>
-          </div>
-        </article>
+              <footer class=bestsellers__footer>
+                <div class=bestsellers__cost>
+                  <a class=bestsellers__value href=#>612 000 ₽</a>
+                  <span class=bestsellers__tag>Цена</span>
+                </div>
 
-        <article class=bestsellers__product>
-          <div class=bestsellers__image-wrapper>
-            <picture>
-              <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-04@1x.webp>
-              <source type=image/webp srcset=img/bestseller-mobile-02@1x.webp>
+                <a class=bestsellers__comparison href=#>Сравнение</a>
+                <a class=bestsellers__cart href=#>Корзина</a>
+              </footer>
+            </div>
+          </article>
 
-              <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-04@1x.png>
-              <img class=bestsellers__image src=img/bestseller-mobile-02@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
-            </picture>
-          </div>
+          <article class=bestsellers__product>
+            <div class=bestsellers__image-wrapper>
+              <picture>
+                <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-04@1x.webp>
+                <source type=image/webp srcset=img/bestseller-mobile-02@1x.webp>
 
-
-          <div class=bestsellers__info>
-            <p class=bestsellers__category>Винтовой компрессор</p>
-            <h3 class=bestsellers__name>
-              <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
-            </h3>
-
-            <div class=bestsellers__characteristics>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>5.5</span>
-                <p class=bestsellers__caption>кВт</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>10</span>
-                <p class=bestsellers__caption>атм</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>600</span>
-                <p class=bestsellers__caption>л/мин</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
+                <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-04@1x.png>
+                <img class=bestsellers__image src=img/bestseller-mobile-02@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
+              </picture>
             </div>
 
-            <footer class=bestsellers__footer>
-              <div class=bestsellers__cost>
-                <a class="bestsellers__value bestsellers__value--request" href=#>По запросу</a>
-                <span class=bestsellers__tag>Цена</span>
+
+            <div class=bestsellers__info>
+              <p class=bestsellers__category>Винтовой компрессор</p>
+              <h3 class=bestsellers__name>
+                <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
+              </h3>
+
+              <div class=bestsellers__characteristics>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>5.5</span>
+                  <p class=bestsellers__caption>кВт</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>10</span>
+                  <p class=bestsellers__caption>атм</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>600</span>
+                  <p class=bestsellers__caption>л/мин</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
               </div>
 
-              <a class=bestsellers__comparison href=#>Сравнение</a>
-              <a class=bestsellers__cart href=#>Корзина</a>
-            </footer>
-          </div>
-        </article>
+              <footer class=bestsellers__footer>
+                <div class=bestsellers__cost>
+                  <a class="bestsellers__value bestsellers__value--request" href=#>По запросу</a>
+                  <span class=bestsellers__tag>Цена</span>
+                </div>
 
-        <article class=bestsellers__product>
-          <div class=bestsellers__image-wrapper>
-            <picture>
-              <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-05@1x.webp>
-              <source type=image/webp srcset=img/bestseller-mobile-01@1x.webp>
+                <a class=bestsellers__comparison href=#>Сравнение</a>
+                <a class=bestsellers__cart href=#>Корзина</a>
+              </footer>
+            </div>
+          </article>
 
-              <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-05@1x.png>
-              <img class=bestsellers__image src=img/bestseller-mobile-01@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
-            </picture>
-          </div>
+          <article class=bestsellers__product>
+            <div class=bestsellers__image-wrapper>
+              <picture>
+                <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-05@1x.webp>
+                <source type=image/webp srcset=img/bestseller-mobile-01@1x.webp>
 
-          <div class=bestsellers__info>
-            <p class=bestsellers__category>Винтовой компрессор</p>
-            <h3 class=bestsellers__name>
-              <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
-            </h3>
-
-            <div class=bestsellers__characteristics>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>5.5</span>
-                <p class=bestsellers__caption>кВт</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>10</span>
-                <p class=bestsellers__caption>атм</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>600</span>
-                <p class=bestsellers__caption>л/мин</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
+                <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-05@1x.png>
+                <img class=bestsellers__image src=img/bestseller-mobile-01@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
+              </picture>
             </div>
 
-            <footer class=bestsellers__footer>
-              <div class=bestsellers__cost>
-                <a class=bestsellers__value href=#>612 000 ₽</a>
-                <span class=bestsellers__tag>Цена</span>
+            <div class=bestsellers__info>
+              <p class=bestsellers__category>Винтовой компрессор</p>
+              <h3 class=bestsellers__name>
+                <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
+              </h3>
+
+              <div class=bestsellers__characteristics>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>5.5</span>
+                  <p class=bestsellers__caption>кВт</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>10</span>
+                  <p class=bestsellers__caption>атм</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>600</span>
+                  <p class=bestsellers__caption>л/мин</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
               </div>
 
-              <a class=bestsellers__comparison href=#>Сравнение</a>
-              <a class=bestsellers__cart href=#>Корзина</a>
-            </footer>
-          </div>
-        </article>
+              <footer class=bestsellers__footer>
+                <div class=bestsellers__cost>
+                  <a class=bestsellers__value href=#>612 000 ₽</a>
+                  <span class=bestsellers__tag>Цена</span>
+                </div>
 
-        <article class=bestsellers__product>
-          <div class=bestsellers__image-wrapper>
-            <picture>
-              <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-06@1x.webp>
-              <source type=image/webp srcset=img/bestseller-mobile-02@1x.webp>
+                <a class=bestsellers__comparison href=#>Сравнение</a>
+                <a class=bestsellers__cart href=#>Корзина</a>
+              </footer>
+            </div>
+          </article>
 
-              <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-06@1x.png>
-              <img class=bestsellers__image src=img/bestseller-mobile-02@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
-            </picture>
-          </div>
+          <article class=bestsellers__product>
+            <div class=bestsellers__image-wrapper>
+              <picture>
+                <source type=image/webp media="(min-width: 1024px)" srcset=img/bestseller-desktop-06@1x.webp>
+                <source type=image/webp srcset=img/bestseller-mobile-02@1x.webp>
 
-
-          <div class=bestsellers__info>
-            <p class=bestsellers__category>Винтовой компрессор</p>
-            <h3 class=bestsellers__name>
-              <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
-            </h3>
-
-            <div class=bestsellers__characteristics>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>5.5</span>
-                <p class=bestsellers__caption>кВт</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>10</span>
-                <p class=bestsellers__caption>атм</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
-              <div class=bestsellers__item>
-                <span class=bestsellers__characteristic>600</span>
-                <p class=bestsellers__caption>л/мин</p>
-                <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
-              </div>
+                <source media="(min-width: 1024px)" srcset=img/bestseller-desktop-06@1x.png>
+                <img class=bestsellers__image src=img/bestseller-mobile-02@1x.png alt="Cross Air Compressors Dali CA-0.6/10-RA">
+              </picture>
             </div>
 
-            <footer class=bestsellers__footer>
-              <div class=bestsellers__cost>
-                <a class="bestsellers__value bestsellers__value--request" href=#>По запросу</a>
-                <span class=bestsellers__tag>Цена</span>
+
+            <div class=bestsellers__info>
+              <p class=bestsellers__category>Винтовой компрессор</p>
+              <h3 class=bestsellers__name>
+                <a class=bestsellers__link href=#>Cross Air Compressors Dali CA-0.6/10-RA</a>
+              </h3>
+
+              <div class=bestsellers__characteristics>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>5.5</span>
+                  <p class=bestsellers__caption>кВт</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>10</span>
+                  <p class=bestsellers__caption>атм</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
+                <div class=bestsellers__item>
+                  <span class=bestsellers__characteristic>600</span>
+                  <p class=bestsellers__caption>л/мин</p>
+                  <span class=bestsellers__tooltip data-tooltip=Производительность>Производительность</span>
+                </div>
               </div>
 
-              <a class=bestsellers__comparison href=#>Сравнение</a>
-              <a class=bestsellers__cart href=#>Корзина</a>
-            </footer>
-          </div>
-        </article>
+              <footer class=bestsellers__footer>
+                <div class=bestsellers__cost>
+                  <a class="bestsellers__value bestsellers__value--request" href=#>По запросу</a>
+                  <span class=bestsellers__tag>Цена</span>
+                </div>
+
+                <a class=bestsellers__comparison href=#>Сравнение</a>
+                <a class=bestsellers__cart href=#>Корзина</a>
+              </footer>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section class=brands>
@@ -2669,7 +2671,7 @@
       </div>
 
       <nav class=footer__main-nav>
-        <a class=footer__link href=#>Каталог</a>
+        <a class=footer__link href=catalog.html>Каталог</a>
         <a class=footer__link href=#>Бренды</a>
         <a class=footer__link href=#>Услуги</a>
         <a class=footer__link href=#>Проекты</a>
@@ -2695,7 +2697,7 @@
     <script src=https://code.jquery.com/jquery-1.12.4.js></script>
     <script src=https://code.jquery.com/ui/1.12.1/jquery-ui.js></script>
     <script src=js/slick.min.js></script>
-    <script src=js/script.js></script>
+    <script src=js/index.js></script>
     <script src=js/picturefill.min.js></script>
   </body>
 
