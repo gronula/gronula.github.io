@@ -318,9 +318,9 @@ var sidebarCatalogLinkMouseoverHandler = function () {
 
 var sidebarCatalogLinkMouseoutHandler = function (evt) {
   if (!window.matchMedia('(max-width: 1023px)').matches) {
-    if (evt.toElement === null ||
-        evt.toElement !== catalogList &&
-        !evt.toElement.classList.contains('catalog__link')) {
+    if (evt.relatedTarget === null ||
+        evt.relatedTarget !== catalogList &&
+        !evt.relatedTarget.classList.contains('catalog__link')) {
       document.body.classList.remove('dark');
       document.body.style.overflow = '';
       document.body.style.width = '';
@@ -338,11 +338,11 @@ var sidebarCatalogLinkMouseoutHandler = function (evt) {
   }
 };
 
-var timer;
+var catalogTimer;
 
 var catalogMouseoverHandler = function (evt) {
   if (evt.target === catalog) {
-    timer = setTimeout(function () {
+    catalogTimer = setTimeout(function () {
       document.body.classList.remove('dark');
       document.body.style.overflow = '';
       document.body.style.width = '';
@@ -358,15 +358,18 @@ var catalogMouseoverHandler = function (evt) {
       catalogWrapper.classList.remove('catalog__wrapper--opened');
       catalogLink.classList.remove('catalog__link--opened');
       catalogSublist.classList.remove('catalog__sublist--opened');
-    }, 250);
-  } else {
-    clearTimeout(timer);
+    }, 500);
   }
 };
 
 var catalogMouseoutHandler = function (evt) {
+  if (catalogTimer) {
+    clearTimeout(catalogTimer);
+    catalogTimer = null;
+  }
+
   sidebarLinks.forEach(function (it) {
-    if (evt.toElement === null || evt.toElement === it && evt.toElement !== sidebarCatalogLink) {
+    if (evt.relatedTarget === null || evt.relatedTarget === it && evt.relatedTarget !== sidebarCatalogLink) {
       document.body.classList.remove('dark');
       document.body.style.overflow = '';
       header.style.zIndex = '';
@@ -388,6 +391,8 @@ var catalogMouseoutHandler = function (evt) {
 
 var catalogSublist;
 var catalogLink;
+
+var catalogItemTimer;
 
 var catalogItemMouseoverHandler = function (evt) {
   if (evt.currentTarget.childElementCount > 1) {
@@ -417,25 +422,32 @@ var catalogItemMouseoverHandler = function (evt) {
       it.classList.remove('catalog__sublist--opened');
     });
   }
+
+  if (catalogItemTimer) {
+    clearTimeout(catalogItemTimer);
+    catalogItemTimer = null;
+  }
 };
 
 var catalogItemMouseoutHandler = function (evt) {
   if (
     evt.currentTarget.childElementCount > 1 &&
-    evt.toElement === catalogList ||
-    evt.toElement === catalogHeader) {
+    !evt.target.classList.contains('catalog__sublist') &&
+    evt.relatedTarget === catalogHeader) {
     return;
   }
 
-  catalogHeader.classList.remove('catalog__header--opened');
-  catalogWrapper.classList.remove('catalog__wrapper--opened');
+  catalogItemTimer = setTimeout(function () {
+    catalogHeader.classList.remove('catalog__header--opened');
+    catalogWrapper.classList.remove('catalog__wrapper--opened');
 
-  catalogLinks.forEach(function (it) {
-    it.classList.remove('catalog__link--opened');
-  });
-  catalogSublists.forEach(function (it) {
-    it.classList.remove('catalog__sublist--opened');
-  });
+    catalogLinks.forEach(function (it) {
+      it.classList.remove('catalog__link--opened');
+    });
+    catalogSublists.forEach(function (it) {
+      it.classList.remove('catalog__sublist--opened');
+    });
+  }, 250);
 };
 
 var setCatalogNumbersValue = function () {
