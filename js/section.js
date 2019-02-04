@@ -17,6 +17,13 @@ var activeCity = citiesWrapper.querySelector('.contacts__active');
 var citiesList = citiesWrapper.querySelector('.contacts__cities');
 var citiesHeader = citiesList.querySelectorAll('.contacts__city');
 var main = document.querySelector('.main');
+var productsButton = main.querySelector('.products__button');
+var productsItems = main.querySelector('.products__items');
+var filter = main.querySelector('.filter');
+var filterButton = filter.querySelector('.filter__toggle');
+var filterCaptions = filter.querySelectorAll('.filter__caption');
+var filterSelects = filter.querySelectorAll('.filter__select');
+var filterButtonsView = filter.querySelectorAll('.filter__view  .filter__button');
 var sidebar = main.querySelector('.sidebar');
 var sidebarLinks = sidebar.querySelectorAll('.sidebar__link');
 var sidebarCatalogLink = sidebar.querySelector('.sidebar__link--catalog');
@@ -30,7 +37,9 @@ var catalogItems = catalog.querySelectorAll('.catalog__item');
 var catalogLinks = catalog.querySelectorAll('.catalog__link');
 var catalogNumbers = catalog.querySelectorAll('.catalog__number');
 var catalogSublists = catalog.querySelectorAll('.catalog__sublist');
-var feedback = main.querySelector('.feedback');
+var recentlyViewed = main.querySelector('.recently-viewed');
+var recentlyViewedProducts = recentlyViewed.querySelectorAll('.recently-viewed__products');
+var recentlyViewedItems = recentlyViewed.querySelectorAll('.recently-viewed  .item');
 var footer = document.querySelector('.footer');
 var citiesFooter = footer.querySelectorAll('.footer__city');
 var addressesFooter = footer.querySelectorAll('.footer__address');
@@ -168,6 +177,246 @@ var citiesListCloseHandler = function (evt) {
     evt.stopPropagation();
   }
   document.removeEventListener('click', citiesListCloseHandler, true);
+};
+
+var productsButtonClickHandler = function () {
+  if (window.matchMedia('(max-width: 1023px)').matches) {
+    document.body.classList.add('no-scroll');
+    filter.classList.add('filter--opened');
+
+    sidebar.classList.add('sidebar--closed');
+
+    filterButton.addEventListener('click', filterButtonClickHandler);
+  }
+};
+
+var filterButtonClickHandler = function () {
+  document.body.classList.remove('no-scroll');
+  filter.classList.remove('filter--opened');
+
+  sidebar.classList.remove('sidebar--closed');
+
+  filterButton.removeEventListener('click', filterButtonClickHandler);
+};
+
+var getFilterBlockHeight = function () {
+  filter.classList.add('filter--opened');
+
+  if (window.matchMedia('(max-width: 1023px)').matches) {
+    var headings = filter.querySelectorAll('.filter__heading');
+    var blocks = filter.querySelectorAll('.filter__block');
+  } else {
+    headings = filter.querySelectorAll('.filter__main  .filter__heading:not(.filter__heading--mobile)');
+    blocks = filter.querySelectorAll('.filter__main  .filter__block:not(.filter__block--categories)');
+  }
+
+  for (var i = 0; i < headings.length; i++) {
+    blocks[i].style.transition = 'none';
+    blocks[i].classList.add('filter__block--opened');
+    var blockHeight = blocks[i].getBoundingClientRect().height;
+    blocks[i].classList.remove('filter__block--opened');
+    blocks[i].style.transition = '';
+
+    filterHeadingsClickHandler(headings, blocks, blockHeight, i);
+  }
+
+  headings[0].classList.add('filter__heading--opened');
+  blocks[0].classList.add('filter__block--opened');
+  blocks[0].style.height = blocks[0].getBoundingClientRect().height + 'px';
+
+  filter.classList.remove('filter--opened');
+};
+
+var filterHeadingsClickHandler = function (headings, blocks, blockHeight, i) {
+  headings[i].addEventListener('click', function () {
+    if (blocks[i].classList.contains('filter__block--opened')) {
+      headings[i].classList.remove('filter__heading--opened');
+      blocks[i].classList.remove('filter__block--opened');
+      blocks[i].style.height = 0;
+    } else {
+      headings.forEach(function (it) {
+        it.classList.remove('filter__heading--opened');
+      });
+      blocks.forEach(function (it) {
+        it.classList.remove('filter__block--opened');
+        it.style.height = 0;
+      });
+
+      headings[i].classList.add('filter__heading--opened');
+      blocks[i].classList.add('filter__block--opened');
+      blocks[i].style.height = blockHeight + 'px';
+    }
+  });
+};
+
+var filterCapionsClickHandler = function (caption, select) {
+  caption.addEventListener('click', function (evt) {
+    if (select.classList.contains('filter__select--opened')) {
+      select.classList.remove('filter__select--opened');
+      document.removeEventListener('click', filterSelectsCloseHandler);
+    } else {
+      filterSelects.forEach(function (it) {
+        it.classList.remove('filter__select--opened');
+      });
+
+      select.classList.add('filter__select--opened');
+
+      document.addEventListener('click', filterSelectsCloseHandler);
+
+      var dropDownItems = evt.target.parentElement.querySelectorAll('.filter__drop-down  .filter__label');
+      dropDownItems.forEach(function (it) {
+        it.addEventListener('click', dropDownItemClickHandler);
+      });
+    }
+  });
+};
+
+var filterSelectsCloseHandler = function (evt) {
+  if (!evt.target.classList.contains('filter__caption') &&
+      !evt.target.classList.contains('filter__label')) {
+    var openedSelect = main.querySelector('.filter__select--opened');
+    openedSelect.classList.remove('filter__select--opened');
+    document.removeEventListener('click', filterSelectsCloseHandler);
+  }
+};
+
+var dropDownItemClickHandler = function (evt) {
+  evt.preventDefault();
+  var dropDownList = evt.target.parentElement.parentElement;
+  var dropDownItems = dropDownList.querySelectorAll('.filter__drop-down  .filter__label');
+  dropDownItems.forEach(function (it) {
+    it.removeEventListener('click', dropDownItemClickHandler);
+  });
+  var select = filter.querySelector('.filter__select--opened');
+  var choice = select.querySelector('.filter__choice');
+
+  select.classList.remove('filter__select--opened');
+  choice.textContent = evt.target.textContent;
+
+  document.removeEventListener('click', filterSelectsCloseHandler);
+};
+
+var filterButtonViewClickHandler = function (button) {
+  button.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    filterButtonsView.forEach(function (it) {
+      it.classList.toggle('filter__button--active');
+    });
+    if (button.classList.contains('filter__button--grid')) {
+      productsItems.classList.add('products__items--grid');
+      productsItems.classList.remove('products__items--row');
+    } else if (button.classList.contains('filter__button--row')) {
+      productsItems.classList.remove('products__items--grid');
+      productsItems.classList.add('products__items--row');
+    }
+  });
+};
+
+var filterSectionTop = filter.querySelector('.filter__top');
+var filterSectionTopWidth = filterSectionTop.getBoundingClientRect().width;
+var filterWidth = filter.getBoundingClientRect().width;
+
+var animateFilterTop = function () {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    if (filterSectionTopWidth > filterWidth) {
+      filterSectionTop.addEventListener('click', filterSectionTopClickHandler);
+      filterSectionTop.addEventListener('mousedown', filterSectionTopMousedownHandler);
+      filterSectionTop.addEventListener('wheel', filterSectionTopWheelHandler);
+    }
+  }
+};
+
+var isClick = true;
+
+var filterSectionTopClickHandler = function (evt) {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    if (!isClick) {
+      evt.preventDefault();
+    }
+  }
+};
+
+var x = 0;
+
+var filterSectionTopMousedownHandler = function (evt) {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    evt.preventDefault();
+
+    filterSectionTop.style.transition = '';
+
+    var startCoords = {
+      x: evt.clientX
+    };
+
+    isClick = true;
+
+    var mouseMoveHandler = function (moveEvt) {
+      moveEvt.preventDefault();
+
+      if (x > 0) {
+        x -= (startCoords.x - moveEvt.x) * 0.3;
+      } else if (x < -filterSectionTopWidth + filterWidth - 50) {
+        x -= (startCoords.x - moveEvt.x) * 0.3;
+        filter.classList.add('filter--full');
+      } else {
+        x -= startCoords.x - moveEvt.x;
+        filter.classList.remove('filter--full');
+      }
+
+      filterSectionTop.style.transform = 'translateX(' + x + 'px)';
+
+      startCoords = {
+        x: moveEvt.clientX
+      };
+    };
+
+    isClick = false;
+
+    var mouseUpHandler = function (upEvt) {
+      upEvt.preventDefault();
+
+      if (x > 0) {
+        x = 0;
+      } else if (x < -filterSectionTopWidth + filterWidth) {
+        x = -filterSectionTopWidth + filterWidth;
+      }
+
+      filterSectionTop.style.transition = 'all 0.2s cubic-bezier(0.77, 0, 0.175, 1)';
+      filterSectionTop.style.transform = 'translateX(' + x + 'px)';
+
+      document.removeEventListener('mousemove', mouseMoveHandler);
+      document.removeEventListener('mouseup', mouseUpHandler, true);
+    };
+
+    filterSectionTop.addEventListener('click', filterSectionTopClickHandler);
+
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler, true);
+  }
+};
+
+var filterSectionTopWheelHandler = function (evt) {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    evt.preventDefault();
+
+    if (evt.deltaY < 0) {
+      x -= 40;
+    } else {
+      x += 40;
+    }
+
+    if (x > 0) {
+      x = 0;
+    } else if (x <= -filterSectionTopWidth + filterWidth) {
+      x = -filterSectionTopWidth + filterWidth;
+      filter.classList.add('filter--full');
+    } else {
+      filter.classList.remove('filter--full');
+    }
+
+    filterSectionTop.style.transition = '';
+    filterSectionTop.style.transform = 'translateX(' + x + 'px)';
+  }
 };
 
 var offsetTop = 0;
@@ -450,6 +699,125 @@ var setCatalogNumbersValue = function () {
   });
 };
 
+var requestAnimationFrame = window.requestAnimationFrame ||
+                                window.mozRequestAnimationFrame ||
+                                window.webkitRequestAnimationFrame ||
+                                window.msRequestAnimationFrame;
+
+window.requestAnimationFrame = requestAnimationFrame;
+
+var isScrollDown = true;
+var requestId;
+var coord = 0;
+
+var animation = function () {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    var recentlyViewedProductsWidth = recentlyViewedProducts[0].getBoundingClientRect().width;
+    coord = isScrollDown ? coord - 1 : coord + 1;
+
+    recentlyViewedProducts.forEach(function (it) {
+      if (coord < -recentlyViewedProductsWidth) {
+        coord = 0;
+      } else if (coord > 0) {
+        coord = -recentlyViewedProductsWidth;
+      }
+
+      it.style.transform = 'translateX(' + coord + 'px)';
+    });
+
+    requestId = requestAnimationFrame(animation);
+  }
+};
+
+var cancelAnimation = function () {
+  cancelAnimationFrame(requestId);
+};
+
+var isMoved = false;
+// var isClick = true;
+
+var recentlyViewedItemClickHandler = function (evt) {
+  if (!isClick) {
+    evt.preventDefault();
+  }
+};
+
+var recentlyViewedItemMouseDownHandler = function (evt) {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    evt.preventDefault();
+
+    var recentlyViewedProductsWidth = recentlyViewedProducts[0].getBoundingClientRect().width;
+
+    var startCoords = {
+      x: evt.clientX
+    };
+
+    isClick = true;
+
+    var mouseMoveHandler = function (moveEvt) {
+      moveEvt.preventDefault();
+
+      cancelAnimation();
+
+      coord -= startCoords.x - moveEvt.x;
+
+      recentlyViewedProducts.forEach(function (it) {
+        if (coord < -recentlyViewedProductsWidth) {
+          coord = 0;
+        } else if (coord > 0) {
+          coord = -recentlyViewedProductsWidth;
+        }
+
+        it.style.transform = 'translateX(' + coord + 'px)';
+      });
+
+      startCoords = {
+        x: moveEvt.clientX
+      };
+
+      isMoved = true;
+      isClick = false;
+    };
+
+    var mouseUpHandler = function (upEvt) {
+      upEvt.preventDefault();
+
+      if (isMoved) {
+        isMoved = false;
+        animation();
+      }
+
+      document.removeEventListener('mousemove', mouseMoveHandler);
+      document.removeEventListener('mouseup', mouseUpHandler, true);
+    };
+
+    for (var i = 0; i < recentlyViewedItems.length; i++) {
+      recentlyViewedItems[i].addEventListener('click', recentlyViewedItemClickHandler);
+    }
+
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler, true);
+  }
+};
+
+var animateRecentlyViewedProducts = function () {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    var recentlyViewedScrollTop = recentlyViewed.getBoundingClientRect().top;
+
+    window.addEventListener('scroll', function () {
+      var newRecentlyViewedScrollTop = recentlyViewed.getBoundingClientRect().top;
+      isScrollDown = recentlyViewedScrollTop >= newRecentlyViewedScrollTop;
+      recentlyViewedScrollTop = newRecentlyViewedScrollTop;
+    });
+
+    requestAnimationFrame(animation);
+
+    for (var i = 0; i < recentlyViewedItems.length; i++) {
+      recentlyViewedItems[i].addEventListener('mousedown', recentlyViewedItemMouseDownHandler);
+    }
+  }
+};
+
 var citiesFooterClickHandler = function (city, address) {
   city.addEventListener('click', function (evt) {
     evt.preventDefault();
@@ -470,8 +838,6 @@ var citiesFooterClickHandler = function (city, address) {
 var scrollTop = document.body.getBoundingClientRect().top;
 
 var windowScrollHandler = function () {
-  var sidebarHeight = sidebar.getBoundingClientRect().height;
-
   if (!window.matchMedia('(max-width: 1023px)').matches) {
     searchField.blur();
     searchField.style.transition = 'border-bottom 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
@@ -507,77 +873,11 @@ var windowScrollHandler = function () {
       }
     }
 
+
     scrollTop = newScrollTop;
 
     setTimeout(getSearchInputWidth, 400);
-
-    sidebarHeight = 0;
   }
-  setTimeout(function () {
-    var feedbackTop = feedback.offsetTop - innerHeight + sidebarHeight;
-    // var feedbackOffsetTop = feedback.offsetTop;
-    var feedbackMiddle = feedbackTop + feedback.getBoundingClientRect().height / 2;
-    var feedbackBottom = feedbackTop + feedback.getBoundingClientRect().height;
-    // var feedbackOffsetBottom = feedback.offsetTop + feedback.getBoundingClientRect().height;
-
-    if (pageYOffset > feedbackTop && pageYOffset < feedbackBottom) {
-      if (pageYOffset <= feedbackMiddle) {
-        var currentPosition = (pageYOffset - feedbackTop) / (feedbackMiddle - feedbackTop);
-        var colors = [
-          [21, 38, 46], // #15262e
-          [251, 192, 45] // #fbc02d
-        ];
-
-        var currentColor = [];
-
-        for (var i = 0; i < colors[0].length; i++) {
-          // Проверяю, какое значение цвета больше
-          if (colors[0][i] < colors[1][i]) {
-            // Высчитываю текущее значение цвета
-            var val = ((colors[1][i] - colors[0][i]) * currentPosition) + colors[0][i];
-            // Устанавливаю текущее значение цвета
-            currentColor[i] = Math.round(val);
-          } else {
-            // Высчитываю текущее значение цвета
-            val = colors[0][i] - ((colors[0][i] - colors[1][i]) * currentPosition);
-            // Устанавливаю текущее значение цвета
-            currentColor[i] = Math.round(val);
-          }
-        }
-
-        feedback.style['background-color'] = 'rgb(' + currentColor.join(',') + ')';
-      } else if (pageYOffset >= feedbackBottom) {
-        // currentPosition = (pageYOffset - feedbackBottom) / (feedbackOffsetBottom - feedbackBottom);
-        // colors = [
-        //   [251, 192, 45], // #fbc02d
-        //   [21, 38, 46] // #15262e
-        // ];
-
-        // currentColor = [];
-
-        // for (i = 0; i < colors[0].length; i++) {
-        //   // Проверяю, какое значение цвета больше
-        //   if (colors[0][i] < colors[1][i]) {
-        //     // Высчитываю текущее значение цвета
-        //     val = ((colors[1][i] - colors[0][i]) * currentPosition) + colors[0][i];
-        //     // Устанавливаю текущее значение цвета
-        //     currentColor[i] = Math.round(val);
-        //   } else {
-        //     // Высчитываю текущее значение цвета
-        //     val = colors[0][i] - ((colors[0][i] - colors[1][i]) * currentPosition);
-        //     // Устанавливаю текущее значение цвета
-        //     currentColor[i] = Math.round(val);
-        //   }
-        // }
-
-        // feedback.style['background-color'] = 'rgb(' + currentColor.join(',') + ')';
-      } else {
-        feedback.style['background-color'] = 'rgb(251, 192, 45)';
-      }
-    } else {
-      feedback.style['background-color'] = 'rgb(251, 192, 45)';
-    }
-  }, 100);
 };
 
 var windowResizeHandler = function () {
@@ -661,6 +961,8 @@ var windowResizeHandler = function () {
     searchField.addEventListener('focus', searchFieldFocusHandler);
     searchField.addEventListener('blur', searchFieldBlurHandler);
 
+    filterButtonClickHandler();
+
     sidebar.classList.remove('sidebar--closed');
     sidebarCatalogLink.removeEventListener('click', sidebarCatalogLinkClickHandler);
     sidebarCatalogLink.addEventListener('mouseover', sidebarCatalogLinkMouseoverHandler);
@@ -685,6 +987,13 @@ var windowResizeHandler = function () {
     catalogSublists.forEach(function (it) {
       it.classList.remove('catalog__sublist--opened');
     });
+
+    setTimeout(function () {
+      $('.recently-viewed__products.slick-initialized').not('.recently-viewed__products--copy').slick('unslick');
+    }, 50);
+
+    cancelAnimation();
+    animateRecentlyViewedProducts();
   }
 };
 
@@ -706,9 +1015,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  for (var i = 0; i < citiesFooter.length; i++) {
+  animateFilterTop();
+
+  getFilterBlockHeight();
+
+  for (var i = 0; i < filterCaptions.length; i++) {
+    filterCapionsClickHandler(filterCaptions[i], filterSelects[i]);
+  }
+
+  for (i = 0; i < filterButtonsView.length; i++) {
+    filterButtonViewClickHandler(filterButtonsView[i]);
+  }
+
+  for (i = 0; i < citiesFooter.length; i++) {
     citiesFooterClickHandler(citiesFooter[i], addressesFooter[i]);
   }
+
+  productsButton.addEventListener('click', productsButtonClickHandler);
 
   setCatalogNumbersValue();
 });
@@ -716,19 +1039,59 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function () {
   $(window).on('load resize', function () {
     if (innerWidth >= 1024) {
-      $('.bestsellers__products.slick-initialized').slick('slickUnfilter');
-      $('.bestsellers__products.slick-initialized').slick('unslick');
+      $('.recently-viewed__products.slick-initialized').slick('slickUnfilter');
+      $('.recently-viewed__products.slick-initialized').slick('unslick');
     } else {
-      if (!document.querySelector('.bestsellers__products').classList.contains('slick-initialized')) {
-        $('.bestsellers__products').slick({
+      if (!document.querySelector('.recently-viewed__products').classList.contains('slick-initialized')) {
+        $('.recently-viewed__products').not('.recently-viewed__products--copy').slick({
           dots: true,
           arrows: true,
           infinite: true,
           appendArrows: $('.controls'),
-          prevArrow: $('.controls .controls__button--previous'),
-          nextArrow: $('.controls .controls__button--next'),
+          prevArrow: $('.recently-viewed  .controls__button--previous'),
+          nextArrow: $('.recently-viewed  .controls__button--next'),
         });
       }
     }
   });
+
+  var filterRange = $('.filter__range');
+  filterRange.slider({
+    range: true,
+    min: 9000,
+    max: 90000,
+    step: 1000,
+    values: [20000, 80000],
+    slide: function (event, ui) {
+      var min = filterRange.slider('option', 'min');
+      var max = filterRange.slider('option', 'max');
+      var step = filterRange.slider('option', 'step');
+      var minValue = $('.filter__block--opened  .filter__value--min');
+      var maxValue = $('.filter__block--opened  .filter__value--max');
+      var minInput = $('.filter__block--opened  .filter__cost--min');
+      var maxInput = $('.filter__block--opened  .filter__cost--max');
+
+      minValue.text(Math.floor(ui.values[0] / step) + 'K');
+      minValue.css({left: ((ui.values[0] - min) / (max - min) * 100 - 1) + '%'});
+      minInput[0].value = ui.values[0];
+
+      maxValue.text(Math.floor(ui.values[1] / step) + 'K');
+      maxValue.css({left: ((ui.values[1] - min) / (max - min) * 100 - 1) + '%'});
+      maxInput[0].value = ui.values[1];
+    }
+  });
+
+  var min = filterRange.slider('option', 'min');
+  var max = filterRange.slider('option', 'max');
+  var step = filterRange.slider('option', 'step');
+  var values = filterRange.slider('option', 'values');
+  var minValue = $('.filter__value--min');
+  var maxValue = $('.filter__value--max');
+
+
+  minValue.text(Math.floor(values[0] / step) + 'K');
+  minValue.css({left: ((values[0] - min) / (max - min) * 100 - 1) + '%'});
+
+  maxValue.text(Math.floor(values[1] / step) + 'K');
+  maxValue.css({left: ((values[1] - min) / (max - min) * 100 - 1) + '%'});
 });

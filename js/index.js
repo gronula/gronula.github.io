@@ -731,13 +731,16 @@ var getFilterBlockHeight = function (form) {
   var blocks = form.querySelectorAll('.filter__block');
 
   for (var i = 0; i < headings.length; i++) {
+    blocks[i].style.transition = 'none';
     blocks[i].classList.add('filter__block--opened');
     var blockHeight = blocks[i].getBoundingClientRect().height;
     blocks[i].classList.remove('filter__block--opened');
+    blocks[i].style.transition = '';
 
     filterHeadingsClickHandler(form, headings, blocks, blockHeight, i);
   }
 
+  headings[0].classList.add('filter__heading--opened');
   blocks[0].classList.add('filter__block--opened');
   blocks[0].style.height = blocks[0].getBoundingClientRect().height + 'px';
 
