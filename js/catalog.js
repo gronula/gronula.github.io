@@ -516,13 +516,13 @@ var windowScrollHandler = function () {
   setTimeout(function () {
     var feedbackTop = feedback.offsetTop - innerHeight + sidebarHeight;
     // var feedbackOffsetTop = feedback.offsetTop;
-    var feedbackMiddle = feedbackTop + feedback.getBoundingClientRect().height / 2;
+    // var feedbackMiddle = feedbackTop + feedback.getBoundingClientRect().height / 2;
     var feedbackBottom = feedbackTop + feedback.getBoundingClientRect().height;
     // var feedbackOffsetBottom = feedback.offsetTop + feedback.getBoundingClientRect().height;
 
     if (pageYOffset > feedbackTop && pageYOffset < feedbackBottom) {
-      if (pageYOffset <= feedbackMiddle) {
-        var currentPosition = (pageYOffset - feedbackTop) / (feedbackMiddle - feedbackTop);
+      if (pageYOffset <= feedbackBottom) {
+        var currentPosition = (pageYOffset - feedbackTop) / (feedbackBottom - feedbackTop);
         var colors = [
           [21, 38, 46], // #15262e
           [251, 192, 45] // #fbc02d
