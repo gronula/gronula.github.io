@@ -252,8 +252,10 @@ var getFilterBlockHeight = function () {
     }
 
     filterMain.style.transition = 'none';
+
     var filterMainOffsetBottom = filterMain.getBoundingClientRect().bottom;
-    filterMain.style.transition = 'none';
+
+    filterMain.style.transition = '';
 
     it.style.transition = 'none';
     it.classList.remove('filter__checkboxes--top');
@@ -817,32 +819,32 @@ var requestAnimationFrame = window.requestAnimationFrame ||
 
 window.requestAnimationFrame = requestAnimationFrame;
 
-var isScrollDown = true;
-var requestId;
+// var isScrollDown = true;
+// var requestId;
 var coord = 0;
 
-var animation = function () {
-  if (!window.matchMedia('(max-width: 1023px)').matches) {
-    var recentlyViewedProductsWidth = recentlyViewedProducts[0].getBoundingClientRect().width;
-    coord = isScrollDown ? coord - 1 : coord + 1;
+// var animation = function () {
+//   if (!window.matchMedia('(max-width: 1023px)').matches) {
+//     var recentlyViewedProductsWidth = recentlyViewedProducts[0].getBoundingClientRect().width;
+//     coord = isScrollDown ? coord - 1 : coord + 1;
 
-    recentlyViewedProducts.forEach(function (it) {
-      if (coord < -recentlyViewedProductsWidth) {
-        coord = 0;
-      } else if (coord > 0) {
-        coord = -recentlyViewedProductsWidth;
-      }
+//     recentlyViewedProducts.forEach(function (it) {
+//       if (coord < -recentlyViewedProductsWidth) {
+//         coord = 0;
+//       } else if (coord > 0) {
+//         coord = -recentlyViewedProductsWidth;
+//       }
 
-      it.style.transform = 'translateX(' + coord + 'px)';
-    });
+//       it.style.transform = 'translateX(' + coord + 'px)';
+//     });
 
-    requestId = requestAnimationFrame(animation);
-  }
-};
+//     // requestId = requestAnimationFrame(animation);
+//   }
+// };
 
-var cancelAnimation = function () {
-  cancelAnimationFrame(requestId);
-};
+// var cancelAnimation = function () {
+//   cancelAnimationFrame(requestId);
+// };
 
 var isMoved = false;
 // var isClick = true;
@@ -957,23 +959,23 @@ var recentlyViewedProductsWheelHandler = function (evt) {
   }
 };
 
-var animateRecentlyViewedProducts = function () {
-  if (!window.matchMedia('(max-width: 1023px)').matches) {
-    var recentlyViewedScrollTop = recentlyViewed.getBoundingClientRect().top;
+// var animateRecentlyViewedProducts = function () {
+//   if (!window.matchMedia('(max-width: 1023px)').matches) {
+//     var recentlyViewedScrollTop = recentlyViewed.getBoundingClientRect().top;
 
-    window.addEventListener('scroll', function () {
-      var newRecentlyViewedScrollTop = recentlyViewed.getBoundingClientRect().top;
-      isScrollDown = recentlyViewedScrollTop >= newRecentlyViewedScrollTop;
-      recentlyViewedScrollTop = newRecentlyViewedScrollTop;
-    });
+//     window.addEventListener('scroll', function () {
+//       var newRecentlyViewedScrollTop = recentlyViewed.getBoundingClientRect().top;
+//       isScrollDown = recentlyViewedScrollTop >= newRecentlyViewedScrollTop;
+//       recentlyViewedScrollTop = newRecentlyViewedScrollTop;
+//     });
 
-    requestAnimationFrame(animation);
+//     requestAnimationFrame(animation);
 
-    for (var i = 0; i < recentlyViewedItems.length; i++) {
-      recentlyViewedItems[i].addEventListener('mousedown', recentlyViewedItemMouseDownHandler);
-    }
-  }
-};
+//     for (var i = 0; i < recentlyViewedItems.length; i++) {
+//       recentlyViewedItems[i].addEventListener('mousedown', recentlyViewedItemMouseDownHandler);
+//     }
+//   }
+// };
 
 var citiesFooterClickHandler = function (city, address) {
   city.addEventListener('click', function (evt) {
