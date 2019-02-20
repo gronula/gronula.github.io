@@ -26,6 +26,7 @@ var filterBlocks = filter.querySelectorAll('.filter__block');
 var filterCaptions = filter.querySelectorAll('.filter__caption');
 var filterSelects = filter.querySelectorAll('.filter__select');
 var filterButtonsView = filter.querySelectorAll('.filter__view  .filter__button');
+var filterButtonsSort = filter.querySelectorAll('.filter__sort  .filter__button');
 var sidebar = main.querySelector('.sidebar');
 // var sidebarLinks = sidebar.querySelectorAll('.sidebar__link');
 var sidebarCatalogLink = sidebar.querySelector('.sidebar__link--catalog');
@@ -379,23 +380,40 @@ var filterButtonViewClickHandler = function (button) {
   });
 };
 
-var filterSectionTop = filter.querySelector('.filter__top');
-var filterSectionTopWidth = filterSectionTop.getBoundingClientRect().width;
-var filterWidth = filter.getBoundingClientRect().width;
+var filterButtonsSortClickHandler = function (button) {
+  button.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    if (!evt.target.classList.contains('filter__button--active')) {
+      filterButtonsSort.forEach(function (it) {
+        it.classList.remove('filter__button--active');
+      });
+      evt.target.classList.add('filter__button--active');
+    }
+  });
+};
 
-var animateFilterTop = function () {
+var filterBlockChoice = filter.querySelector('.filter__block--choice');
+var filterSlider = filter.querySelector('.filter__slider');
+
+var filterBlockChoiceWidth = filterBlockChoice.getBoundingClientRect().width;
+var filterSliderWidth = filterSlider.getBoundingClientRect().width;
+
+var filterBlockChoiceRight = filterBlockChoice.getBoundingClientRect().right;
+var filterSliderRight = filterSlider.getBoundingClientRect().right;
+
+var animateFilterSlider = function () {
   if (!window.matchMedia('(max-width: 1023px)').matches) {
-    if (filterSectionTopWidth > filterWidth) {
-      filterSectionTop.addEventListener('click', filterSectionTopClickHandler);
-      filterSectionTop.addEventListener('mousedown', filterSectionTopMousedownHandler);
-      filterSectionTop.addEventListener('wheel', filterSectionTopWheelHandler);
+    if (filterSliderRight > filterBlockChoiceRight) {
+      filterSlider.addEventListener('click', filterSliderClickHandler);
+      filterSlider.addEventListener('mousedown', filterSliderMousedownHandler);
+      filterSlider.addEventListener('wheel', filterSliderWheelHandler);
     }
   }
 };
 
 var isClick = true;
 
-var filterSectionTopClickHandler = function (evt) {
+var filterSliderClickHandler = function (evt) {
   if (!window.matchMedia('(max-width: 1023px)').matches) {
     if (!isClick) {
       evt.preventDefault();
@@ -405,14 +423,14 @@ var filterSectionTopClickHandler = function (evt) {
 
 var x = 0;
 
-var filterSectionTopMousedownHandler = function (evt) {
+var filterSliderMousedownHandler = function (evt) {
   if (!window.matchMedia('(max-width: 1023px)').matches) {
     evt.preventDefault();
 
-    filterSectionTopWidth = filterSectionTop.getBoundingClientRect().width;
-    filterWidth = filter.getBoundingClientRect().width;
+    filterBlockChoiceWidth = filterBlockChoice.getBoundingClientRect().width;
+    filterSliderWidth = filterSlider.getBoundingClientRect().width;
 
-    filterSectionTop.style.transition = '';
+    filterSlider.style.transition = 'none';
 
     var startCoords = {
       x: evt.clientX
@@ -423,9 +441,12 @@ var filterSectionTopMousedownHandler = function (evt) {
     var mouseMoveHandler = function (moveEvt) {
       moveEvt.preventDefault();
 
+      filterSliderRight = filterSlider.getBoundingClientRect().right;
+      filterBlockChoiceRight = filterBlockChoice.getBoundingClientRect().right;
+
       if (x > 0) {
         x -= (startCoords.x - moveEvt.x) * 0.3;
-      } else if (x < -filterSectionTopWidth + filterWidth - 50) {
+      } else if (filterSliderRight < filterBlockChoiceRight) {
         x -= (startCoords.x - moveEvt.x) * 0.3;
         filter.classList.add('filter--full');
       } else {
@@ -433,7 +454,7 @@ var filterSectionTopMousedownHandler = function (evt) {
         filter.classList.remove('filter--full');
       }
 
-      filterSectionTop.style.transform = 'translateX(' + x + 'px)';
+      filterSlider.style.transform = 'translateX(' + x + 'px)';
 
       startCoords = {
         x: moveEvt.clientX
@@ -447,30 +468,33 @@ var filterSectionTopMousedownHandler = function (evt) {
 
       if (x > 0) {
         x = 0;
-      } else if (x < -filterSectionTopWidth + filterWidth) {
-        x = -filterSectionTopWidth + filterWidth;
+      } else if (filterSliderRight < filterBlockChoiceRight) {
+        x = -filterSliderWidth + filterBlockChoiceWidth;
       }
 
-      filterSectionTop.style.transition = 'all 0.2s cubic-bezier(0.77, 0, 0.175, 1)';
-      filterSectionTop.style.transform = 'translateX(' + x + 'px)';
+      filterSlider.style.transition = 'all 0.2s cubic-bezier(0.77, 0, 0.175, 1)';
+      filterSlider.style.transform = 'translateX(' + x + 'px)';
 
       document.removeEventListener('mousemove', mouseMoveHandler);
       document.removeEventListener('mouseup', mouseUpHandler, true);
     };
 
-    filterSectionTop.addEventListener('click', filterSectionTopClickHandler);
+    filterSlider.addEventListener('click', filterSliderClickHandler);
 
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler, true);
   }
 };
 
-var filterSectionTopWheelHandler = function (evt) {
+var filterSliderWheelHandler = function (evt) {
   if (!window.matchMedia('(max-width: 1023px)').matches) {
     evt.preventDefault();
 
-    filterSectionTopWidth = filterSectionTop.getBoundingClientRect().width;
-    filterWidth = filter.getBoundingClientRect().width;
+    filterBlockChoiceWidth = filterBlockChoice.getBoundingClientRect().width;
+    filterSliderWidth = filterSlider.getBoundingClientRect().width;
+
+    filterSliderRight = filterSlider.getBoundingClientRect().right;
+    filterBlockChoiceRight = filter.getBoundingClientRect().right;
 
     if (evt.deltaY < 0) {
       x -= 40;
@@ -480,15 +504,16 @@ var filterSectionTopWheelHandler = function (evt) {
 
     if (x > 0) {
       x = 0;
-    } else if (x <= -filterSectionTopWidth + filterWidth) {
-      x = -filterSectionTopWidth + filterWidth;
+    } else if (x <= -filterSliderWidth + filterBlockChoiceWidth) {
+      x = -filterSliderWidth + filterBlockChoiceWidth;
       filter.classList.add('filter--full');
     } else {
       filter.classList.remove('filter--full');
     }
 
-    filterSectionTop.style.transition = '';
-    filterSectionTop.style.transform = 'translateX(' + x + 'px)';
+
+    filterSlider.style.transition = 'none';
+    filterSlider.style.transform = 'translateX(' + x + 'px)';
   }
 };
 
@@ -1185,7 +1210,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  animateFilterTop();
+  animateFilterSlider();
 
   // getFilterBlockHeight();
 
@@ -1195,6 +1220,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   for (i = 0; i < filterButtonsView.length; i++) {
     filterButtonViewClickHandler(filterButtonsView[i]);
+  }
+
+  for (i = 0; i < filterButtonsView.length; i++) {
+    filterButtonsSortClickHandler(filterButtonsSort[i]);
   }
 
   for (i = 0; i < citiesFooter.length; i++) {

@@ -490,6 +490,25 @@ var setCatalogNumbersValue = function () {
   });
 };
 
+var bestsellersItemClickHandler = function (evt) {
+  evt.preventDefault();
+  window.location.href = '#';
+};
+
+var bestsellersItemMousedownHandler = function (evt) {
+  evt.preventDefault();
+  if (evt.which === 2) {
+    window.open('#', '_blank');
+    window.focus();
+  }
+};
+
+var bestsellersItems = main.querySelectorAll('.item--bestsellers');
+bestsellersItems.forEach(function (it) {
+  it.addEventListener('click', bestsellersItemClickHandler);
+  it.addEventListener('mousedown', bestsellersItemMousedownHandler);
+});
+
 var citiesFooterClickHandler = function (city, address) {
   city.addEventListener('click', function (evt) {
     evt.preventDefault();
