@@ -558,7 +558,7 @@ var windowResizeHandler = function () {
       it.classList.remove('catalog__sublist--opened');
     });
   } else {
-    windowScrollHandler();
+    // windowScrollHandler();
 
     document.body.classList.remove('no-scroll');
     document.body.classList.remove('dark');
@@ -1016,7 +1016,7 @@ var animateBrandsLists = function () {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-  window.addEventListener('scroll', windowScrollHandler);
+  // window.addEventListener('scroll', windowScrollHandler);
   window.addEventListener('resize', windowResizeHandler);
 
   windowResizeHandler();
