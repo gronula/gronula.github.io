@@ -37,20 +37,20 @@ var addressesFooter = footer.querySelectorAll('.footer__address');
 var searchFieldWidth = 100;
 var mainNavWidth = 240;
 
-// var getScrollWidth = function () {
-//   var div = document.createElement('div');
+var getScrollWidth = function () {
+  var div = document.createElement('div');
 
-//   div.style.overflowY = 'scroll';
-//   div.style.width = '50px';
-//   div.style.height = '50px';
-//   div.style.visibility = 'hidden';
+  div.style.overflowY = 'scroll';
+  div.style.width = '50px';
+  div.style.height = '50px';
+  div.style.visibility = 'hidden';
 
-//   document.body.appendChild(div);
-//   var scrollWidth = div.offsetWidth - div.clientWidth;
-//   document.body.removeChild(div);
+  document.body.appendChild(div);
+  var scrollWidth = div.offsetWidth - div.clientWidth;
+  document.body.removeChild(div);
 
-//   return scrollWidth;
-// };
+  return scrollWidth;
+};
 
 var navButtonClickHandler = function () {
   if (window.matchMedia('(max-width: 1023px)').matches) {
@@ -109,17 +109,17 @@ var searchFieldFocusHandler = function () {
 };
 
 var searchFieldBlurHandler = function () {
-  if (navButton.classList.contains('main-nav__toggle--closed')) {
-    searchField.removeEventListener('click', searchFieldBlurHandler);
-    searchField.classList.add('search__field--closed');
-    searchField.style.width = '';
-    mainNav.style.width = mainNavWidth + 'px';
-    mainNav.classList.remove('main-nav--closed');
-  }
-
   if (!window.matchMedia('(max-width: 1023px)').matches) {
     searchIcon.classList.remove('search__icon--opened');
     searchField.placeholder = 'Поиск товаров и услуг';
+
+    if (!header.classList.contains('header--fixed')) {
+      searchField.removeEventListener('click', searchFieldBlurHandler);
+      searchField.classList.add('search__field--closed');
+      searchField.style.width = '';
+      mainNav.style.width = mainNavWidth + 'px';
+      mainNav.classList.remove('main-nav--closed');
+    }
   }
 };
 
@@ -141,6 +141,84 @@ var getSearchInputWidth = function () {
     searchField.style.width = '';
   }
 };
+
+var mainNavLinkTimer;
+
+var mainNavLinkCatalogMouseoverHandler = function () {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    window.removeEventListener('scroll', windowScrollHandler);
+
+    offsetTop = pageYOffset;
+
+    if (window.matchMedia('(max-width: 1687px)').matches) {
+      header.style.left = '';
+      header.style.right = getScrollWidth() + 'px';
+    } else {
+      header.style.left = offsetTop > 65 ? getScrollWidth() / -2 + 'px' : '';
+      header.style.right = offsetTop > 65 ? getScrollWidth() / 2 + 'px' : getScrollWidth() + 'px';
+    }
+
+    document.body.style.top = -offsetTop + 'px';
+    document.body.style.width = 'calc(100% - ' + getScrollWidth() + 'px)';
+    document.body.classList.add('no-scroll');
+
+    mainNavOverlay.classList.remove('main-nav__overlay--out');
+    mainNavOverlay.classList.add('main-nav__overlay--hover');
+
+    var mainNavLinkCatalogOffsetLeft = mainNavLinkCatalog.getBoundingClientRect().left;
+
+    sidebar.style.left = mainNavLinkCatalogOffsetLeft + 'px';
+    sidebar.classList.remove('sidebar--out');
+    sidebar.classList.add('sidebar--hover');
+
+    if (mainNavLinkTimer) {
+      clearTimeout(mainNavLinkTimer);
+      mainNavLinkTimer = null;
+    }
+
+    mainNavOverlay.addEventListener('mouseover', mainNavOverlayMouseoverHandler);
+    sidebar.addEventListener('mouseover', sidebarMouseoverHandler);
+  }
+};
+
+var mainNavOverlayMouseoverHandler = function () {
+  document.body.style.top = '';
+  document.body.style.width = '';
+  document.body.classList.remove('no-scroll');
+  header.style.left = '';
+  header.style.right = '';
+
+  window.scroll(0, offsetTop);
+
+  mainNavOverlay.classList.add('main-nav__overlay--out');
+  sidebar.classList.add('sidebar--out');
+
+  mainNavLinkCatalog.removeEventListener('mouseover', mainNavOverlayMouseoverHandler);
+  window.addEventListener('scroll', windowScrollHandler);
+
+  mainNavLinkTimer = setTimeout(function () {
+    mainNavOverlay.classList.remove('main-nav__overlay--hover');
+    sidebar.classList.remove('sidebar--hover');
+    sidebar.removeEventListener('mouseover', sidebarMouseoverHandler);
+  }, 500);
+};
+
+var sidebarMouseoverHandler = function () {
+  mainNavOverlay.classList.remove('main-nav__overlay--out');
+  mainNavOverlay.classList.add('main-nav__overlay--hover');
+  sidebar.classList.remove('sidebar--out');
+  sidebar.classList.add('sidebar--hover');
+
+  if (mainNavLinkTimer) {
+    clearTimeout(mainNavLinkTimer);
+    mainNavLinkTimer = null;
+  }
+};
+
+var mainNavLinkCatalog = mainNav.querySelector('.main-nav__link--catalog');
+var mainNavOverlay = mainNav.querySelector('.main-nav__overlay');
+
+mainNavLinkCatalog.addEventListener('mouseover', mainNavLinkCatalogMouseoverHandler);
 
 var activeCityClickHandler = function () {
   activeCity.addEventListener('click', function () {
@@ -537,38 +615,32 @@ var windowScrollHandler = function () {
 
     var newScrollTop = document.body.getBoundingClientRect().top;
 
-    if (scrollTop > newScrollTop) {
-      header.classList.add('header--closed');
+    var mainOffsetTop = main.getBoundingClientRect().top;
+
+    if (mainOffsetTop > 115) {
+      header.classList.remove('header--fixed');
       main.classList.remove('main--full');
+
+      logoTitle.classList.remove('logo__title--closed');
+      mainNavList.classList.remove('main-nav__list--closed');
+      siteNav.classList.remove('site-nav--closed');
+      contacts.classList.remove('contacts--closed');
+      searchField.classList.add('search__field--closed');
     } else {
-      if (pageYOffset > 115) {
-        header.classList.remove('header--closed');
-        logoTitle.classList.add('logo__title--closed');
-        mainNavList.classList.add('main-nav__list--closed');
-        mainNavList.classList.add('main-nav__list--hidden');
-        navButton.classList.remove('main-nav__toggle--closed');
-        navButton.classList.add('main-nav__toggle--opened');
-        siteNav.classList.add('site-nav--closed');
-        contacts.classList.add('contacts--closed');
-        searchField.classList.remove('search__field--closed');
-      } else {
-        header.classList.remove('header--closed');
-        logoTitle.classList.remove('logo__title--closed');
-        mainNavList.classList.remove('main-nav__list--closed');
-        mainNavList.classList.remove('main-nav__list--hidden');
-        mainNavList.classList.remove('main-nav__list--fixed');
-        navButton.classList.add('main-nav__toggle--closed');
-        navButton.classList.remove('main-nav__toggle--opened');
-        siteNav.classList.remove('site-nav--closed');
-        contacts.classList.remove('contacts--closed');
-        searchField.classList.add('search__field--closed');
-        main.classList.add('main--full');
-      }
+      header.classList.add('header--fixed');
+      main.classList.add('main--full');
+
+      logoTitle.classList.add('logo__title--closed');
+      mainNavList.classList.add('main-nav__list--closed');
+      siteNav.classList.add('site-nav--closed');
+      contacts.classList.add('contacts--closed');
+      searchField.classList.remove('search__field--closed');
     }
 
     scrollTop = newScrollTop;
 
-    setTimeout(getSearchInputWidth, 400);
+    getSearchInputWidth();
+    // setTimeout(getSearchInputWidth, 400);
 
     sidebarHeight = 0;
   }
@@ -707,15 +779,24 @@ var windowResizeHandler = function () {
 
     header.classList.remove('header--fixed');
     if (pageYOffset > 115) {
-      header.classList.add('header--closed');
-      main.classList.remove('main--full');
+      // header.classList.add('header--closed');
+      // main.classList.remove('main--full');
     }
 
     logo.classList.remove('logo--closed');
     logo.classList.add('logo--opened');
+    logoTitle.classList.remove('logo__title--closed');
+
+    navButton.classList.remove('main-nav__toggle--opened');
+    navButton.classList.add('main-nav__toggle--closed');
+
+    mainNavList.classList.remove('main-nav__list--closed');
+    siteNav.classList.remove('site-nav--closed');
 
     search.classList.add('search--closed');
     searchField.placeholder = 'Поиск товаров и услуг';
+
+    contacts.classList.remove('contacts--closed');
 
     searchField.addEventListener('focus', searchFieldFocusHandler);
     searchField.addEventListener('blur', searchFieldBlurHandler);
