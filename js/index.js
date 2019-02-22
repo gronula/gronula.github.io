@@ -126,37 +126,56 @@ var navButtonClickHandler = function () {
 //   }
 // };
 
-var searchFieldFocusHandler = function () {
-  if (!navButton.classList.contains('main-nav__toggle--opened') &&
-      !mainNavList.classList.contains('main-nav__list--fixed') &&
-      !siteNav.classList.contains('site-nav--closed')) {
+var searchIconClickHandler = function (evt) {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    evt.stopPropagation();
     mainNav.style.transition = 'all 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
-    mainNav.style.width = '';
+    mainNav.style.width = 0;
     mainNav.classList.add('main-nav--closed');
-    searchField.removeEventListener('click', searchFieldFocusHandler);
-    searchField.classList.remove('search__field--closed');
     searchField.style.transition = 'all 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
     searchField.style.width = searchFieldWidth + 'px';
   }
+};
 
+var searchFieldCloseHandler = function (evt) {
+  if (evt.target !== searchField && evt.target !== searchSubmit) {
+    searchIcon.classList.remove('search__icon--opened');
+    searchField.style.width = '';
+    mainNav.style.width = mainNavWidth + 'px';
+    mainNav.classList.remove('main-nav--closed');
+  }
+};
+
+var searchFieldFocusHandler = function () {
   if (!window.matchMedia('(max-width: 1023px)').matches) {
     searchIcon.classList.add('search__icon--opened');
     searchField.placeholder = 'Поиск';
+    searchField.addEventListener('blur', searchFieldBlurHandler);
+    document.addEventListener('click', searchFieldCloseHandler);
+
+    if (!header.classList.contains('header--fixed')) {
+      mainNav.style.transition = 'all 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
+      mainNav.style.width = 0;
+      mainNav.classList.add('main-nav--closed');
+      searchField.style.transition = 'all 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
+      searchField.style.width = searchFieldWidth + 'px';
+    }
   }
 };
 
 var searchFieldBlurHandler = function () {
   if (!window.matchMedia('(max-width: 1023px)').matches) {
-    searchIcon.classList.remove('search__icon--opened');
-    searchField.placeholder = 'Поиск товаров и услуг';
-
     if (!header.classList.contains('header--fixed')) {
-      searchField.removeEventListener('click', searchFieldBlurHandler);
-      searchField.classList.add('search__field--closed');
       searchField.style.width = '';
       mainNav.style.width = mainNavWidth + 'px';
       mainNav.classList.remove('main-nav--closed');
     }
+
+    searchIcon.classList.remove('search__icon--opened');
+    searchField.placeholder = 'Поиск товаров и услуг';
+
+    document.removeEventListener('click', searchFieldCloseHandler);
+    searchField.removeEventListener('blur', searchFieldBlurHandler);
   }
 };
 
@@ -697,8 +716,9 @@ var windowResizeHandler = function () {
       it.classList.remove('catalog__sublist--opened');
     });
 
+    searchIcon.addEventListener('click', searchIconClickHandler);
     searchField.addEventListener('focus', searchFieldFocusHandler);
-    searchField.addEventListener('blur', searchFieldBlurHandler);
+    // searchField.addEventListener('blur', searchFieldBlurHandler);
 
     var categoryCompressorSubitems = categoryCompressor.parentElement.querySelectorAll('.categories__subitem').length;
     var categoryDehydratorSubitems = categoryDehydrator.parentElement.querySelectorAll('.categories__subitem').length;
