@@ -660,6 +660,8 @@ var filterLinksClickHandler = function (link, form) {
   });
 };
 
+var isHandlerAdded = false;
+
 var getFilterBlockHeight = function () {
   filterForms.forEach(function (it, j) {
     it.classList.add('filter__form--active');
@@ -669,15 +671,57 @@ var getFilterBlockHeight = function () {
 
     for (var i = 0; i < headings.length; i++) {
       blocks[i].style.transition = 'none';
+      blocks[i].style.height = '';
+      blocks[i].style.maxHeight = '';
+      blocks[i].classList.remove('filter__block--opened');
+      var headingParentElement = headings[i].parentElement;
+      var filterMainFreeHeight = headingParentElement.getBoundingClientRect().height + 2; // 2 нужно, чтобы пустота учитывала границы фильтра
+
+      if (blocks[i].classList.contains('filter__block--elements')) {
+        // var element = blocks[i].querySelector('.filter__elements');
+
+        for (var k = 0; k < headingParentElement.children.length; k++) {
+          if (!headingParentElement.children[k].classList.contains('visually-hidden')) {
+            filterMainFreeHeight -= headingParentElement.children[k].getBoundingClientRect().height;
+          }
+        }
+
+        blocks[i].style.maxHeight = filterMainFreeHeight + 'px';
+      }
+
       blocks[i].classList.add('filter__block--opened');
-      var blockHeight = blocks[i].getBoundingClientRect().height;
-      console.log(headings[i]);
-      console.log(blockHeight);
+
+      if (blocks[i].parentElement.classList.contains('filter__additional')) {
+        var blockHeight = filterMainFreeHeight;
+      } else {
+        blockHeight = blocks[i].getBoundingClientRect().height;
+      }
+
+      var elements = blocks[i].querySelector('.filter__elements');
+      if (elements) {
+        var elementsChildren = elements.querySelectorAll('.filter__element');
+
+        elementsChildren.forEach(function (element) {
+          element.style.display = 'none';
+        });
+
+        blocks[i].style.maxHeight = '';
+
+        for (var l = 0; l < elementsChildren.length; l++) {
+          elementsChildren[l].style.display = '';
+          var elementsHeight = elements.getBoundingClientRect().height;
+          if (elementsHeight > filterMainFreeHeight) {
+            elementsChildren[l].style.display = 'none';
+          }
+        }
+
+        blocks[i].style.maxHeight = filterMainFreeHeight + 'px';
+      }
 
       blocks[i].classList.remove('filter__block--opened');
       blocks[i].style.transition = '';
 
-      filterHeadingsClickHandler(it, headings, blocks, blockHeight, i);
+      filterHeadingsClickHandler(it, headings, blocks, blockHeight, i, isHandlerAdded);
     }
 
     headings[0].classList.add('filter__heading--opened');
@@ -710,26 +754,33 @@ var getFilterBlockHeight = function () {
   // form.classList.remove('filter__form--active');
 };
 
-var filterHeadingsClickHandler = function (form, headings, blocks, blockHeight, i) {
-  headings[i].addEventListener('click', function () {
-    if (blocks[i].classList.contains('filter__block--opened')) {
-      headings[i].classList.remove('filter__heading--opened');
-      blocks[i].classList.remove('filter__block--opened');
-      blocks[i].style.height = 0;
-    } else {
-      headings.forEach(function (it) {
-        it.classList.remove('filter__heading--opened');
-      });
-      blocks.forEach(function (it) {
-        it.classList.remove('filter__block--opened');
-        it.style.height = 0;
-      });
+var filterHeadingsClickHandler = function (form, headings, blocks, blockHeight, i, isAdded) {
+  if (!isAdded) {
+    isAdded = true;
+    headings[i].addEventListener('click', function (evt) {
+      if (blocks[i].classList.contains('filter__block--opened')) {
+        headings[i].classList.remove('filter__heading--opened');
+        blocks[i].classList.remove('filter__block--opened');
+        blocks[i].style.height = 0;
+      } else {
+        headings.forEach(function (it) {
+          if (!evt.target.parentElement.classList.contains('filter__additional') && !it.parentElement.classList.contains('filter__additional')) {
+            it.classList.remove('filter__heading--opened');
+          }
+        });
+        blocks.forEach(function (it) {
+          if (!evt.target.parentElement.classList.contains('filter__additional') && !it.parentElement.classList.contains('filter__additional')) {
+            it.classList.remove('filter__block--opened');
+            it.style.height = 0;
+          }
+        });
 
-      headings[i].classList.add('filter__heading--opened');
-      blocks[i].classList.add('filter__block--opened');
-      blocks[i].style.height = blockHeight + 'px';
-    }
-  });
+        headings[i].classList.add('filter__heading--opened');
+        blocks[i].classList.add('filter__block--opened');
+        blocks[i].style.height = blockHeight + 'px';
+      }
+    });
+  }
 };
 
 var filterCapionsClickHandler = function (caption, select) {
@@ -1181,7 +1232,11 @@ var windowResizeHandler = function () {
     filterBlockTimer = null;
   }
 
-  filterBlockTimer = setTimeout(getFilterBlockHeight, 500);
+  filterBlockTimer = setTimeout(function () {
+    getFilterBlockHeight();
+    isHandlerAdded = true;
+  }, 500);
+  // getFilterBlockHeight();
 
   document.removeEventListener('click', filterSelectsCloseHandler);
 };
