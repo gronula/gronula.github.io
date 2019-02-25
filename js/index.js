@@ -38,6 +38,8 @@ var categoryPowerstation = main.querySelector('.categories__item--powerstation  
 var upwardButton = main.querySelector('.upward');
 var filterLinks = main.querySelectorAll('.filter__link');
 var filterForms = main.querySelectorAll('.filter__form');
+var filterElements = main.querySelectorAll('.filter__element');
+var filterLinksMore = main.querySelectorAll('.filter__more');
 var filterCaptions = main.querySelectorAll('.filter__caption');
 var filterSelects = main.querySelectorAll('.filter__select');
 var filterPreview = main.querySelectorAll('.filter__preview');
@@ -596,157 +598,6 @@ var setCatalogNumbersValue = function () {
   });
 };
 
-var windowResizeHandler = function () {
-  if (window.matchMedia('(max-width: 1023px)').matches) {
-    document.body.classList.remove('dark');
-    document.body.style.overflow = '';
-    document.body.style.width = '';
-    header.style.zIndex = '';
-    header.style.right = '';
-    setTimeout(function () {
-      header.style.transition = '';
-    }, 500);
-
-    logoTitle.classList.remove('logo__title--closed');
-    searchField.placeholder = 'Поиск';
-
-    if (navButton.classList.contains('main-nav__toggle--opened') && logo.classList.contains('logo--opened')) {
-      navButton.classList.remove('main-nav__toggle--opened');
-      navButton.classList.add('main-nav__toggle--closed');
-    }
-
-    if (mainNavList.classList.contains('main-nav__list--fixed')) {
-      mainNavList.classList.remove('main-nav__list--fixed');
-      mainNavList.classList.add('main-nav__list--closed');
-      navButton.classList.add('main-nav__toggle--closed');
-      siteNav.classList.add('site-nav--closed');
-      search.classList.add('search--closed');
-    } else if (navButton.classList.contains('main-nav__toggle--closed')) {
-      mainNavList.classList.add('main-nav__list--closed');
-      siteNav.classList.add('site-nav--closed');
-      search.classList.add('search--closed');
-    }
-
-    categoryCompressor.textContent = 'Компрессоры';
-    categoryDehydrator.textContent = 'Осушители';
-    categoryPump.textContent = 'Насосы';
-    categoryPowerstation.textContent = 'Электростанции';
-
-    sidebarCatalogLink.addEventListener('click', sidebarCatalogLinkClickHandler);
-    // sidebarCatalogLink.removeEventListener('mouseover', sidebarCatalogLinkMouseoverHandler);
-    // sidebarCatalogLink.removeEventListener('mouseout', sidebarCatalogLinkMouseoutHandler);
-    catalog.classList.remove('catalog--opened');
-    // catalog.removeEventListener('mouseover', catalogMouseoverHandler);
-    // catalog.removeEventListener('mouseout', catalogMouseoutHandler);
-    catalogHeader.classList.remove('catalog__header--opened');
-    catalogButton.removeEventListener('click', catalogButtonClickHandler);
-    catalogWrapper.classList.remove('catalog__wrapper--opened');
-    catalogTitleClickHandler();
-
-    // for (var i = 0; i < catalogItems.length; i++) {
-    //   catalogItems[i].removeEventListener('mouseover', catalogItemMouseoverHandler);
-    //   catalogItems[i].removeEventListener('mouseout', catalogItemMouseoutHandler);
-    // }
-
-    catalogLinks.forEach(function (it) {
-      it.classList.remove('catalog__link--opened');
-    });
-    catalogSublists.forEach(function (it) {
-      it.classList.remove('catalog__sublist--opened');
-    });
-  } else {
-    windowScrollHandler();
-    // getSearchInputWidth();
-
-    document.body.classList.remove('no-scroll');
-    document.body.classList.remove('dark');
-    document.body.style.overflow = '';
-    document.body.style.width = '';
-    header.style.zIndex = '';
-    header.style.right = '';
-    setTimeout(function () {
-      header.style.transition = '';
-    }, 500);
-
-    header.classList.remove('header--fixed');
-    main.classList.remove('main--full');
-
-    if (pageYOffset > 115) {
-      // header.classList.add('header--closed');
-      // main.classList.remove('main--full');
-    }
-
-    logo.classList.remove('logo--closed');
-    logo.classList.add('logo--opened');
-    logoTitle.classList.remove('logo__title--closed');
-
-    navButton.classList.remove('main-nav__toggle--opened');
-    navButton.classList.add('main-nav__toggle--closed');
-
-    mainNavList.classList.remove('main-nav__list--closed');
-    siteNav.classList.remove('site-nav--closed');
-
-    search.classList.add('search--closed');
-    searchField.placeholder = 'Поиск товаров и услуг';
-
-    contacts.classList.remove('contacts--closed');
-
-    sidebar.classList.remove('sidebar--closed');
-    sidebarCatalogLink.removeEventListener('click', sidebarCatalogLinkClickHandler);
-    // sidebarCatalogLink.addEventListener('mouseover', sidebarCatalogLinkMouseoverHandler);
-    // sidebarCatalogLink.addEventListener('mouseout', sidebarCatalogLinkMouseoutHandler);
-    catalog.classList.remove('catalog--opened');
-    // catalog.removeEventListener('mouseover', catalogMouseoverHandler);
-    // catalog.removeEventListener('mouseout', catalogMouseoutHandler);
-    catalogHeader.classList.remove('catalog__header--opened');
-    catalogButton.removeEventListener('click', catalogButtonClickHandler);
-    catalogWrapper.classList.remove('catalog__wrapper--opened');
-    catalogTitleClickHandler();
-
-    // for (i = 0; i < catalogLinks.length; i++) {
-    //   if (catalogLinks[i].parentElement.childElementCount > 1) {
-    //     catalogLinks[i].removeEventListener('click', catalogLinkClickHandler, true);
-    //   }
-    // }
-
-    catalogLinks.forEach(function (it) {
-      it.classList.remove('catalog__link--opened');
-    });
-    catalogSublists.forEach(function (it) {
-      it.classList.remove('catalog__sublist--opened');
-    });
-
-    searchIcon.addEventListener('click', searchIconClickHandler);
-    searchField.addEventListener('focus', searchFieldFocusHandler);
-    // searchField.addEventListener('blur', searchFieldBlurHandler);
-
-    var categoryCompressorSubitems = categoryCompressor.parentElement.querySelectorAll('.categories__subitem').length;
-    var categoryDehydratorSubitems = categoryDehydrator.parentElement.querySelectorAll('.categories__subitem').length;
-    var categoryPneumotoolSubitems = categoryPneumotool.parentElement.querySelectorAll('.categories__subitem').length;
-    var categoryPumpSubitems = categoryPump.parentElement.querySelectorAll('.categories__subitem').length;
-    var categoryPowerstationSubitems = categoryPowerstation.parentElement.querySelectorAll('.categories__subitem').length;
-
-    categoryCompressor.innerHTML = 'Компрессорное оборудование<sup class="categories__number">' + categoryCompressorSubitems + '</sup>';
-
-    categoryDehydrator.innerHTML = 'Адсорбционные осушители<sup class="categories__number">' + categoryDehydratorSubitems + '</sup>';
-
-    categoryPneumotool.innerHTML = 'Пневмоинструмент<sup class="categories__number">' + categoryPneumotoolSubitems + '</sup>';
-
-    categoryPump.innerHTML = 'Вакуумные насосы<sup class="categories__number">' + categoryPumpSubitems + '</sup>';
-
-    categoryPowerstation.innerHTML = 'Автономные электростанции<sup class="categories__number">' + categoryPowerstationSubitems + '</sup>';
-
-    setTimeout(function () {
-      $('.brands__list.slick-initialized').not('.brands__list--copy').slick('unslick');
-    }, 50);
-
-    cancelAnimation();
-    animateBrandsLists();
-  }
-
-  document.removeEventListener('click', filterSelectsCloseHandler);
-};
-
 var activeCityClickHandler = function () {
   activeCity.addEventListener('click', function () {
     citiesList.classList.toggle('contacts__cities--opened');
@@ -792,96 +643,6 @@ var citiesFooterClickHandler = function (city, address) {
   });
 };
 
-var scrollTop = document.body.getBoundingClientRect().top;
-
-var windowScrollHandler = function () {
-  if (!window.matchMedia('(max-width: 1023px)').matches) {
-    searchField.blur();
-    searchField.style.transition = 'border-bottom 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
-
-    var newScrollTop = document.body.getBoundingClientRect().top;
-
-    var bodyHeight = document.body.offsetHeight;
-    // var footerHeight = footer.getBoundingClientRect().height;
-    // var footerTop = bodyHeight - innerHeight - footerHeight;
-    var footerAuthorHeight = footerAuthor.getBoundingClientRect().height;
-    var footerAuthorTop = bodyHeight - footerAuthorHeight;
-    var upwardButtonTop = footerAuthorTop - upwardButton.getBoundingClientRect().height - 28;
-
-    // if (footerTop < window.pageYOffset) {
-    //   sidebar.style.position = 'absolute';
-    //   sidebar.style.top = footerTop + 'px';
-    // } else {
-    //   sidebar.style.position = '';
-    //   sidebar.style.top = '';
-    // }
-
-    if (footerAuthorTop < window.pageYOffset + innerHeight) {
-      upwardButton.style.position = 'absolute';
-      upwardButton.style.top = upwardButtonTop + 'px';
-    } else {
-      upwardButton.style.position = '';
-      upwardButton.style.top = '';
-    }
-
-    var mainOffsetTop = main.getBoundingClientRect().top;
-
-    if (mainOffsetTop > 115) {
-      header.classList.remove('header--fixed');
-      main.classList.remove('main--full');
-
-      logoTitle.classList.remove('logo__title--closed');
-      mainNavList.classList.remove('main-nav__list--closed');
-      siteNav.classList.remove('site-nav--closed');
-      contacts.classList.remove('contacts--closed');
-      searchField.classList.add('search__field--closed');
-    } else {
-      header.classList.add('header--fixed');
-      main.classList.add('main--full');
-
-      logoTitle.classList.add('logo__title--closed');
-      mainNavList.classList.add('main-nav__list--closed');
-      siteNav.classList.add('site-nav--closed');
-      contacts.classList.add('contacts--closed');
-      searchField.classList.remove('search__field--closed');
-    }
-
-    if (scrollTop > newScrollTop) {
-      // header.classList.add('header--fixed');
-    //   main.classList.remove('main--full');
-    } else {
-    //   if (pageYOffset > 115) {
-    //     header.classList.remove('header--closed');
-    //     logoTitle.classList.add('logo__title--closed');
-    //     mainNavList.classList.add('main-nav__list--closed');
-    //     mainNavList.classList.add('main-nav__list--hidden');
-    //     navButton.classList.remove('main-nav__toggle--closed');
-    //     navButton.classList.add('main-nav__toggle--opened');
-    //     siteNav.classList.add('site-nav--closed');
-    //     contacts.classList.add('contacts--closed');
-    //     searchField.classList.remove('search__field--closed');
-    //   } else {
-    //     header.classList.remove('header--closed');
-    //     logoTitle.classList.remove('logo__title--closed');
-    //     mainNavList.classList.remove('main-nav__list--closed');
-    //     mainNavList.classList.remove('main-nav__list--hidden');
-    //     mainNavList.classList.remove('main-nav__list--fixed');
-    //     navButton.classList.add('main-nav__toggle--closed');
-    //     navButton.classList.remove('main-nav__toggle--opened');
-    //     siteNav.classList.remove('site-nav--closed');
-    //     contacts.classList.remove('contacts--closed');
-    //     searchField.classList.add('search__field--closed');
-    //     main.classList.add('main--full');
-    //   }
-    }
-
-    scrollTop = newScrollTop;
-
-    getSearchInputWidth();
-    // setTimeout(getSearchInputWidth, 400);
-  }
-};
-
 var filterLinksClickHandler = function (link, form) {
   link.addEventListener('click', function (evt) {
     evt.preventDefault();
@@ -899,27 +660,54 @@ var filterLinksClickHandler = function (link, form) {
   });
 };
 
-var getFilterBlockHeight = function (form) {
-  form.classList.add('filter__form--active');
+var getFilterBlockHeight = function () {
+  filterForms.forEach(function (it, j) {
+    it.classList.add('filter__form--active');
 
-  var headings = form.querySelectorAll('.filter__main  .filter__heading');
-  var blocks = form.querySelectorAll('.filter__block');
+    var headings = it.querySelectorAll('.filter__heading');
+    var blocks = it.querySelectorAll('.filter__block');
 
-  for (var i = 0; i < headings.length; i++) {
-    blocks[i].style.transition = 'none';
-    blocks[i].classList.add('filter__block--opened');
-    var blockHeight = blocks[i].getBoundingClientRect().height;
-    blocks[i].classList.remove('filter__block--opened');
-    blocks[i].style.transition = '';
+    for (var i = 0; i < headings.length; i++) {
+      blocks[i].style.transition = 'none';
+      blocks[i].classList.add('filter__block--opened');
+      var blockHeight = blocks[i].getBoundingClientRect().height;
+      console.log(headings[i]);
+      console.log(blockHeight);
 
-    filterHeadingsClickHandler(form, headings, blocks, blockHeight, i);
-  }
+      blocks[i].classList.remove('filter__block--opened');
+      blocks[i].style.transition = '';
 
-  headings[0].classList.add('filter__heading--opened');
-  blocks[0].classList.add('filter__block--opened');
-  blocks[0].style.height = blocks[0].getBoundingClientRect().height + 'px';
+      filterHeadingsClickHandler(it, headings, blocks, blockHeight, i);
+    }
 
-  form.classList.remove('filter__form--active');
+    headings[0].classList.add('filter__heading--opened');
+    blocks[0].classList.add('filter__block--opened');
+    blocks[0].style.height = blocks[0].getBoundingClientRect().height + 'px';
+
+    if (j > 0) {
+      it.classList.remove('filter__form--active');
+    }
+  });
+  // form.classList.add('filter__form--active');
+
+  // var headings = form.querySelectorAll('.filter__heading');
+  // var blocks = form.querySelectorAll('.filter__block');
+
+  // for (var i = 0; i < headings.length; i++) {
+  //   blocks[i].style.transition = 'none';
+  //   blocks[i].classList.add('filter__block--opened');
+  //   var blockHeight = blocks[i].getBoundingClientRect().height;
+  //   blocks[i].classList.remove('filter__block--opened');
+  //   blocks[i].style.transition = '';
+
+  //   filterHeadingsClickHandler(form, headings, blocks, blockHeight, i);
+  // }
+
+  // headings[0].classList.add('filter__heading--opened');
+  // blocks[0].classList.add('filter__block--opened');
+  // blocks[0].style.height = blocks[0].getBoundingClientRect().height + 'px';
+
+  // form.classList.remove('filter__form--active');
 };
 
 var filterHeadingsClickHandler = function (form, headings, blocks, blockHeight, i) {
@@ -1148,6 +936,256 @@ var animateBrandsLists = function () {
   }
 };
 
+// var scrollTop = document.body.getBoundingClientRect().top;
+
+var windowScrollHandler = function () {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    searchField.blur();
+    searchField.style.transition = 'border-bottom 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
+
+    // var newScrollTop = document.body.getBoundingClientRect().top;
+
+    var bodyHeight = document.body.offsetHeight;
+    // var footerHeight = footer.getBoundingClientRect().height;
+    // var footerTop = bodyHeight - innerHeight - footerHeight;
+    var footerAuthorHeight = footerAuthor.getBoundingClientRect().height;
+    var footerAuthorTop = bodyHeight - footerAuthorHeight;
+    var upwardButtonTop = footerAuthorTop - upwardButton.getBoundingClientRect().height - 28;
+
+    // if (footerTop < window.pageYOffset) {
+    //   sidebar.style.position = 'absolute';
+    //   sidebar.style.top = footerTop + 'px';
+    // } else {
+    //   sidebar.style.position = '';
+    //   sidebar.style.top = '';
+    // }
+
+    if (footerAuthorTop < window.pageYOffset + innerHeight) {
+      upwardButton.style.position = 'absolute';
+      upwardButton.style.top = upwardButtonTop + 'px';
+    } else {
+      upwardButton.style.position = '';
+      upwardButton.style.top = '';
+    }
+
+    var mainOffsetTop = main.getBoundingClientRect().top;
+
+    if (mainOffsetTop > 115) {
+      header.classList.remove('header--fixed');
+      main.classList.remove('main--full');
+
+      logoTitle.classList.remove('logo__title--closed');
+      mainNavList.classList.remove('main-nav__list--closed');
+      siteNav.classList.remove('site-nav--closed');
+      contacts.classList.remove('contacts--closed');
+      searchField.classList.add('search__field--closed');
+    } else {
+      header.classList.add('header--fixed');
+      main.classList.add('main--full');
+
+      logoTitle.classList.add('logo__title--closed');
+      mainNavList.classList.add('main-nav__list--closed');
+      siteNav.classList.add('site-nav--closed');
+      contacts.classList.add('contacts--closed');
+      searchField.classList.remove('search__field--closed');
+    }
+
+    // if (scrollTop > newScrollTop) {
+    // header.classList.add('header--fixed');
+    //   main.classList.remove('main--full');
+    // } else {
+    //   if (pageYOffset > 115) {
+    //     header.classList.remove('header--closed');
+    //     logoTitle.classList.add('logo__title--closed');
+    //     mainNavList.classList.add('main-nav__list--closed');
+    //     mainNavList.classList.add('main-nav__list--hidden');
+    //     navButton.classList.remove('main-nav__toggle--closed');
+    //     navButton.classList.add('main-nav__toggle--opened');
+    //     siteNav.classList.add('site-nav--closed');
+    //     contacts.classList.add('contacts--closed');
+    //     searchField.classList.remove('search__field--closed');
+    //   } else {
+    //     header.classList.remove('header--closed');
+    //     logoTitle.classList.remove('logo__title--closed');
+    //     mainNavList.classList.remove('main-nav__list--closed');
+    //     mainNavList.classList.remove('main-nav__list--hidden');
+    //     mainNavList.classList.remove('main-nav__list--fixed');
+    //     navButton.classList.add('main-nav__toggle--closed');
+    //     navButton.classList.remove('main-nav__toggle--opened');
+    //     siteNav.classList.remove('site-nav--closed');
+    //     contacts.classList.remove('contacts--closed');
+    //     searchField.classList.add('search__field--closed');
+    //     main.classList.add('main--full');
+    //   }
+    // }
+
+    // scrollTop = newScrollTop;
+
+    getSearchInputWidth();
+    // setTimeout(getSearchInputWidth, 400);
+  }
+};
+
+var filterBlockTimer;
+
+var windowResizeHandler = function () {
+  if (window.matchMedia('(max-width: 1023px)').matches) {
+    document.body.classList.remove('dark');
+    document.body.style.overflow = '';
+    document.body.style.width = '';
+    header.style.zIndex = '';
+    header.style.right = '';
+    setTimeout(function () {
+      header.style.transition = '';
+    }, 500);
+
+    logoTitle.classList.remove('logo__title--closed');
+    searchField.placeholder = 'Поиск';
+
+    if (navButton.classList.contains('main-nav__toggle--opened') && logo.classList.contains('logo--opened')) {
+      navButton.classList.remove('main-nav__toggle--opened');
+      navButton.classList.add('main-nav__toggle--closed');
+    }
+
+    if (mainNavList.classList.contains('main-nav__list--fixed')) {
+      mainNavList.classList.remove('main-nav__list--fixed');
+      mainNavList.classList.add('main-nav__list--closed');
+      navButton.classList.add('main-nav__toggle--closed');
+      siteNav.classList.add('site-nav--closed');
+      search.classList.add('search--closed');
+    } else if (navButton.classList.contains('main-nav__toggle--closed')) {
+      mainNavList.classList.add('main-nav__list--closed');
+      siteNav.classList.add('site-nav--closed');
+      search.classList.add('search--closed');
+    }
+
+    categoryCompressor.textContent = 'Компрессоры';
+    categoryDehydrator.textContent = 'Осушители';
+    categoryPump.textContent = 'Насосы';
+    categoryPowerstation.textContent = 'Электростанции';
+
+    sidebarCatalogLink.addEventListener('click', sidebarCatalogLinkClickHandler);
+    // sidebarCatalogLink.removeEventListener('mouseover', sidebarCatalogLinkMouseoverHandler);
+    // sidebarCatalogLink.removeEventListener('mouseout', sidebarCatalogLinkMouseoutHandler);
+    catalog.classList.remove('catalog--opened');
+    // catalog.removeEventListener('mouseover', catalogMouseoverHandler);
+    // catalog.removeEventListener('mouseout', catalogMouseoutHandler);
+    catalogHeader.classList.remove('catalog__header--opened');
+    catalogButton.removeEventListener('click', catalogButtonClickHandler);
+    catalogWrapper.classList.remove('catalog__wrapper--opened');
+    catalogTitleClickHandler();
+
+    // for (var i = 0; i < catalogItems.length; i++) {
+    //   catalogItems[i].removeEventListener('mouseover', catalogItemMouseoverHandler);
+    //   catalogItems[i].removeEventListener('mouseout', catalogItemMouseoutHandler);
+    // }
+
+    catalogLinks.forEach(function (it) {
+      it.classList.remove('catalog__link--opened');
+    });
+    catalogSublists.forEach(function (it) {
+      it.classList.remove('catalog__sublist--opened');
+    });
+  } else {
+    windowScrollHandler();
+    // getSearchInputWidth();
+
+    document.body.classList.remove('no-scroll');
+    document.body.classList.remove('dark');
+    document.body.style.overflow = '';
+    document.body.style.width = '';
+    header.style.zIndex = '';
+    header.style.right = '';
+    setTimeout(function () {
+      header.style.transition = '';
+    }, 500);
+
+    header.classList.remove('header--fixed');
+    main.classList.remove('main--full');
+
+    if (pageYOffset > 115) {
+      // header.classList.add('header--closed');
+      // main.classList.remove('main--full');
+    }
+
+    logo.classList.remove('logo--closed');
+    logo.classList.add('logo--opened');
+    logoTitle.classList.remove('logo__title--closed');
+
+    navButton.classList.remove('main-nav__toggle--opened');
+    navButton.classList.add('main-nav__toggle--closed');
+
+    mainNavList.classList.remove('main-nav__list--closed');
+    siteNav.classList.remove('site-nav--closed');
+
+    search.classList.add('search--closed');
+    searchField.placeholder = 'Поиск товаров и услуг';
+
+    contacts.classList.remove('contacts--closed');
+
+    sidebar.classList.remove('sidebar--closed');
+    sidebarCatalogLink.removeEventListener('click', sidebarCatalogLinkClickHandler);
+    // sidebarCatalogLink.addEventListener('mouseover', sidebarCatalogLinkMouseoverHandler);
+    // sidebarCatalogLink.addEventListener('mouseout', sidebarCatalogLinkMouseoutHandler);
+    catalog.classList.remove('catalog--opened');
+    // catalog.removeEventListener('mouseover', catalogMouseoverHandler);
+    // catalog.removeEventListener('mouseout', catalogMouseoutHandler);
+    catalogHeader.classList.remove('catalog__header--opened');
+    catalogButton.removeEventListener('click', catalogButtonClickHandler);
+    catalogWrapper.classList.remove('catalog__wrapper--opened');
+    catalogTitleClickHandler();
+
+    // for (i = 0; i < catalogLinks.length; i++) {
+    //   if (catalogLinks[i].parentElement.childElementCount > 1) {
+    //     catalogLinks[i].removeEventListener('click', catalogLinkClickHandler, true);
+    //   }
+    // }
+
+    catalogLinks.forEach(function (it) {
+      it.classList.remove('catalog__link--opened');
+    });
+    catalogSublists.forEach(function (it) {
+      it.classList.remove('catalog__sublist--opened');
+    });
+
+    searchIcon.addEventListener('click', searchIconClickHandler);
+    searchField.addEventListener('focus', searchFieldFocusHandler);
+    // searchField.addEventListener('blur', searchFieldBlurHandler);
+
+    var categoryCompressorSubitems = categoryCompressor.parentElement.querySelectorAll('.categories__subitem').length;
+    var categoryDehydratorSubitems = categoryDehydrator.parentElement.querySelectorAll('.categories__subitem').length;
+    var categoryPneumotoolSubitems = categoryPneumotool.parentElement.querySelectorAll('.categories__subitem').length;
+    var categoryPumpSubitems = categoryPump.parentElement.querySelectorAll('.categories__subitem').length;
+    var categoryPowerstationSubitems = categoryPowerstation.parentElement.querySelectorAll('.categories__subitem').length;
+
+    categoryCompressor.innerHTML = 'Компрессорное оборудование<sup class="categories__number">' + categoryCompressorSubitems + '</sup>';
+
+    categoryDehydrator.innerHTML = 'Адсорбционные осушители<sup class="categories__number">' + categoryDehydratorSubitems + '</sup>';
+
+    categoryPneumotool.innerHTML = 'Пневмоинструмент<sup class="categories__number">' + categoryPneumotoolSubitems + '</sup>';
+
+    categoryPump.innerHTML = 'Вакуумные насосы<sup class="categories__number">' + categoryPumpSubitems + '</sup>';
+
+    categoryPowerstation.innerHTML = 'Автономные электростанции<sup class="categories__number">' + categoryPowerstationSubitems + '</sup>';
+
+    setTimeout(function () {
+      $('.brands__list.slick-initialized').not('.brands__list--copy').slick('unslick');
+    }, 50);
+
+    cancelAnimation();
+    animateBrandsLists();
+  }
+
+  if (filterBlockTimer) {
+    clearTimeout(filterBlockTimer);
+    filterBlockTimer = null;
+  }
+
+  filterBlockTimer = setTimeout(getFilterBlockHeight, 500);
+
+  document.removeEventListener('click', filterSelectsCloseHandler);
+};
+
 document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', windowScrollHandler);
   window.addEventListener('resize', windowResizeHandler);
@@ -1170,7 +1208,7 @@ document.addEventListener('DOMContentLoaded', function () {
     filterLinksClickHandler(filterLinks[i], filterForms[i]);
     filterFormsClickHandler(filterForms[i], filterPreview[i]);
     filterFormsSubmitHandler(filterForms[i]);
-    getFilterBlockHeight(filterForms[i]);
+    // getFilterBlockHeight(filterForms[i]);
   }
 
   filterForms[0].classList.add('filter__form--active');

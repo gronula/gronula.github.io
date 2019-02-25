@@ -604,7 +604,7 @@ var citiesFooterClickHandler = function (city, address) {
   });
 };
 
-var scrollTop = document.body.getBoundingClientRect().top;
+// var scrollTop = document.body.getBoundingClientRect().top;
 
 var windowScrollHandler = function () {
   var sidebarHeight = sidebar.getBoundingClientRect().height;
@@ -613,7 +613,7 @@ var windowScrollHandler = function () {
     searchField.blur();
     searchField.style.transition = 'border-bottom 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
 
-    var newScrollTop = document.body.getBoundingClientRect().top;
+    // var newScrollTop = document.body.getBoundingClientRect().top;
 
     var mainOffsetTop = main.getBoundingClientRect().top;
 
@@ -637,7 +637,7 @@ var windowScrollHandler = function () {
       searchField.classList.remove('search__field--closed');
     }
 
-    scrollTop = newScrollTop;
+    // scrollTop = newScrollTop;
 
     getSearchInputWidth();
     // setTimeout(getSearchInputWidth, 400);
@@ -778,6 +778,8 @@ var windowResizeHandler = function () {
     }, 500);
 
     header.classList.remove('header--fixed');
+    main.classList.remove('main--full');
+
     if (pageYOffset > 115) {
       // header.classList.add('header--closed');
       // main.classList.remove('main--full');

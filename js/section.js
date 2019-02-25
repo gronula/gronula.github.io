@@ -27,6 +27,8 @@ var filterCaptions = filter.querySelectorAll('.filter__caption');
 var filterSelects = filter.querySelectorAll('.filter__select');
 var filterButtonsView = filter.querySelectorAll('.filter__view  .filter__button');
 var filterButtonsSort = filter.querySelectorAll('.filter__sort  .filter__button');
+var filterElements = filter.querySelectorAll('.filter__element');
+var filterLinksMore = filter.querySelectorAll('.filter__more');
 var sidebar = main.querySelector('.sidebar');
 // var sidebarLinks = sidebar.querySelectorAll('.sidebar__link');
 var sidebarCatalogLink = sidebar.querySelector('.sidebar__link--catalog');
@@ -282,6 +284,25 @@ var filterButtonClickHandler = function () {
 };
 
 var blockHeights = [];
+var blockFullHeights = [];
+var filterElementsHeights = [];
+
+var getFilterElementsHeight = function (block) {
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    var element = block.querySelector('.filter__elements');
+    var link = block.querySelector('.filter__more');
+
+    element.style.transition = 'none';
+    element.style.maxHeight = 'none';
+    filterElementsHeights.push(element.getBoundingClientRect().height);
+    if (element.getBoundingClientRect().height < 240) {
+      link.style.display = 'none';
+    }
+    blockFullHeights.push(block.getBoundingClientRect().height);
+    element.style.maxHeight = '';
+    element.style.transition = '';
+  }
+};
 
 var getFilterBlockHeight = function () {
   filter.classList.add('filter--opened');
@@ -290,12 +311,13 @@ var getFilterBlockHeight = function () {
     var headings = filter.querySelectorAll('.filter__heading');
     var blocks = filter.querySelectorAll('.filter__block');
   } else {
-    headings = filter.querySelectorAll('.filter__main  .filter__heading:not(.filter__heading--mobile)');
-    blocks = filter.querySelectorAll('.filter__main  .filter__block:not(.filter__block--categories)');
+    headings = filter.querySelectorAll('.filter__main  .filter__heading');
+    blocks = filter.querySelectorAll('.filter__main  .filter__block');
   }
 
   filterHeadings.forEach(function (it) {
     it.style.height = '';
+    it.removeEventListener('click', filterHeadingsClickHandler);
   });
 
   filterBlocks.forEach(function (it) {
@@ -308,6 +330,9 @@ var getFilterBlockHeight = function () {
     blocks[i].style.transition = 'none';
     blocks[i].style.height = '';
     blocks[i].classList.add('filter__block--opened');
+    if (blocks[i].classList.contains('filter__block--elements')) {
+      getFilterElementsHeight(blocks[i]);
+    }
     blockHeights[i] = blocks[i].getBoundingClientRect().height;
     blocks[i].classList.remove('filter__block--opened');
     blocks[i].style.transition = '';
@@ -356,14 +381,16 @@ var getFilterBlockHeight = function () {
 var filterHeadingsClickHandler = function (evt) {
   var heading = evt.target;
   var block = evt.target.nextElementSibling;
+  var elements = filter.querySelectorAll('.filter__elements');
+  var links = filter.querySelectorAll('.filter__more');
   var number;
 
   if (window.matchMedia('(max-width: 1023px)').matches) {
     var headings = filter.querySelectorAll('.filter__heading');
     var blocks = filter.querySelectorAll('.filter__block');
   } else {
-    headings = filter.querySelectorAll('.filter__main  .filter__heading:not(.filter__heading--mobile)');
-    blocks = filter.querySelectorAll('.filter__main  .filter__block:not(.filter__block--categories)');
+    headings = filter.querySelectorAll('.filter__main  .filter__heading');
+    blocks = filter.querySelectorAll('.filter__main  .filter__block');
   }
 
   headings.forEach(function (it, i) {
@@ -377,17 +404,52 @@ var filterHeadingsClickHandler = function (evt) {
     block.classList.remove('filter__block--opened');
     block.style.height = 0;
   } else {
-    headings.forEach(function (it) {
-      it.classList.remove('filter__heading--opened');
-    });
-    blocks.forEach(function (it) {
-      it.classList.remove('filter__block--opened');
-      it.style.height = 0;
+    if (window.matchMedia('(max-width: 1023px)').matches) {
+      headings.forEach(function (it) {
+        it.classList.remove('filter__heading--opened');
+      });
+      blocks.forEach(function (it) {
+        it.classList.remove('filter__block--opened');
+        it.style.height = 0;
+      });
+
+      heading.classList.add('filter__heading--opened');
+      block.classList.add('filter__block--opened');
+      block.style.height = blockHeights[number] + 'px';
+    } else {
+      if (heading.classList.contains('filter__heading--categories')) {
+        heading.classList.add('filter__heading--opened');
+        block.classList.add('filter__block--opened');
+        block.style.height = blockHeights[number] + 'px';
+      } else {
+        headings.forEach(function (it) {
+          if (!it.classList.contains('filter__heading--categories')) {
+            it.classList.remove('filter__heading--opened');
+          }
+        });
+        blocks.forEach(function (it) {
+          if (!it.classList.contains('filter__block--categories')) {
+            it.classList.remove('filter__block--opened');
+            it.style.height = 0;
+          }
+        });
+
+        heading.classList.add('filter__heading--opened');
+        block.classList.add('filter__block--opened');
+        block.style.height = blockHeights[number] + 'px';
+      }
+    }
+  }
+
+  if (!window.matchMedia('(max-width: 1023px)').matches) {
+    links.forEach(function (it) {
+      it.textContent = 'Показать все';
     });
 
-    heading.classList.add('filter__heading--opened');
-    block.classList.add('filter__block--opened');
-    block.style.height = blockHeights[number] + 'px';
+    elements.forEach(function (it) {
+      it.style.maxHeight = '';
+      it.classList.remove('filter__elements--full');
+    });
   }
 };
 
@@ -458,7 +520,7 @@ var filterButtonViewClickHandler = function (button) {
   });
 };
 
-var filterButtonsSortClickHandler = function (button) {
+var filterButtonSortClickHandler = function (button) {
   button.addEventListener('click', function (evt) {
     evt.preventDefault();
     if (!evt.target.classList.contains('filter__button--active')) {
@@ -466,6 +528,52 @@ var filterButtonsSortClickHandler = function (button) {
         it.classList.remove('filter__button--active');
       });
       evt.target.classList.add('filter__button--active');
+    }
+  });
+};
+
+var filterElementClickHandler = function (element) {
+  element.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    element.classList.toggle('filter__element--selected');
+  });
+};
+
+var filterLinkMoreClickHandler = function (link) {
+  link.addEventListener('click', function (evt) {
+    if (!window.matchMedia('(max-width: 1023px)').matches) {
+      console.log(filterElementsHeights);
+      evt.preventDefault();
+      var block = evt.target.parentElement;
+      var blocks = filter.querySelectorAll('.filter__main  .filter__block');
+      var element = evt.target.previousElementSibling;
+      var elements = filter.querySelectorAll('.filter__elements');
+      var blockNumber;
+      var elementNumber;
+
+      blocks.forEach(function (it, i) {
+        if (it === block) {
+          blockNumber = i;
+        }
+      });
+
+      elements.forEach(function (it, i) {
+        if (it === element) {
+          elementNumber = i;
+        }
+      });
+
+      if (element.classList.contains('filter__elements--full')) {
+        link.textContent = 'Показать все';
+        block.style.height = blockHeights[blockNumber] + 'px';
+        element.style.maxHeight = '';
+        element.classList.remove('filter__elements--full');
+      } else {
+        link.textContent = 'Скрыть';
+        block.style.height = blockFullHeights[elementNumber] + 'px';
+        element.style.maxHeight = filterElementsHeights[elementNumber] + 'px';
+        element.classList.add('filter__elements--full');
+      }
     }
   });
 };
@@ -1097,14 +1205,14 @@ var citiesFooterClickHandler = function (city, address) {
   });
 };
 
-var scrollTop = document.body.getBoundingClientRect().top;
+// var scrollTop = document.body.getBoundingClientRect().top;
 
 var windowScrollHandler = function () {
   if (!window.matchMedia('(max-width: 1023px)').matches) {
     searchField.blur();
     searchField.style.transition = 'border-bottom 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
 
-    var newScrollTop = document.body.getBoundingClientRect().top;
+    // var newScrollTop = document.body.getBoundingClientRect().top;
 
     var mainOffsetTop = main.getBoundingClientRect().top;
 
@@ -1128,7 +1236,7 @@ var windowScrollHandler = function () {
       searchField.classList.remove('search__field--closed');
     }
 
-    scrollTop = newScrollTop;
+    // scrollTop = newScrollTop;
 
     getSearchInputWidth();
     // setTimeout(getSearchInputWidth, 400);
@@ -1204,9 +1312,11 @@ var windowResizeHandler = function () {
     }, 500);
 
     header.classList.remove('header--fixed');
+    main.classList.remove('main--full');
+
     if (pageYOffset > 115) {
-      header.classList.add('header--closed');
-      main.classList.remove('main--full');
+      // header.classList.add('header--closed');
+      // main.classList.remove('main--full');
     }
 
     logo.classList.remove('logo--closed');
@@ -1303,7 +1413,15 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   for (i = 0; i < filterButtonsView.length; i++) {
-    filterButtonsSortClickHandler(filterButtonsSort[i]);
+    filterButtonSortClickHandler(filterButtonsSort[i]);
+  }
+
+  for (i = 0; i < filterElements.length; i++) {
+    filterElementClickHandler(filterElements[i]);
+  }
+
+  for (i = 0; i < filterLinksMore.length; i++) {
+    filterLinkMoreClickHandler(filterLinksMore[i]);
   }
 
   for (i = 0; i < citiesFooter.length; i++) {

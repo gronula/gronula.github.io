@@ -1253,19 +1253,19 @@
         <h2 class=filter__title>Быстрый подбор компрессора</h2>
 
         <ul class=filter__list>
-          <li class=filter__item>
+          <li class=filter__section>
             <a class="filter__link filter__link--active" href=#>Винтовые</a>
             <sup class=filter__number>222</sup>
           </li>
-          <li class=filter__item>
+          <li class=filter__section>
             <a class=filter__link href=#>Безмасляные</a>
             <sup class=filter__number>222</sup>
           </li>
-          <li class=filter__item>
+          <li class=filter__section>
             <a class=filter__link href=#>Дизельные</a>
             <sup class=filter__number>222</sup>
           </li>
-          <li class=filter__item>
+          <li class=filter__section>
             <a class=filter__link href=#>Поршневые</a>
             <sup class=filter__number>222</sup>
           </li>
@@ -1286,138 +1286,179 @@
               </div>
             </div>
 
-            <h3 class=filter__heading>Производительность, л/мин</h3>
-            <div class=filter__block>
-              <div class=filter__prices>
-                <input class="filter__cost filter__cost--min" type=number name=minScrewEfficiency id=minScrewEfficiency placeholder="от 9 000" min=9000 max=90000>
-                <input class="filter__cost filter__cost--max" type=number name=maxScrewEfficiency id=maxScrewEfficiency placeholder="до 90 000" min=9000 max=90000>
-              </div>
-
-              <div class=filter__range>
-                <span class="filter__value filter__value--min"></span>
-                <span class="filter__value filter__value--max"></span>
-              </div>
-            </div>
+            
 
             <h3 class=filter__heading>Мощность, кВт</h3>
-            <div class=filter__block>
-              <div class=filter__prices>
-                <input class="filter__cost filter__cost--min" type=number name=minScrewPower id=minScrewPower placeholder="от 9 000" min=9000 max=90000>
-                <input class="filter__cost filter__cost--max" type=number name=maxScrewPower id=maxScrewPower placeholder="до 90 000" min=9000 max=90000>
+            <div class="filter__block filter__block--elements">
+              <div class=filter__elements>
+                <a class=filter__element href=#>
+                  <span class=filter__text>8</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>8</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>10</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>10</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>50</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>50</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>100</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>100</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>200</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>200</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>1000</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>1000</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>10000</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>10000</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>100000</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>100000</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>1000000</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>1000000 1000000 1000000 1000000 1000000 1000000 10000001000000</span>
+                  <span class=filter__number>50000</span>
+                </a>
               </div>
 
-              <div class=filter__range>
-                <span class="filter__value filter__value--min"></span>
-                <span class="filter__value filter__value--max"></span>
-              </div>
+              <a class=filter__more href=#>Показать все</a>
             </div>
 
-            <h3 class=filter__heading>Объём ресивера, л</h3>
-            <div class=filter__block>
-              <div class=filter__prices>
-                <input class="filter__cost filter__cost--min" type=number name=minScrewVolume id=minScrewVolume placeholder="от 9 000" min=9000 max=90000>
-                <input class="filter__cost filter__cost--max" type=number name=maxScrewVolume id=maxScrewVolume placeholder="до 90 000" min=9000 max=90000>
-              </div>
+            
 
-              <div class=filter__range>
-                <span class="filter__value filter__value--min"></span>
-                <span class="filter__value filter__value--max"></span>
-              </div>
-            </div>
+            <input class="filter__checkbox visually-hidden" type=checkbox name=ashtrayScrew id=ashtrayScrew value=ashtrayScrew>
+            <label class=filter__label for=ashtrayScrew>Выдвижная пепельница</label>
+
+            <input class="filter__checkbox visually-hidden" type=checkbox name=beltScrew id=beltScrew value=beltScrew checked=checked>
+            <label class=filter__label for=beltScrew>Ременной</label>
           </section>
 
           <section class=filter__additional>
-            <h3 class=filter__heading>Дополнительно</h3>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Производитель</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=firstScrewProducer value=first>
-                <label class=filter__label for=firstScrewProducer>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=secondScrewProducer value=second>
-                <label class=filter__label for=secondScrewProducer>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=thirdScrewProducer>
-                <label class=filter__label for=thirdScrewProducer>Third</label>
+            <h3 class=filter__heading>Бренд</h3>
+            <div class="filter__block filter__block--elements">
+              <div class=filter__elements>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Dali</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Atlas copko</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Fubag</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Metabo</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Remeza</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Denzel</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Wester</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Вихрь</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Quattro Elementi</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Dali</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Atlas copko</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Fubag</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Metabo</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Remeza</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Denzel</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Wester</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Вихрь</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Quattro Elementi</span>
+                  <span class=filter__number>50</span>
+                </a>
               </div>
+
+              <a class=filter__more href=#>Показать все</a>
             </div>
 
-            <div class=filter__select>
-              <h4 class=filter__caption>Вид компрессора</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=firstScrewCompressor value=first>
-                <label class=filter__label for=firstScrewCompressor>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=secondScrewCompressor value=second>
-                <label class=filter__label for=secondScrewCompressor>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=thirdScrewCompressor value=third>
-                <label class=filter__label for=thirdScrewCompressor>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Питание, В</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=firstScrewSupply value=first>
-                <label class=filter__label for=firstScrewSupply>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=secondScrewSupply value=second>
-                <label class=filter__label for=secondScrewSupply>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=thirdScrewSupply value=third>
-                <label class=filter__label for=thirdScrewSupply>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Безмасляный</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=firstScrewOilless value=first>
-                <label class=filter__label for=firstScrewOilless>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=secondScrewOilless value=second>
-                <label class=filter__label for=secondScrewOilless>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=thirdScrewOilless value=third>
-                <label class=filter__label for=thirdScrewOilless>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Тип привода</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=firstScrewDrive value=first>
-                <label class=filter__label for=firstScrewDrive>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=secondScrewDrive value=second>
-                <label class=filter__label for=secondScrewDrive>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=thirdScrewDrive value=third>
-                <label class=filter__label for=thirdScrewDrive>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Частот. преобразователь</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=firstScrewConverter value=first>
-                <label class=filter__label for=firstScrewConverter>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=secondScrewConverter value=second>
-                <label class=filter__label for=secondScrewConverter>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=thirdScrewConverter value=third>
-                <label class=filter__label for=thirdScrewConverter>Third</label>
-              </div>
-            </div>
+            
           </section>
 
           <section class=filter__preview>
@@ -1489,18 +1530,7 @@
               </div>
             </div>
 
-            <h3 class=filter__heading>Производительность, л/мин</h3>
-            <div class=filter__block>
-              <div class=filter__prices>
-                <input class="filter__cost filter__cost--min" type=number name=minOillessEfficiency id=minOillessEfficiency placeholder="от 9 000" min=9000 max=90000>
-                <input class="filter__cost filter__cost--max" type=number name=maxOillessEfficiency id=maxOillessEfficiency placeholder="до 90 000" min=9000 max=90000>
-              </div>
-
-              <div class=filter__range>
-                <span class="filter__value filter__value--min"></span>
-                <span class="filter__value filter__value--max"></span>
-              </div>
-            </div>
+            
 
             <h3 class=filter__heading>Мощность, кВт</h3>
             <div class=filter__block>
@@ -1515,112 +1545,97 @@
               </div>
             </div>
 
-            <h3 class=filter__heading>Объём ресивера, л</h3>
-            <div class=filter__block>
-              <div class=filter__prices>
-                <input class="filter__cost filter__cost--min" type=number name=minOillessVolume id=minOillessVolume placeholder="от 9 000" min=9000 max=90000>
-                <input class="filter__cost filter__cost--max" type=number name=maxOillessVolume id=maxOillessVolume placeholder="до 90 000" min=9000 max=90000>
-              </div>
+            
 
-              <div class=filter__range>
-                <span class="filter__value filter__value--min"></span>
-                <span class="filter__value filter__value--max"></span>
-              </div>
-            </div>
+            <input class="filter__checkbox visually-hidden" type=checkbox name=ashtrayOilless id=ashtrayOilless value=ashtrayOilless>
+            <label class=filter__label for=ashtrayOilless>Выдвижная пепельница</label>
+
+            <input class="filter__checkbox visually-hidden" type=checkbox name=beltOilless id=beltOilless value=beltOilless checked=checked>
+            <label class=filter__label for=beltOilless>Ременной</label>
           </section>
 
           <section class=filter__additional>
-            <h3 class=filter__heading>Дополнительно</h3>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Производитель</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=firstOillessProducer value=first>
-                <label class=filter__label for=firstOillessProducer>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=secondOillessProducer value=second>
-                <label class=filter__label for=secondOillessProducer>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=thirdOillessProducer value=third>
-                <label class=filter__label for=thirdOillessProducer>Third</label>
+            <h3 class=filter__heading>Бренд</h3>
+            <div class="filter__block filter__block--elements">
+              <div class=filter__elements>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Dali</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Atlas copko</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Fubag</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Metabo</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Remeza</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Denzel</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Wester</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Вихрь</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Quattro Elementi</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Dali</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Atlas copko</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Fubag</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Metabo</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Remeza</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Denzel</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Wester</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Вихрь</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Quattro Elementi</span>
+                  <span class=filter__number>50</span>
+                </a>
               </div>
+
+              <a class=filter__more href=#>Показать все</a>
             </div>
 
-            <div class=filter__select>
-              <h4 class=filter__caption>Вид компрессора</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=firstOillessCompressor value=first>
-                <label class=filter__label for=firstOillessCompressor>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=secondOillessCompressor value=second>
-                <label class=filter__label for=secondOillessCompressor>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=thirdOillessCompressor value=third>
-                <label class=filter__label for=thirdOillessCompressor>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Питание, В</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=firstOillessSupply value=first>
-                <label class=filter__label for=firstOillessSupply>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=secondOillessSupply value=second>
-                <label class=filter__label for=secondOillessSupply>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=thirdOillessSupply value=third>
-                <label class=filter__label for=thirdOillessSupply>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Безмасляный</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=firstOillessOilless value=first>
-                <label class=filter__label for=firstOillessOilless>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=secondOillessOilless value=second>
-                <label class=filter__label for=secondOillessOilless>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=thirdOillessOilless value=third>
-                <label class=filter__label for=thirdOillessOilless>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Тип привода</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=firstOillessDrive value=first>
-                <label class=filter__label for=firstOillessDrive>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=secondOillessDrive value=second>
-                <label class=filter__label for=secondOillessDrive>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=thirdOillessDrive value=third>
-                <label class=filter__label for=thirdOillessDrive>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Частот. преобразователь</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=firstOillessConverter value=first>
-                <label class=filter__label for=firstOillessConverter>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=secondOillessConverter value=second>
-                <label class=filter__label for=secondOillessConverter>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=thirdOillessConverter value=third>
-                <label class=filter__label for=thirdOillessConverter>Third</label>
-              </div>
-            </div>
+            
           </section>
 
           <section class=filter__preview>
@@ -1692,18 +1707,7 @@
               </div>
             </div>
 
-            <h3 class=filter__heading>Производительность, л/мин</h3>
-            <div class=filter__block>
-              <div class=filter__prices>
-                <input class="filter__cost filter__cost--min" type=number name=minDieselEfficiency id=minDieselEfficiency placeholder="от 9 000" min=9000 max=90000>
-                <input class="filter__cost filter__cost--max" type=number name=maxDieselEfficiency id=maxDieselEfficiency placeholder="до 90 000" min=9000 max=90000>
-              </div>
-
-              <div class=filter__range>
-                <span class="filter__value filter__value--min"></span>
-                <span class="filter__value filter__value--max"></span>
-              </div>
-            </div>
+            
 
             <h3 class=filter__heading>Мощность, кВт</h3>
             <div class=filter__block>
@@ -1718,112 +1722,97 @@
               </div>
             </div>
 
-            <h3 class=filter__heading>Объём ресивера, л</h3>
-            <div class=filter__block>
-              <div class=filter__prices>
-                <input class="filter__cost filter__cost--min" type=number name=minDieselVolume id=minDieselVolume placeholder="от 9 000" min=9000 max=90000>
-                <input class="filter__cost filter__cost--max" type=number name=maxDieselVolume id=maxDieselVolume placeholder="до 90 000" min=9000 max=90000>
-              </div>
+            
 
-              <div class=filter__range>
-                <span class="filter__value filter__value--min"></span>
-                <span class="filter__value filter__value--max"></span>
-              </div>
-            </div>
+            <input class="filter__checkbox visually-hidden" type=checkbox name=ashtrayDiesel id=ashtrayDiesel value=ashtrayDiesel>
+            <label class=filter__label for=ashtrayDiesel>Выдвижная пепельница</label>
+
+            <input class="filter__checkbox visually-hidden" type=checkbox name=beltDiesel id=beltDiesel value=beltDiesel checked=checked>
+            <label class=filter__label for=beltDiesel>Ременной</label>
           </section>
 
           <section class=filter__additional>
-            <h3 class=filter__heading>Дополнительно</h3>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Производитель</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=firstDieselProducer value=first>
-                <label class=filter__label for=firstDieselProducer>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=secondDieselProducer value=second>
-                <label class=filter__label for=secondDieselProducer>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=thirdDieselProducer value=third>
-                <label class=filter__label for=thirdDieselProducer>Third</label>
+            <h3 class=filter__heading>Бренд</h3>
+            <div class="filter__block filter__block--elements">
+              <div class=filter__elements>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Dali</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Atlas copko</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Fubag</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Metabo</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Remeza</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Denzel</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Wester</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Вихрь</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Quattro Elementi</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Dali</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Atlas copko</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Fubag</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Metabo</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Remeza</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Denzel</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Wester</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Вихрь</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Quattro Elementi</span>
+                  <span class=filter__number>50</span>
+                </a>
               </div>
+
+              <a class=filter__more href=#>Показать все</a>
             </div>
 
-            <div class=filter__select>
-              <h4 class=filter__caption>Вид компрессора</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=firstDieselCompressor value=first>
-                <label class=filter__label for=firstDieselCompressor>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=secondDieselCompressor value=second>
-                <label class=filter__label for=secondDieselCompressor>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=thirdDieselCompressor value=third>
-                <label class=filter__label for=thirdDieselCompressor>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Питание, В</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=firstDieselSupply value=first>
-                <label class=filter__label for=firstDieselSupply>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=secondDieselSupply value=second>
-                <label class=filter__label for=secondDieselSupply>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=thirdDieselSupply value=third>
-                <label class=filter__label for=thirdDieselSupply>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Безмасляный</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=firstDieselOilless value=first>
-                <label class=filter__label for=firstDieselOilless>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=secondDieselOilless value=second>
-                <label class=filter__label for=secondDieselOilless>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=thirdDieselOilless value=third>
-                <label class=filter__label for=thirdDieselOilless>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Тип привода</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=firstDieselDrive value=first>
-                <label class=filter__label for=firstDieselDrive>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=secondDieselDrive value=second>
-                <label class=filter__label for=secondDieselDrive>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=thirdDieselDrive value=third>
-                <label class=filter__label for=thirdDieselDrive>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Частот. преобразователь</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=firstDieselConverter value=first>
-                <label class=filter__label for=firstDieselConverter>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=secondDieselConverter value=second>
-                <label class=filter__label for=secondDieselConverter>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=thirdDieselConverter value=third>
-                <label class=filter__label for=thirdDieselConverter>Third</label>
-              </div>
-            </div>
+            
           </section>
 
           <section class=filter__preview>
@@ -1895,18 +1884,7 @@
               </div>
             </div>
 
-            <h3 class=filter__heading>Производительность, л/мин</h3>
-            <div class=filter__block>
-              <div class=filter__prices>
-                <input class="filter__cost filter__cost--min" type=number name=minPistonEfficiency id=minPistonEfficiency placeholder="от 9 000" min=9000 max=90000>
-                <input class="filter__cost filter__cost--max" type=number name=maxPistonEfficiency id=maxPistonEfficiency placeholder="до 90 000" min=9000 max=90000>
-              </div>
-
-              <div class=filter__range>
-                <span class="filter__value filter__value--min"></span>
-                <span class="filter__value filter__value--max"></span>
-              </div>
-            </div>
+            
 
             <h3 class=filter__heading>Мощность, кВт</h3>
             <div class=filter__block>
@@ -1921,112 +1899,97 @@
               </div>
             </div>
 
-            <h3 class=filter__heading>Объём ресивера, л</h3>
-            <div class=filter__block>
-              <div class=filter__prices>
-                <input class="filter__cost filter__cost--min" type=number name=minPistonVolume id=minPistonVolume placeholder="от 9 000" min=9000 max=90000>
-                <input class="filter__cost filter__cost--max" type=number name=maxPistonVolume id=maxPistonVolume placeholder="до 90 000" min=9000 max=90000>
-              </div>
+            
 
-              <div class=filter__range>
-                <span class="filter__value filter__value--min"></span>
-                <span class="filter__value filter__value--max"></span>
-              </div>
-            </div>
+            <input class="filter__checkbox visually-hidden" type=checkbox name=ashtrayPiston id=ashtrayPiston value=ashtrayPiston>
+            <label class=filter__label for=ashtrayPiston>Выдвижная пепельница</label>
+
+            <input class="filter__checkbox visually-hidden" type=checkbox name=beltPiston id=beltPiston value=beltPiston checked=checked>
+            <label class=filter__label for=beltPiston>Ременной</label>
           </section>
 
           <section class=filter__additional>
-            <h3 class=filter__heading>Дополнительно</h3>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Производитель</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=firstPistonProducer value=first>
-                <label class=filter__label for=firstPistonProducer>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=secondPistonProducer value=second>
-                <label class=filter__label for=secondPistonProducer>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=producer id=thirdPistonProducer value=third>
-                <label class=filter__label for=thirdPistonProducer>Third</label>
+            <h3 class=filter__heading>Бренд</h3>
+            <div class="filter__block filter__block--elements">
+              <div class=filter__elements>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Dali</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Atlas copko</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Fubag</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Metabo</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Remeza</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Denzel</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Wester</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Вихрь</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Quattro Elementi</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Dali</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Atlas copko</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Fubag</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Metabo</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Remeza</span>
+                  <span class=filter__number>50</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Denzel</span>
+                  <span class=filter__number>500</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Wester</span>
+                  <span class=filter__number>5000</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Вихрь</span>
+                  <span class=filter__number>5</span>
+                </a>
+                <a class=filter__element href=#>
+                  <span class=filter__text>Quattro Elementi</span>
+                  <span class=filter__number>50</span>
+                </a>
               </div>
+
+              <a class=filter__more href=#>Показать все</a>
             </div>
 
-            <div class=filter__select>
-              <h4 class=filter__caption>Вид компрессора</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=firstPistonCompressor value=first>
-                <label class=filter__label for=firstPistonCompressor>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=secondPistonCompressor value=second>
-                <label class=filter__label for=secondPistonCompressor>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=compressor id=thirdPistonCompressor value=third>
-                <label class=filter__label for=thirdPistonCompressor>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Питание, В</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=firstPistonSupply value=first>
-                <label class=filter__label for=firstPistonSupply>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=secondPistonSupply value=second>
-                <label class=filter__label for=secondPistonSupply>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=supply id=thirdPistonSupply value=third>
-                <label class=filter__label for=thirdPistonSupply>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Безмасляный</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=firstPistonOilless value=first>
-                <label class=filter__label for=firstPistonOilless>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=secondPistonOilless value=second>
-                <label class=filter__label for=secondPistonOilless>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=oilless id=thirdPistonOilless value=third>
-                <label class=filter__label for=thirdPistonOilless>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Тип привода</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=firstPistonDrive value=first>
-                <label class=filter__label for=firstPistonDrive>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=secondPistonDrive value=second>
-                <label class=filter__label for=secondPistonDrive>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=drive id=thirdPistonDrive value=third>
-                <label class=filter__label for=thirdPistonDrive>Third</label>
-              </div>
-            </div>
-
-            <div class=filter__select>
-              <h4 class=filter__caption>Частот. преобразователь</h4>
-
-              <div class=filter__checkboxes>
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=firstPistonConverter value=first>
-                <label class=filter__label for=firstPistonConverter>First</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=secondPistonConverter value=second>
-                <label class=filter__label for=secondPistonConverter>Second</label>
-
-                <input class="filter__checkbox visually-hidden" type=checkbox name=converter id=thirdPistonConverter value=third>
-                <label class=filter__label for=thirdPistonConverter>Third</label>
-              </div>
-            </div>
+            
           </section>
 
           <section class=filter__preview>
