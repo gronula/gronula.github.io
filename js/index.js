@@ -39,7 +39,6 @@ var upwardButton = main.querySelector('.upward');
 var filterLinks = main.querySelectorAll('.filter__link');
 var filterForms = main.querySelectorAll('.filter__form');
 var filterElements = main.querySelectorAll('.filter__element');
-var filterLinksMore = main.querySelectorAll('.filter__more');
 var filterCaptions = main.querySelectorAll('.filter__caption');
 var filterSelects = main.querySelectorAll('.filter__select');
 var filterPreview = main.querySelectorAll('.filter__preview');
@@ -783,6 +782,13 @@ var filterHeadingsClickHandler = function (form, headings, blocks, blockHeight, 
   }
 };
 
+var filterElementClickHandler = function (element) {
+  element.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    element.classList.toggle('filter__element--selected');
+  });
+};
+
 var filterCapionsClickHandler = function (caption, select) {
   caption.addEventListener('click', function () {
     if (select.classList.contains('filter__select--opened')) {
@@ -1267,6 +1273,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   filterForms[0].classList.add('filter__form--active');
+
+  for (i = 0; i < filterElements.length; i++) {
+    filterElementClickHandler(filterElements[i]);
+  }
 
   for (i = 0; i < filterCaptions.length; i++) {
     filterCapionsClickHandler(filterCaptions[i], filterSelects[i]);
