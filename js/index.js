@@ -728,6 +728,7 @@ var getFilterBlockHeight = function () {
     blocks[0].style.height = blocks[0].getBoundingClientRect().height + 'px';
 
     var blockBrands = it.querySelector('.filter__additional  .filter__block');
+    blockBrands.previousElementSibling.classList.add('filter__heading--opened');
     blockBrands.classList.add('filter__block--opened');
     blockBrands.style.height = blockBrands.getBoundingClientRect().height + 'px';
 
