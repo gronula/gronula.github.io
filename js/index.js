@@ -674,7 +674,7 @@ var getFilterBlockHeight = function () {
       blocks[i].style.maxHeight = '';
       blocks[i].classList.remove('filter__block--opened');
       var headingParentElement = headings[i].parentElement;
-      var filterMainFreeHeight = headingParentElement.getBoundingClientRect().height + 2; // 2 нужно, чтобы пустота учитывала границы фильтра
+      var filterMainFreeHeight = headingParentElement.getBoundingClientRect().height + 1; // 2 нужно, чтобы пустота учитывала границы фильтра
 
       if (blocks[i].classList.contains('filter__block--elements')) {
         // var element = blocks[i].querySelector('.filter__elements');
@@ -726,6 +726,10 @@ var getFilterBlockHeight = function () {
     headings[0].classList.add('filter__heading--opened');
     blocks[0].classList.add('filter__block--opened');
     blocks[0].style.height = blocks[0].getBoundingClientRect().height + 'px';
+
+    var blockBrands = it.querySelector('.filter__additional  .filter__block');
+    blockBrands.classList.add('filter__block--opened');
+    blockBrands.style.height = blockBrands.getBoundingClientRect().height + 'px';
 
     if (j > 0) {
       it.classList.remove('filter__form--active');
