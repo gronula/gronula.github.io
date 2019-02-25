@@ -288,20 +288,20 @@ var blockFullHeights = [];
 var filterElementsHeights = [];
 
 var getFilterElementsHeight = function (block) {
-  if (!window.matchMedia('(max-width: 1023px)').matches) {
-    var element = block.querySelector('.filter__elements');
-    var link = block.querySelector('.filter__more');
+  var element = block.querySelector('.filter__elements');
+  var link = block.querySelector('.filter__more');
 
-    element.style.transition = 'none';
-    element.style.maxHeight = 'none';
-    filterElementsHeights.push(element.getBoundingClientRect().height);
-    if (element.getBoundingClientRect().height < 240) {
-      link.style.display = 'none';
-    }
-    blockFullHeights.push(block.getBoundingClientRect().height);
-    element.style.maxHeight = '';
-    element.style.transition = '';
+  element.style.transition = 'none';
+  element.style.maxHeight = 'none';
+  filterElementsHeights.push(element.getBoundingClientRect().height);
+  if (element.getBoundingClientRect().height < 240) {
+    link.style.display = 'none';
+  } else {
+    link.style.display = '';
   }
+  blockFullHeights.push(block.getBoundingClientRect().height);
+  element.style.maxHeight = '';
+  element.style.transition = '';
 };
 
 var getFilterBlockHeight = function () {
@@ -441,16 +441,14 @@ var filterHeadingsClickHandler = function (evt) {
     }
   }
 
-  if (!window.matchMedia('(max-width: 1023px)').matches) {
-    links.forEach(function (it) {
-      it.textContent = 'Показать все';
-    });
+  links.forEach(function (it) {
+    it.textContent = 'Показать все';
+  });
 
-    elements.forEach(function (it) {
-      it.style.maxHeight = '';
-      it.classList.remove('filter__elements--full');
-    });
-  }
+  elements.forEach(function (it) {
+    it.style.maxHeight = '';
+    it.classList.remove('filter__elements--full');
+  });
 };
 
 var filterCapionsClickHandler = function (caption, select) {
@@ -541,39 +539,41 @@ var filterElementClickHandler = function (element) {
 
 var filterLinkMoreClickHandler = function (link) {
   link.addEventListener('click', function (evt) {
-    if (!window.matchMedia('(max-width: 1023px)').matches) {
-      console.log(filterElementsHeights);
-      evt.preventDefault();
-      var block = evt.target.parentElement;
-      var blocks = filter.querySelectorAll('.filter__main  .filter__block');
-      var element = evt.target.previousElementSibling;
-      var elements = filter.querySelectorAll('.filter__elements');
-      var blockNumber;
-      var elementNumber;
+    evt.preventDefault();
+    if (window.matchMedia('(max-width: 1023px)').matches) {
+      var blocks = filter.querySelectorAll('.filter__block');
+    } else {
+      blocks = filter.querySelectorAll('.filter__main  .filter__block');
+    }
 
-      blocks.forEach(function (it, i) {
-        if (it === block) {
-          blockNumber = i;
-        }
-      });
+    var block = evt.target.parentElement;
+    var element = evt.target.previousElementSibling;
+    var elements = filter.querySelectorAll('.filter__elements');
+    var blockNumber;
+    var elementNumber;
 
-      elements.forEach(function (it, i) {
-        if (it === element) {
-          elementNumber = i;
-        }
-      });
-
-      if (element.classList.contains('filter__elements--full')) {
-        link.textContent = 'Показать все';
-        block.style.height = blockHeights[blockNumber] + 'px';
-        element.style.maxHeight = '';
-        element.classList.remove('filter__elements--full');
-      } else {
-        link.textContent = 'Скрыть';
-        block.style.height = blockFullHeights[elementNumber] + 'px';
-        element.style.maxHeight = filterElementsHeights[elementNumber] + 'px';
-        element.classList.add('filter__elements--full');
+    blocks.forEach(function (it, i) {
+      if (it === block) {
+        blockNumber = i;
       }
+    });
+
+    elements.forEach(function (it, i) {
+      if (it === element) {
+        elementNumber = i;
+      }
+    });
+
+    if (element.classList.contains('filter__elements--full')) {
+      link.textContent = 'Показать все';
+      block.style.height = blockHeights[blockNumber] + 'px';
+      element.style.maxHeight = '';
+      element.classList.remove('filter__elements--full');
+    } else {
+      link.textContent = 'Скрыть';
+      block.style.height = blockFullHeights[elementNumber] + 'px';
+      element.style.maxHeight = filterElementsHeights[elementNumber] + 'px';
+      element.classList.add('filter__elements--full');
     }
   });
 };
@@ -1377,7 +1377,13 @@ var windowResizeHandler = function () {
     filterBlockTimer = null;
   }
 
-  filterBlockTimer = setTimeout(getFilterBlockHeight, 500);
+  filterBlockTimer = setTimeout(function () {
+    blockHeights = [];
+    blockFullHeights = [];
+    filterElementsHeights = [];
+
+    getFilterBlockHeight();
+  }, 500);
 
   document.removeEventListener('click', filterSelectsCloseHandler);
 };
