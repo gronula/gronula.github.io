@@ -717,7 +717,12 @@ var getFilterBlockHeight = function () {
         blocks[i].style.maxHeight = filterMainFreeHeight + 'px';
       }
 
-      blocks[i].classList.remove('filter__block--opened');
+      if (!blocks[i].parentElement.classList.contains('filter__additional')) {
+        blocks[i].classList.remove('filter__block--opened');
+      } else {
+        headings[i].classList.add('filter__heading--opened');
+        blocks[i].style.height = filterMainFreeHeight + 'px';
+      }
       blocks[i].style.transition = '';
 
       filterHeadingsClickHandler(it, headings, blocks, blockHeight, i, isHandlerAdded);
@@ -727,35 +732,10 @@ var getFilterBlockHeight = function () {
     blocks[0].classList.add('filter__block--opened');
     blocks[0].style.height = blocks[0].getBoundingClientRect().height + 'px';
 
-    var blockBrands = it.querySelector('.filter__additional  .filter__block');
-    blockBrands.previousElementSibling.classList.add('filter__heading--opened');
-    blockBrands.classList.add('filter__block--opened');
-    blockBrands.style.height = blockBrands.getBoundingClientRect().height + 'px';
-
     if (j > 0) {
       it.classList.remove('filter__form--active');
     }
   });
-  // form.classList.add('filter__form--active');
-
-  // var headings = form.querySelectorAll('.filter__heading');
-  // var blocks = form.querySelectorAll('.filter__block');
-
-  // for (var i = 0; i < headings.length; i++) {
-  //   blocks[i].style.transition = 'none';
-  //   blocks[i].classList.add('filter__block--opened');
-  //   var blockHeight = blocks[i].getBoundingClientRect().height;
-  //   blocks[i].classList.remove('filter__block--opened');
-  //   blocks[i].style.transition = '';
-
-  //   filterHeadingsClickHandler(form, headings, blocks, blockHeight, i);
-  // }
-
-  // headings[0].classList.add('filter__heading--opened');
-  // blocks[0].classList.add('filter__block--opened');
-  // blocks[0].style.height = blocks[0].getBoundingClientRect().height + 'px';
-
-  // form.classList.remove('filter__form--active');
 };
 
 var filterHeadingsClickHandler = function (form, headings, blocks, blockHeight, i, isAdded) {
