@@ -233,9 +233,22 @@ var mainNavLinkCatalogMouseoverHandler = function () {
       mainNavLinkTimer = null;
     }
 
+    catalogItems.forEach(function (it) {
+      it.addEventListener('mouseenter', catalogItemMouseenterHandler);
+      it.addEventListener('mouseleave', catalogItemMouseleaveHandler);
+    });
+
     mainNavOverlay.addEventListener('mouseover', mainNavOverlayMouseoverHandler);
     sidebar.addEventListener('mouseover', sidebarMouseoverHandler);
   }
+};
+
+var catalogItemMouseenterHandler = function () {
+  catalogWrapper.classList.add('catalog__wrapper--hovered');
+};
+
+var catalogItemMouseleaveHandler = function () {
+  catalogWrapper.classList.remove('catalog__wrapper--hovered');
 };
 
 var mainNavOverlayMouseoverHandler = function () {
@@ -249,11 +262,17 @@ var mainNavOverlayMouseoverHandler = function () {
 
   mainNavOverlay.classList.add('main-nav__overlay--out');
   sidebar.classList.add('sidebar--out');
+  sidebar.style.left = '';
 
   mainNavLinkCatalog.removeEventListener('mouseover', mainNavOverlayMouseoverHandler);
   window.addEventListener('scroll', windowScrollHandler);
 
   mainNavLinkTimer = setTimeout(function () {
+    catalogItems.forEach(function (it) {
+      it.removeEventListener('mouseenter', catalogItemMouseenterHandler);
+      it.removeEventListener('mouseleave', catalogItemMouseleaveHandler);
+    });
+
     mainNavOverlay.classList.remove('main-nav__overlay--hover');
     sidebar.classList.remove('sidebar--hover');
     sidebar.removeEventListener('mouseover', sidebarMouseoverHandler);
