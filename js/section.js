@@ -316,6 +316,7 @@ var getFilterElementsHeight = function (block) {
     link.style.display = 'none';
   } else {
     link.style.display = '';
+    link.textContent = 'Показать все';
   }
   blockFullHeights.push(block.getBoundingClientRect().height);
   element.style.maxHeight = '';
@@ -363,6 +364,20 @@ var getFilterBlockHeight = function () {
   blocks[0].classList.add('filter__block--opened');
   blocks[0].style.height = blockHeights[0] + 'px';
   blocks[0].style.transition = '';
+
+  var headingBrands = filter.querySelector('.filter__heading--brands');
+  var blockBrands = filter.querySelector('.filter__block--brands');
+  var brandsNumber;
+  blocks.forEach(function (it, number) {
+    if (it === blockBrands) {
+      brandsNumber = number;
+    }
+  });
+  headingBrands.classList.add('filter__heading--opened');
+  blockBrands.style.transition = 'none';
+  blockBrands.classList.add('filter__block--opened');
+  blockBrands.style.height = blockHeights[brandsNumber] + 'px';
+  blockBrands.style.transition = '';
 
   var filterMain = filter.querySelector('.filter__main');
   var selects = filterMain.querySelectorAll('.filter__select--inner');
